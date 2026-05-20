@@ -251,15 +251,13 @@
     html[lang="fr"] [data-lang="fr"].inline,
     html[lang="hu"] [data-lang="hu"].inline { display: inline; }
 
-    /* Messages de dernière minute */
+    /* Bandeau message */
     .msg-banner {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--bordeaux);
       background: #fdf6ee;
-      border-bottom: 1px solid var(--rule);
-      padding: 16px 24px;
-    }
-    .msg-banner-inner {
-      max-width: 760px;
-      margin: 0 auto;
+      padding: 14px 18px;
+      margin-bottom: 40px;
     }
     .msg-banner-label {
       font-size: 11px;
@@ -267,28 +265,14 @@
       text-transform: uppercase;
       color: var(--bordeaux);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .msg-placeholder-text {
+    .msg-text {
       color: var(--muted);
       font-style: italic;
       font-size: 15px;
       margin: 0;
     }
-    .msg-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .msg-item {
-      background: white;
-      border-left: 3px solid var(--bordeaux);
-      padding: 10px 16px;
-      margin-bottom: 8px;
-      font-size: 15px;
-      color: var(--ink);
-    }
-    .msg-item:last-child { margin-bottom: 0; }
   </style>
 </head>
 <body>
@@ -296,22 +280,6 @@
   <div class="lang-switch" role="navigation" aria-label="Langue">
     <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
     <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
-  </div>
-
-  <!-- MESSAGES DE DERNIÈRE MINUTE -->
-  <div class="msg-banner">
-    <div class="msg-banner-inner">
-      <div class="msg-banner-label">
-        <span data-lang="fr" class="inline">Messages de dernière minute</span>
-        <span data-lang="hu" class="inline">Utolsó pillanatos üzenetek</span>
-      </div>
-      <div data-lang="fr" id="msg-fr">
-        <p class="msg-placeholder-text">Le 3 juin, retrouvez ici toutes les informations de dernière minute. Pensez à actualiser la page.</p>
-      </div>
-      <div data-lang="hu" id="msg-hu">
-        <p class="msg-placeholder-text">Június 3-án itt talál majd minden utolsó pillanatos információt. Ne felejtse frissíteni az oldalt.</p>
-      </div>
-    </div>
   </div>
 
   <header class="hero">
@@ -325,6 +293,20 @@
   </header>
 
   <div class="container">
+
+    <!-- MESSAGE -->
+    <div class="msg-banner">
+      <div class="msg-banner-label">
+        <span data-lang="fr" class="inline">Message</span>
+        <span data-lang="hu" class="inline">Üzenet</span>
+      </div>
+      <div data-lang="fr" id="msg-fr">
+        <p class="msg-text">C'est ici qu'apparaîtront les messages d'information de dernière minute.</p>
+      </div>
+      <div data-lang="hu" id="msg-hu">
+        <p class="msg-text">Itt jelennek majd meg az utolsó pillanatos információs üzenetek.</p>
+      </div>
+    </div>
 
     <!-- FAIRE-PART -->
     <section>
@@ -533,33 +515,7 @@
       document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
       try { localStorage.setItem('site-lang', lang); } catch(e) {}
     }
-    // Chargement des messages de dernière minute depuis messages.json
-    (function() {
-      fetch('./messages.json?t=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          if (!data.actif) return;
-          ['fr', 'hu'].forEach(function(lang) {
-            var msgs = data[lang] || [];
-            if (!msgs.length) return;
-            var el = document.getElementById('msg-' + lang);
-            if (!el) return;
-            var ul = document.createElement('ul');
-            ul.className = 'msg-list';
-            msgs.forEach(function(m) {
-              var li = document.createElement('li');
-              li.className = 'msg-item';
-              li.textContent = m;
-              ul.appendChild(li);
-            });
-            el.innerHTML = '';
-            el.appendChild(ul);
-          });
-        })
-        .catch(function() {});
-    })();
-
-    (function() {
+(function() {
       let lang = 'fr';
       try {
         const saved = localStorage.getItem('site-lang');
