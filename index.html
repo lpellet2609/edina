@@ -273,6 +273,42 @@
       font-size: 15px;
       margin: 0;
     }
+    .msg-latest {
+      color: var(--ink);
+      font-style: normal;
+      font-size: 15px;
+      margin: 0;
+    }
+    .msg-archive {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+    }
+    .msg-archive-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .msg-archive-list li {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .msg-archive-list li:last-child { border-bottom: none; }
+    .msg-archive-btn {
+      display: block;
+      background: none;
+      border: none;
+      color: var(--bordeaux);
+      font-size: 13px;
+      cursor: pointer;
+      padding: 8px 0 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-family: 'Lato', sans-serif;
+    }
+    .msg-archive-btn:hover { color: var(--bordeaux-dark); }
   </style>
 </head>
 <body>
@@ -300,12 +336,32 @@
         <span data-lang="fr" class="inline">Messages de dernière minute</span>
         <span data-lang="hu" class="inline">Utolsó pillanatos üzenetek</span>
       </div>
-      <div data-lang="fr" id="msg-fr">
+
+      <!-- Dernier message (toujours visible) -->
+      <div data-lang="fr">
         <p class="msg-text">C'est ici qu'apparaîtront les messages d'information de dernière minute.</p>
       </div>
-      <div data-lang="hu" id="msg-hu">
+      <div data-lang="hu">
         <p class="msg-text">Itt jelennek majd meg az utolsó pillanatos információs üzenetek.</p>
       </div>
+
+      <!-- Messages archivés — masqués par défaut, visibles après clic -->
+      <!-- Ajouter ici les anciens messages quand nécessaire -->
+      <div id="msg-archive" hidden>
+        <div data-lang="fr">
+          <ul class="msg-archive-list">
+            <!-- anciens messages FR ici, du plus récent au plus ancien -->
+          </ul>
+        </div>
+        <div data-lang="hu">
+          <ul class="msg-archive-list">
+            <!-- régi FR üzenetek itt, a legújabbtól a legrégebbiig -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bouton déplier/replier (masqué tant qu'il n'y a pas d'archives) -->
+      <button id="msg-archive-btn" class="msg-archive-btn" hidden onclick="toggleArchive()"></button>
     </div>
 
     <!-- FAIRE-PART -->
@@ -509,11 +565,29 @@
   </footer>
 
   <script>
+    function updateArchiveBtn(lang) {
+      var btn = document.getElementById('msg-archive-btn');
+      if (!btn || btn.hidden) return;
+      var isOpen = !document.getElementById('msg-archive').hidden;
+      if (lang === 'fr') {
+        btn.textContent = isOpen ? 'Masquer les anciens messages ▲' : 'Voir les messages archivés ▼';
+      } else {
+        btn.textContent = isOpen ? 'Régi üzenetek elrejtése ▲' : 'Archivált üzenetek megtekintése ▼';
+      }
+    }
+
+    function toggleArchive() {
+      var archive = document.getElementById('msg-archive');
+      archive.hidden = !archive.hidden;
+      updateArchiveBtn(document.documentElement.lang || 'fr');
+    }
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
       document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
       try { localStorage.setItem('site-lang', lang); } catch(e) {}
+      updateArchiveBtn(lang);
     }
 (function() {
       let lang = 'fr';
