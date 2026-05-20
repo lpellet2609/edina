@@ -251,7 +251,50 @@
     html[lang="fr"] [data-lang="fr"].inline,
     html[lang="hu"] [data-lang="hu"].inline { display: inline; }
 
-    /* Bandeau message */
+    /* Formulaire code restaurant */
+    .repas-form {
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .repas-input-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .repas-input {
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 9px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: white;
+      flex: 1;
+      max-width: 220px;
+    }
+    .repas-input:focus { outline: none; border-color: var(--bordeaux); }
+    .repas-btn {
+      background: var(--bordeaux);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      padding: 9px 22px;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .repas-btn:hover { background: var(--bordeaux-dark); }
+    .repas-error {
+      color: #c08a3e;
+      font-size: 14px;
+      margin-top: 10px;
+      font-style: italic;
+    }
     .msg-banner {
       border: 1px solid var(--rule);
       border-left: 3px solid var(--bordeaux);
@@ -550,6 +593,32 @@
       </div>
     </section>
 
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <!-- RESTAURANT -->
+    <section>
+      <h2 data-lang="fr">Informations pour les personnes invitées au restaurant</h2>
+      <h2 data-lang="hu">Információk az éttermi vacsorára meghívottak számára</h2>
+
+      <div class="repas-form">
+        <p data-lang="fr">Entrez le code qui vous a été remis dans l'invitation.</p>
+        <p data-lang="hu">Adja meg a meghívóban kapott kódot.</p>
+        <div class="repas-input-row">
+          <input type="text" id="repas-code" class="repas-input"
+            placeholder="Code…" autocomplete="off"
+            onkeydown="if(event.key==='Enter') checkRepasCode()" />
+          <button class="repas-btn" onclick="checkRepasCode()">
+            <span data-lang="fr" class="inline">Envoyer</span>
+            <span data-lang="hu" class="inline">Küldés</span>
+          </button>
+        </div>
+        <p id="repas-error" class="repas-error" hidden>
+          <span data-lang="fr" class="inline">Code incorrect. Veuillez réessayer.</span>
+          <span data-lang="hu" class="inline">Hibás kód. Kérjük, próbálja újra.</span>
+        </p>
+      </div>
+    </section>
+
     <div class="ornament">✦</div>
 
     <p style="text-align:center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--bordeaux); font-size: 22px;">
@@ -565,6 +634,15 @@
   </footer>
 
   <script>
+    function checkRepasCode() {
+      var val = document.getElementById('repas-code').value.trim();
+      if (val.toLowerCase() === 'budapest') {
+        window.location.href = './repas.html';
+      } else {
+        document.getElementById('repas-error').hidden = false;
+      }
+    }
+
     function updateArchiveBtn(lang) {
       var btn = document.getElementById('msg-archive-btn');
       if (!btn || btn.hidden) return;

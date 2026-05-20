@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réception — Koszmovszky Edina Franciska</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--bordeaux-dark); }
+
+    .lang-switch {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .lang-switch button.active {
+      background: var(--bordeaux);
+      color: white;
+      border-color: var(--bordeaux);
+    }
+    .lang-switch button:hover:not(.active) {
+      border-color: var(--bordeaux);
+      color: var(--bordeaux);
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 48px 24px 24px;
+    }
+    header.hero .cross {
+      color: var(--bordeaux);
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+    header.hero h1 {
+      font-size: 32px;
+      margin: 8px 0 6px;
+      line-height: 1.2;
+    }
+    header.hero .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    section { margin: 48px 0; }
+    section h2 {
+      font-size: 28px;
+      text-align: center;
+      margin: 0 0 8px;
+    }
+
+    .info-block { margin: 28px 0; }
+    .info-block h3 {
+      font-size: 22px;
+      margin: 0 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .info-block p, .info-block ul {
+      margin: 10px 0;
+    }
+    .info-block ul {
+      padding-left: 22px;
+    }
+    .info-block li { margin-bottom: 6px; }
+
+    .placeholder-note {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-size: 15px;
+      padding: 32px 0;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--bordeaux);
+      font-size: 18px;
+      margin: 32px 0;
+      letter-spacing: 0.4em;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 32px 24px;
+      border-top: 1px solid var(--rule);
+      margin-top: 40px;
+    }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switch" role="navigation" aria-label="Langue">
+    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  </div>
+
+  <header class="hero">
+    <div class="cross">✝</div>
+    <h1>
+      <span data-lang="fr" class="inline">Informations — Réception</span>
+      <span data-lang="hu" class="inline">Információk — Fogadás</span>
+    </h1>
+    <div class="subtitle">
+      <span data-lang="fr" class="inline">Koszmovszky Edina Franciska — 3 juin 2026</span>
+      <span data-lang="hu" class="inline">Koszmovszky Edina Franciska — 2026. június 3.</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <a class="back-link" href="./index.html">
+      <span data-lang="fr" class="inline">← Retour à la page principale</span>
+      <span data-lang="hu" class="inline">← Vissza a főoldalra</span>
+    </a>
+
+    <!-- Les informations seront ajoutées ici -->
+    <section>
+      <div data-lang="fr">
+        <p class="placeholder-note">Les informations concernant la réception au restaurant seront ajoutées prochainement.</p>
+      </div>
+      <div data-lang="hu">
+        <p class="placeholder-note">Az éttermi fogadással kapcsolatos információk hamarosan elérhetők lesznek.</p>
+      </div>
+    </section>
+
+    <div class="ornament">✦</div>
+
+    <p style="text-align:center; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--bordeaux); font-size: 22px;">
+      <span data-lang="fr" class="inline">Que le Seigneur l'accueille dans sa lumière.</span>
+      <span data-lang="hu" class="inline">Az örök világosság fényeskedjék neki.</span>
+    </p>
+
+  </div>
+
+  <footer>
+    <span data-lang="fr" class="inline">Avec toute notre reconnaissance pour votre présence et vos prières.</span>
+    <span data-lang="hu" class="inline">Köszönettel jelenlétükért és imáikért.</span>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+      try { localStorage.setItem('site-lang', lang); } catch(e) {}
+    }
+    (function() {
+      let lang = 'fr';
+      try {
+        const saved = localStorage.getItem('site-lang');
+        if (saved === 'hu' || saved === 'fr') lang = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+      } catch(e) {}
+      setLang(lang);
+    })();
+  </script>
+
+</body>
+</html>
