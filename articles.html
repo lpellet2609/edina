@@ -159,6 +159,111 @@
       color: white;
     }
 
+    /* Section vidéos */
+    .video-section-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bordeaux);
+      font-size: 28px;
+      margin: 56px 0 8px;
+      font-weight: 500;
+    }
+    .video-section-sub {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+    @media (max-width: 640px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+    .video-card {
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .video-thumb {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .video-thumb:hover img { transform: scale(1.04); }
+    .video-thumb::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(122, 31, 36, 0.9);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      padding-left: 4px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    .video-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+    .video-meta {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .video-meta .source { color: var(--bordeaux); }
+    .video-title {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bordeaux);
+      font-size: 20px;
+      margin: 0 0 8px;
+      line-height: 1.3;
+      font-weight: 500;
+    }
+    .video-desc {
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 0 0 14px;
+      flex: 1;
+    }
+    .video-link {
+      align-self: flex-start;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border: 1px solid var(--bordeaux);
+      border-radius: 2px;
+      text-decoration: none;
+      color: var(--bordeaux);
+      transition: all 0.2s;
+    }
+    .video-link:hover { background: var(--bordeaux); color: white; }
+
     footer {
       text-align: center; color: var(--muted); font-size: 14px;
       padding: 32px 24px; border-top: 1px solid var(--rule); margin-top: 40px;
@@ -416,6 +521,68 @@
         </div>
       </div>
     </article>
+
+    <!-- ===================== BIBLIOTHÈQUE VIDÉO ===================== -->
+    <h2 class="video-section-title">
+      <span data-lang="fr" class="inline">Vidéos</span>
+      <span data-lang="hu" class="inline">Videók</span>
+    </h2>
+    <p class="video-section-sub">
+      <span data-lang="fr" class="inline">Documentaires, projections et interviews disponibles en ligne</span>
+      <span data-lang="hu" class="inline">Dokumentumfilmek, vetítések és interjúk online</span>
+    </p>
+
+    <div class="video-grid">
+
+      <!-- Vidéo 1 : Hazaérés -->
+      <div class="video-card">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=Lrcmui3khlM" target="_blank" rel="noopener" aria-label="Voir la vidéo">
+          <img src="images/videos/video-lrcmui3khlm.jpg" alt="Vignette de la vidéo Hazaérés" />
+        </a>
+        <div class="video-body">
+          <div class="video-meta"><span class="source">Párbeszéd Háza</span> · YouTube · documentaire</div>
+          <h3 class="video-title">A piros kabátos lány — Sípos István : « Hazaérés »</h3>
+          <p class="video-desc">Documentaire complet de Sípos István consacré à Edina : son rôle le 23 octobre 1956 devant la Radio hongroise, l'exil en France, et son témoignage personnel sur la révolution. Le titre « Hazaérés » — littéralement « Retour à la maison » — fait écho à son retour définitif en Hongrie après des décennies d'éloignement.</p>
+          <a class="video-link" href="https://www.youtube.com/watch?v=Lrcmui3khlM" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Voir sur YouTube</span>
+            <span data-lang="hu" class="inline">→ Megtekintés YouTube-on</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Vidéo 2 : Párbeszéd Háza projection-discussion -->
+      <div class="video-card">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=Cw_bzOQYnHE" target="_blank" rel="noopener" aria-label="Voir la vidéo">
+          <img src="images/videos/video-cwbzoqynhe.jpg" alt="Vignette de la vidéo Párbeszéd Háza" />
+        </a>
+        <div class="video-body">
+          <div class="video-meta"><span class="source">Párbeszéd Háza</span> · YouTube · projection-discussion</div>
+          <h3 class="video-title">A piros kabátos lány a Párbeszéd Házában</h3>
+          <p class="video-desc">Projection du documentaire suivie d'une discussion publique avec Edina à la Maison du Dialogue, le centre culturel et spirituel jésuite de Budapest. Elle y revient sur les journées d'octobre 1956, sur son exil et sur la transmission de cette mémoire aux jeunes générations.</p>
+          <a class="video-link" href="https://www.youtube.com/watch?v=Cw_bzOQYnHE" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Voir sur YouTube</span>
+            <span data-lang="hu" class="inline">→ Megtekintés YouTube-on</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Vidéo 3 : Duett BUDA TV -->
+      <div class="video-card">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=L-zseCfvtR0" target="_blank" rel="noopener" aria-label="Voir la vidéo">
+          <img src="images/videos/video-lzsecfvtr0.jpg" alt="Vignette de l'émission Duett" />
+        </a>
+        <div class="video-body">
+          <div class="video-meta"><span class="source">BUDA TV</span> · YouTube · 21.10.2017 · interview TV</div>
+          <h3 class="video-title">Duett — 21 octobre 2017, invitée : Koszmovszky Edina</h3>
+          <p class="video-desc">Émission « Duett » de BUDA TV, diffusée à la veille du 61ᵉ anniversaire de la révolution. Edina y est l'invitée principale et revient sur son parcours, sur le geste fondateur du 23 octobre 1956 et sur sa vie en France.</p>
+          <a class="video-link" href="https://www.youtube.com/watch?v=L-zseCfvtR0" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Voir sur YouTube</span>
+            <span data-lang="hu" class="inline">→ Megtekintés YouTube-on</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
 
   </div>
 
