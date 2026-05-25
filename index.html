@@ -532,7 +532,7 @@
       <h2 data-lang="hu">Gyakorlati tudnivalók</h2>
 
       <!-- FR -->
-      <div data-lang="fr">
+      <div data-lang="fr" id="infos-fr">
         <div class="alert">
           <strong>À noter :</strong> le cimetière est très vaste. Il est <strong>indispensable</strong> de s'y rendre en voiture ou en taxi. L'accès à pied depuis l'entrée prend 45 à 60 minutes.
         </div>
@@ -596,7 +596,7 @@
       </div>
 
       <!-- HU -->
-      <div data-lang="hu">
+      <div data-lang="hu" id="infos-hu">
         <div class="alert">
           <strong>Fontos:</strong> a temető nagyon nagy. Mindenféleképpen <strong>autóval vagy taxival</strong> érkezzenek. A bejárattól gyalogosan az út körülbelül 45–60 percet vesz igénybe.
         </div>
@@ -657,6 +657,15 @@
           </div>
         </div>
       </div>
+
+      <div class="dl-row" data-lang="fr">
+        <button class="dl-btn" type="button" onclick="downloadHtmlAsImage('infos-fr', 'infos-pratiques-fr.jpg', 'jpg')">↓ Télécharger en JPG</button>
+        <button class="dl-btn" type="button" onclick="downloadHtmlAsImage('infos-fr', 'infos-pratiques-fr.pdf', 'pdf')">↓ Télécharger en PDF</button>
+      </div>
+      <div class="dl-row" data-lang="hu">
+        <button class="dl-btn" type="button" onclick="downloadHtmlAsImage('infos-hu', 'gyakorlati-tudnivalok-hu.jpg', 'jpg')">↓ Letöltés JPG-ként</button>
+        <button class="dl-btn" type="button" onclick="downloadHtmlAsImage('infos-hu', 'gyakorlati-tudnivalok-hu.pdf', 'pdf')">↓ Letöltés PDF-ként</button>
+      </div>
     </section>
 
     <div class="ornament">✦ ✦ ✦</div>
@@ -669,9 +678,17 @@
       <div class="maps">
         <div data-lang="fr">
           <img src="infos-fr.jpg" alt="Informations pratiques et plans" />
+          <div class="dl-row">
+            <a class="dl-btn" href="infos-fr.jpg" download="plan-itineraire-fr.jpg">↓ Télécharger en JPG</a>
+            <button class="dl-btn" type="button" onclick="downloadPdf('infos-fr.jpg', 'plan-itineraire-fr.pdf')">↓ Télécharger en PDF</button>
+          </div>
         </div>
         <div data-lang="hu">
           <img src="infos-hu.jpg" alt="Gyakorlati információk és térképek" />
+          <div class="dl-row">
+            <a class="dl-btn" href="infos-hu.jpg" download="terkep-utvonal-hu.jpg">↓ Letöltés JPG-ként</a>
+            <button class="dl-btn" type="button" onclick="downloadPdf('infos-hu.jpg', 'terkep-utvonal-hu.pdf')">↓ Letöltés PDF-ként</button>
+          </div>
         </div>
       </div>
     </section>
@@ -717,7 +734,59 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
+    // Rend un bloc HTML en image (canvas), puis le télécharge en JPG ou en PDF A4 (1 page)
+    async function downloadHtmlAsImage(elementId, filename, format) {
+      const btn = event && event.currentTarget;
+      if (btn) { btn.disabled = true; }
+      try {
+        const el = document.getElementById(elementId);
+        // On force l'affichage du bloc (au cas où la langue ne soit pas l'active)
+        const prevDisplay = el.style.display;
+        el.style.display = 'block';
+        const canvas = await html2canvas(el, {
+          scale: 2,                      // haute résolution pour impression nette
+          backgroundColor: '#fbf8f3',    // couleur paper du site
+          useCORS: true,
+          windowWidth: 760               // largeur fixe pour rendu cohérent
+        });
+        el.style.display = prevDisplay;
+
+        if (format === 'jpg') {
+          canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+          }, 'image/jpeg', 0.92);
+        } else {
+          const { jsPDF } = window.jspdf;
+          const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+          const pageW = 210, pageH = 297, margin = 10;
+          const maxW = pageW - margin * 2;
+          const maxH = pageH - margin * 2;
+          // Adapter à UNE seule page A4 : scale par le plus contraignant des deux ratios
+          const ratio = Math.min(maxW / canvas.width, maxH / canvas.height);
+          const w = canvas.width * ratio;
+          const h = canvas.height * ratio;
+          const x = (pageW - w) / 2;
+          const y = (pageH - h) / 2;
+          pdf.addImage(canvas, 'JPEG', x, y, w, h);
+          pdf.save(filename);
+        }
+      } catch (err) {
+        alert("Erreur lors de la génération du fichier. Réessayez ou contactez Laurent.");
+        console.error(err);
+      } finally {
+        if (btn) { btn.disabled = false; }
+      }
+    }
+
     // Génère un PDF A4 à partir d'une image JPG en l'adaptant à la page
     async function downloadPdf(imageUrl, filename) {
       const btn = event && event.currentTarget;
