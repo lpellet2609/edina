@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Articles de presse — Koszmovszky Edina Franciska</title>
-  <meta name="description" content="Articles de presse hongrois sur la révolution de 1956 et ses héros, en mémoire d'Edina Koszmovszky." />
+  <title>Revue de presse — Koszmovszky Edina Franciska</title>
+  <meta name="description" content="Revue de presse hongroise et internationale sur Koszmovszky Edina, héroïne de la révolution hongroise de 1956." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -41,9 +41,7 @@
       position: sticky; top: 0; z-index: 50;
       background: var(--paper); border-bottom: 1px solid var(--rule);
     }
-    .lang-switch {
-      display: flex; justify-content: center; gap: 8px; padding: 10px 16px 6px;
-    }
+    .lang-switch { display: flex; justify-content: center; gap: 8px; padding: 10px 16px 6px; }
     .lang-switch button {
       background: transparent; border: 1px solid var(--rule);
       color: var(--muted); font-family: 'Lato', sans-serif;
@@ -61,7 +59,7 @@
     .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
     .navbar a:hover { color: var(--bordeaux); }
 
-    .container { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 24px 80px; }
 
     header.hero { text-align: center; padding: 32px 24px 8px; }
     header.hero h1 { font-size: 34px; margin: 0 0 8px; line-height: 1.15; }
@@ -76,118 +74,89 @@
 
     .intro {
       max-width: 640px;
-      margin: 0 auto 36px;
+      margin: 0 auto 40px;
       text-align: center;
       color: var(--muted);
       font-style: italic;
       font-family: 'Cormorant Garamond', serif;
       font-size: 17px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* Article card */
+    /* Carte article — format résumé */
     .press-article {
       background: var(--cream);
       border-left: 3px solid var(--bordeaux);
-      padding: 28px 28px 24px;
       border-radius: 2px;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
+      overflow: hidden;
     }
+    .article-image {
+      width: 100%;
+      max-height: 360px;
+      overflow: hidden;
+      display: block;
+    }
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .article-body-wrap { padding: 24px 28px 22px; }
     .article-meta {
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-weight: 700;
     }
-    .article-title {
-      font-size: 26px;
+    .article-meta .source { color: var(--bordeaux); }
+    .article-title-fr {
+      font-size: 23px;
       color: var(--bordeaux);
-      margin: 0 0 6px;
+      margin: 0 0 4px;
       line-height: 1.25;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
     }
-    .article-original-title {
+    .article-title-hu {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       color: var(--muted);
       font-size: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
+      line-height: 1.35;
     }
-    .article-image {
-      margin: 20px -28px;
-    }
-    .article-image img {
-      width: 100%;
-      display: block;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    }
-    .article-image figcaption {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-      padding: 8px 16px 0;
-    }
-    .article-body {
-      margin-top: 8px;
-    }
-    .article-body p {
-      margin: 0 0 14px;
-      line-height: 1.7;
-    }
-    .article-body p:first-of-type::first-letter {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 44px;
-      float: left;
-      line-height: 0.9;
-      padding: 4px 8px 0 0;
-      color: var(--bordeaux);
-    }
-    .article-note {
+    .article-summary { margin-top: 12px; }
+    .article-summary p { margin: 0 0 12px; line-height: 1.65; }
+    .article-summary p:last-child { margin-bottom: 0; }
+
+    .article-link-row {
       margin-top: 18px;
       padding-top: 14px;
       border-top: 1px solid var(--rule);
-      font-size: 14px;
-      font-style: italic;
-      color: var(--muted);
-    }
-    .article-link-row {
-      margin-top: 18px;
-      text-align: center;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .article-link-row a {
       display: inline-block;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 9px 18px;
+      padding: 8px 16px;
       border: 1px solid var(--bordeaux);
       border-radius: 2px;
       text-decoration: none;
       transition: all 0.2s;
+      color: var(--bordeaux);
     }
     .article-link-row a:hover {
       background: var(--bordeaux);
       color: white;
-    }
-
-    /* Empty state */
-    .empty-state {
-      text-align: center;
-      padding: 60px 24px;
-      background: var(--cream);
-      border-left: 3px solid var(--bordeaux);
-      border-radius: 2px;
-      margin: 24px 0;
-    }
-    .empty-state p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--muted);
-      font-size: 18px;
-      margin: 8px 0;
     }
 
     footer {
@@ -212,19 +181,19 @@
     <nav class="navbar">
       <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
       <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
-      <a href="articles.html" class="active"><span data-lang="fr" class="inline">Articles</span><span data-lang="hu" class="inline">Cikkek</span></a>
+      <a href="articles.html" class="active"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
       <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
     </nav>
   </div>
 
   <header class="hero">
     <h1>
-      <span data-lang="fr" class="inline">Articles de presse</span>
-      <span data-lang="hu" class="inline">Sajtócikkek</span>
+      <span data-lang="fr" class="inline">Revue de presse</span>
+      <span data-lang="hu" class="inline">Sajtószemle</span>
     </h1>
     <div class="sub">
-      <span data-lang="fr" class="inline">Articles parus en mémoire des héros de 1956 — dont notre mère</span>
-      <span data-lang="hu" class="inline">Az 1956-os hősök emlékére megjelent cikkek — édesanyánkról is</span>
+      <span data-lang="fr" class="inline">Articles parus dans la presse hongroise et internationale</span>
+      <span data-lang="hu" class="inline">A magyar és nemzetközi sajtóban megjelent cikkek</span>
     </div>
   </header>
 
@@ -232,81 +201,216 @@
 
   <div class="container">
     <p class="intro">
-      <span data-lang="fr" class="inline">Les articles sont reproduits ici avec la traduction française intégrale pour permettre à chacun, en France comme en Hongrie, d'en prendre connaissance. Chaque article comporte un lien vers la source originale.</span>
-      <span data-lang="hu" class="inline">A cikkek itt teljes francia fordításban szerepelnek, hogy Franciaországban és Magyarországon is mindenki elolvashassa őket. Minden cikkhez tartozik egy hivatkozás az eredeti forrásra.</span>
+      <span data-lang="fr" class="inline">Pour chaque article, un résumé en français et un lien vers la version originale. Articles classés du plus récent au plus ancien.</span>
+      <span data-lang="hu" class="inline">Minden cikkhez francia nyelvű összefoglaló és link az eredeti változathoz. A cikkek a legújabbtól a legrégebbiig.</span>
     </p>
 
-    <!-- ARTICLE 1 — Magyar Nemzet, 23 mai 2026 -->
+    <!-- 1. Magyar Nemzet — 23.05.2026 -->
     <article class="press-article">
-      <div class="article-meta">Magyar Nemzet — 23.05.2026 — Bánó Attila</div>
-
-      <h2 class="article-title">
-        <span data-lang="fr" class="inline">Les derniers héros vivants de la révolution de 1956 nous disent adieu</span>
-        <span data-lang="hu" class="inline">Búcsúznak az 1956-os forradalom még élő hősei</span>
-      </h2>
-      <div class="article-original-title" data-lang="fr">
-        Titre original : « Búcsúznak az 1956-os forradalom még élő hősei »
-      </div>
-
-      <figure class="article-image">
-        <img src="images/articles/2026-05-23-magyarnemzet-1956-heros.jpg" alt="Illustration de l'article" />
-        <figcaption>
-          <span data-lang="fr" class="inline">Illustration : Magyar Nemzet</span>
-          <span data-lang="hu" class="inline">Illusztráció: Magyar Nemzet</span>
-        </figcaption>
-      </figure>
-
-      <!-- Corps FR -->
-      <div class="article-body" data-lang="fr">
-        <p>Ils n'ont pas eu droit à une seconde vie : ni Mansfeld Péter, apprenti ouvrier qualifié exécuté à dix-huit ans après la révolution, ni Tóth Ilona, étudiante en médecine exécutée à vingt-cinq ans, ni Szeles Erika Kornélia, apprentie cuisinière d'origine juive, qui n'avait pas encore atteint son seizième anniversaire lorsque des balles de mitraillette soviétique se sont enfoncées dans son corps. Les tirs l'ont atteinte au moment précis où, vêtue de l'uniforme de la Croix-Rouge, elle courait vers un camarade blessé pour lui porter secours.</p>
-
-        <p>Szeles Erika a également été immortalisée par un photographe danois, Vagn Hansen, en pufajka (veste matelassée), souriante, mitraillette russe à tambour à la main. La célèbre photographie, parue en couverture de nombreux journaux, nous dit aujourd'hui bien plus qu'au moment de sa publication. Car nous savons quel sort le destin a réservé à cette jeune fille au regard innocent, devenue l'un des symboles de la révolution.</p>
-
-        <p>En dehors d'elle, les héros tombés du Corvin köz, de la place Széna et des autres foyers révolutionnaires n'ont pas eu non plus de seconde vie. Quant aux survivants restés au pays, ils ont connu un destin cruel : prison, torture, persécution. La dactylographe Wittner Mária, à dix-neuf ans, soignait les révolutionnaires blessés lorsqu'elle fut elle-même blessée au début de l'invasion soviétique. Après l'écrasement de la révolution, elle fut d'abord condamnée à mort, puis à la prison à vie. Elle ne fut libérée qu'en 1970, après treize années d'incarcération.</p>
-
-        <p>Tóth Ilona, elle, fut accusée dans un procès truqué d'un meurtre dont la commission n'a jamais pu être prouvée. Elle et ses co-accusés furent torturés par leurs interrogateurs, qui leur arrachèrent ainsi des aveux. Sur la base de ceux-ci, Ilona fut condamnée à mort et exécutée en juin 1957. La mise au jour des faits réels et la réhabilitation juridique n'ont été rendues possibles qu'après la chute du régime communiste.</p>
-
-        <p>C'est avant tout le destin de Mansfeld Péter qui révèle la véritable nature de la dictature qui a écrasé la révolution.</p>
-
-        <p>Ce garçon, qui entrait dans sa seizième année, livrait des armes et des vivres aux insurgés de la place Széna, et en cachait également chez lui. En 1958, avec un complice, il enleva un policier qu'ils relâchèrent ensuite. Après son arrestation, il fut d'abord condamné à la prison à vie, puis à la peine de mort. Pour procéder à l'exécution, on attendit qu'il fête son dix-huitième anniversaire. Onze jours plus tard, le 21 mars 1959, il fut exécuté.</p>
-
-        <p>On pourrait longuement énumérer les destins tragiques de ces jeunes de 1956, connus ou inconnus, mais l'essentiel est qu'ils ont véritablement écrit l'Histoire.</p>
-
-        <p>L'histoire d'un chapitre glorieux et inoubliable de l'histoire hongroise, à la mémoire éternelle, dans laquelle les jeunes d'aujourd'hui peuvent encore largement puiser.</p>
-
-        <div class="article-note">L'auteur est écrivain et journaliste.</div>
-      </div>
-
-      <!-- Corps HU (texte original) -->
-      <div class="article-body" data-lang="hu">
-        <p>Nem kapott új életet a forradalom után tizennyolc évesen kivégzett szakmunkástanuló Mansfeld Péter, a huszonöt évesen kivégzett orvostanhallgató Tóth Ilona, valamint Szeles Erika Kornélia, a zsidó származású szakácstanuló, aki még a tizenhatodik életévét sem töltötte be, amikor a testébe szovjet géppisztolylövedékek fúródtak. A lövések éppen akkor érték, amikor vöröskeresztes ruhában egy sebesült társához rohant, hogy segítsen rajta.</p>
-
-        <p>Szeles Erikát egy dán fotós, Vagn Hansen is megörökítette, amint pufajkában, dobtáras orosz géppisztollyal a kezében mosolyog. A híres, címlapokon is megjelent fénykép ma sokkal többet mond nekünk, mint megjelenésének pillanatában. Mert tudjuk, hogy mit hozott a sors ennek az ártatlan tekintetű lánynak, a forradalom egyik szimbólumának.</p>
-
-        <p>Rajta kívül a Corvin köz, a Széna tér és más forradalmi gócok elesett hősei sem kaptak új életet. Az itthon maradt túlélőkre kegyetlen sors, börtön, kínzás, üldöztetés várt. Wittner Mária gépírónő tizenkilenc évesen ápolta a sérült forradalmárokat, míg a szovjet invázió kezdetén ő is megsebesült. A forradalom leverése után előbb halálra, majd életfogytig tartó börtönre ítélték. Tizenhárom évi rabság után, 1970-ben szabadult.</p>
-
-        <p>Tóth Ilonát egy koncepciós perben vádolták olyan gyilkossággal, amelynek elkövetését nem tudták rábizonyítani. Őt és vádlott-társait vallatóik megkínozták, s így csikarták ki a vallomásokat. Ilonát ezek alapján halálra ítélték, és 1957 júniusában kivégezték. A valós tények feltárására és a jogi rehabilitációra csak a rendszerváltás nyújtott lehetőséget.</p>
-
-        <p>Leginkább Mansfeld Péter sorsa világít rá a forradalmat leverő diktatúra igazi természetére.</p>
-
-        <p>A tizenhatodik évét töltő fiú a Széna téri felkelőknek szállított fegyvert és élelmiszert, és a fegyverekből otthon is elrejtett valamennyit. 1958-ban egyik társával elraboltak egy rendőrt, akit azután elengedtek. Letartóztatása után előbb életfogytiglanra ítélték, majd halálbüntetést kapott. A végrehajtással megvárták, amíg betölti a tizennyolcadik születésnapját. Tizenegy nappal később, 1959. március 21-én végezték ki.</p>
-
-        <p>Hosszan lehetne sorolni az ismert és ismeretlen ötvenhatos fiatalok tragikus történeteit, de a lényeg az, hogy ők valóban történelmet írtak.</p>
-
-        <p>A magyar történelem dicsőséges és feledhetetlen fejezetének örök emlékű történetét, amelyből a mai fiatalok is sokat meríthetnek.</p>
-
-        <div class="article-note">A szerző író, újságíró.</div>
-      </div>
-
-      <div class="article-link-row">
-        <a href="https://magyarnemzet.hu/velemeny/2026/05/bucsu-1956-forradalom-hos-szabadsag-diktatura-zsarnoksag-fiatalsag" target="_blank" rel="noopener">
-          <span data-lang="fr" class="inline">→ Lire l'article original sur magyarnemzet.hu</span>
-          <span data-lang="hu" class="inline">→ Eredeti cikk a magyarnemzet.hu oldalon</span>
-        </a>
+      <a href="images/articles/2026-05-23-magyarnemzet-1956-heros.jpg" target="_blank" class="article-image">
+        <img src="images/articles/2026-05-23-magyarnemzet-1956-heros.jpg" alt="Illustration Magyar Nemzet" />
+      </a>
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Magyar Nemzet</span> · 23.05.2026 · Bánó Attila</div>
+        <h2 class="article-title-fr">Les derniers héros encore vivants de la révolution de 1956 nous disent adieu</h2>
+        <div class="article-title-hu">« Búcsúznak az 1956-os forradalom még élő hősei »</div>
+        <div class="article-summary">
+          <p>Publié onze jours après le décès d'Edina, ce texte d'opinion signé par l'écrivain et journaliste Bánó Attila rend hommage à la génération de jeunes Hongrois qui ont écrit l'histoire en 1956. Sans nommer Edina, l'article s'inscrit dans la vague d'hommages parus dans la presse nationale au moment de son décès.</p>
+          <p>L'auteur évoque quatre figures emblématiques — Mansfeld Péter, exécuté à dix-huit ans ; Tóth Ilona, étudiante en médecine exécutée à vingt-cinq ans ; Szeles Erika Kornélia, tuée avant ses seize ans ; et Wittner Mária, dactylographe condamnée à mort puis à la prison à vie, libérée en 1970 après treize ans d'incarcération. Le destin de Mansfeld, exécuté onze jours après son dix-huitième anniversaire pour que la peine de mort puisse être appliquée, illustre selon Bánó la véritable nature de la dictature qui écrasa la révolution.</p>
+          <p>La conclusion souligne que ces jeunes, connus ou inconnus, ont écrit un chapitre glorieux et inoubliable de l'histoire hongroise, dans lequel la jeunesse d'aujourd'hui peut encore largement puiser.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://magyarnemzet.hu/velemeny/2026/05/bucsu-1956-forradalom-hos-szabadsag-diktatura-zsarnoksag-fiatalsag" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur magyarnemzet.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a magyarnemzet.hu-n</span>
+          </a>
+        </div>
       </div>
     </article>
 
-    <!-- Pour ajouter d'autres articles : dupliquer le bloc <article class="press-article"> ci-dessus -->
+    <!-- 2. Magyar Jelen — 19.05.2026 -->
+    <article class="press-article">
+      <a href="images/articles/2026-05-19-magyarjelen.webp" target="_blank" class="article-image">
+        <img src="images/articles/2026-05-19-magyarjelen.webp" alt="Photo Magyar Jelen" />
+      </a>
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Magyar Jelen</span> · 19.05.2026 · Remenyiczki Éva</div>
+        <h2 class="article-title-fr">Décès de Koszmovszky Edina, la « jeune fille au manteau rouge » de la révolution de 1956</h2>
+        <div class="article-title-hu">« Elhunyt Koszmovszky Edina, az 1956-os forradalom „piros kabátos lánya" »</div>
+        <div class="article-summary">
+          <p>Magyar Jelen retrace en détail le parcours exceptionnel d'Edina Koszmovszky, née en 1938 à Budapest dans une famille aristocrate persécutée par le régime communiste. Écartée des études supérieures en raison de son origine, elle travaille en usine quand la révolution éclate. À dix-huit ans, le 23 octobre 1956, elle lit publiquement les quatorze points des étudiants devant la Radio hongroise et participe, comme seule femme d'une délégation de dix personnes, aux négociations avec la direction.</p>
+          <p>Pendant les combats, elle se porte volontaire à l'hôpital, donne son sang et soigne les blessés sur la route Villányi. Contrainte de fuir en France en 1959 pour échapper à l'ÁVH qui la recherchait nommément, elle y élève quatre enfants et exerce vingt ans comme aumônière à l'hôpital psychiatrique de Nice (1992-2000). Elle rencontre deux fois Jean-Paul II.</p>
+          <p>Décorée de l'Ordre du Mérite hongrois en 2022, elle revient définitivement en Hongrie en 2024 et s'éteint à Sződliget le 12 mai 2026, à l'âge de 87 ans.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://magyarjelen.hu/belfold/31503-elhunyt-koszmovszky-edina-az-1956-os-forradalom-piros-kabatos-lanya" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur magyarjelen.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a magyarjelen.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. Felvidék.ma — 19.05.2026 -->
+    <article class="press-article">
+      <a href="images/articles/2026-05-19-felvidek.jpg" target="_blank" class="article-image">
+        <img src="images/articles/2026-05-19-felvidek.jpg" alt="Illustration Felvidék.ma" />
+      </a>
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Felvidék.ma</span> · 19.05.2026</div>
+        <h2 class="article-title-fr">Décès de la « jeune fille au manteau rouge » de 1956, Koszmovszky Edina</h2>
+        <div class="article-title-hu">« Meghalt Koszmovszky Edina, az 1956-os forradalom „piros kabátos lánya" »</div>
+        <div class="article-summary">
+          <p>Felvidék.ma, journal de la communauté hongroise de Slovaquie, annonce le décès d'Edina Koszmovszky et résume les grandes lignes de sa vie. L'article met l'accent sur son rôle le 23 octobre 1956 — lecture publique des quatorze points devant la Radio hongroise comme seule femme d'une délégation de dix —, sur son engagement humanitaire pendant les combats, et sur sa fuite en France après le déclenchement des recherches de l'ÁVH à son nom.</p>
+          <p>Le journal souligne ses retours réguliers en Hongrie à partir des années 2000 pour transmettre la mémoire de 1956 aux jeunes générations et les valeurs de liberté et d'unité nationale. Il rappelle qu'elle a reçu l'Ordre du Mérite hongrois en 2022, et précise la date des obsèques : le 3 juin 2026, au Nouveau cimetière de Rákoskeresztúr, avec une messe préalable.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://felvidek.ma/2026/05/19/meghalt-koszmovszky-edina-az-1956-os-forradalom-piros-kabatos-lanya/" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur felvidek.ma</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a felvidek.ma-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Debreceni Nap — 19.05.2026 -->
+    <article class="press-article">
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Debreceni Nap</span> · 19.05.2026</div>
+        <h2 class="article-title-fr">Décès de Koszmovszky Edina, la « jeune fille au manteau rouge » de 1956</h2>
+        <div class="article-title-hu">« Meghalt Koszmovszky Edina, az 1956-os forradalom „piros kabátos lánya" »</div>
+        <div class="article-summary">
+          <p>Le quotidien régional Debreceni Nap relaie la disparition d'Edina Koszmovszky pour ses lecteurs de l'est de la Hongrie. L'article reprend les grandes lignes biographiques : naissance à Budapest en 1938 dans une famille noble persécutée sous le communisme, rôle central le 23 octobre 1956 devant la Radio hongroise, exil en France, retour régulier en Hongrie pour témoigner devant les jeunes générations, et reconnaissance officielle par l'Ordre du Mérite hongrois en 2022.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://newsrv.debreceninap.hu/orszag/2026/05/19/meghalt-koszmovszky-edina-az-1956-os-forradalom-piros-kabatos-lanya/" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur debreceninap.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a debreceninap.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5. Index.hu — 18.05.2026 -->
+    <article class="press-article">
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Index.hu</span> · 18.05.2026 · Simon Barbara Kincső</div>
+        <h2 class="article-title-fr">Décès de Koszmovszky Edina</h2>
+        <div class="article-title-hu">« Meghalt Koszmovszky Edina »</div>
+        <div class="article-summary">
+          <p>Index.hu, l'un des plus grands portails d'information hongrois, est parmi les premiers à annoncer le décès d'Edina Koszmovszky, le 12 mai à 87 ans. La journaliste Simon Barbara Kincső souligne le rôle qu'elle joua le 23 octobre 1956 — seule femme d'une délégation de dix personnes ayant négocié avec la direction de la Radio hongroise et lu publiquement les quatorze points des étudiants devant la foule.</p>
+          <p>L'article retrace son enfance contrariée par un régime qui empêcha la jeune fille d'origine noble de poursuivre des études, son engagement humanitaire pendant la révolution (don de sang, soins aux blessés à l'hôpital de Villányi), son exil en France et son retour annuel pour témoigner devant les élèves. La fin de l'article annonce la cérémonie des obsèques, prévue le 3 juin à l'église Saint-László de Kőbánya.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://index.hu/belfold/2026/05/18/koszmovszky-edina-meghalt-1956-os-forradalom-piros-kabatos-lany/" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur index.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk az index.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6. Bors Online — 18.05.2026 -->
+    <article class="press-article">
+      <a href="images/articles/2026-05-18-bors.webp" target="_blank" class="article-image">
+        <img src="images/articles/2026-05-18-bors.webp" alt="Photo Bors Online" />
+      </a>
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Bors Online</span> · 18.05.2026</div>
+        <h2 class="article-title-fr">La « jeune fille au manteau rouge » de la révolution de 1956, Koszmovszky Edina, est décédée</h2>
+        <div class="article-title-hu">« Elhunyt az 1956-os forradalom „piros kabátos lánya", Koszmovszky Edina »</div>
+        <div class="article-summary">
+          <p>Le tabloïd Bors Online consacre un long article au parcours d'Edina Koszmovszky. Au-delà des faits de 1956 — lecture des quatorze points devant la Radio comme seule femme d'une délégation de dix —, le journal s'attarde sur la vie qu'elle reconstruit en France après la fuite : famille de quatre enfants à Nice, engagement communautaire et religieux, et deux rencontres avec le pape Jean-Paul II.</p>
+          <p>Bors insiste également sur les vingt années pendant lesquelles elle servit comme aumônière à l'hôpital psychiatrique de Nice (1992-2000), un pan moins connu de son existence. Il rappelle qu'à partir des années 2000, elle revint régulièrement en Hongrie pour rencontrer élèves et étudiants, et qu'elle s'installa définitivement à Sződliget en 2024.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://www.borsonline.hu/kozelet/2026/05/elhunyt-1956-os-forradalom-piros-kabatos-lanya-kosmzovszky-edina" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur borsonline.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a borsonline.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 7. Blikk — mai 2026 -->
+    <article class="press-article">
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Blikk</span> · mai 2026</div>
+        <h2 class="article-title-fr">Décès d'Edina Koszmovszky, « jeune fille au manteau rouge » de 1956</h2>
+        <div class="article-summary">
+          <p>Blikk, l'un des quotidiens populaires les plus lus de Hongrie, annonce le décès d'Edina Koszmovszky avec l'émotion qui caractérise habituellement ce journal grand public. L'article rappelle son geste fondateur du 23 octobre 1956 et le surnom qui l'a accompagnée toute sa vie : la jeune fille au manteau rouge. L'article complet est accessible directement sur le site du journal.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://www.blikk.hu/aktualis/belfold/meghalt-1956-gyasz-forradalom/m7z90tm" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article sur blikk.hu</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk a blikk.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 8. Hungary Today (EN) — mai 2026 -->
+    <article class="press-article">
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Hungary Today</span> · mai 2026 · en anglais</div>
+        <h2 class="article-title-fr">Adieu à la « jeune fille au manteau rouge », participante de la révolution de 1956</h2>
+        <div class="article-title-hu">« Farewell to the Girl in the Red Coat, a Participant in the 1956 Revolution »</div>
+        <div class="article-summary">
+          <p>Hungary Today, magazine d'information anglophone destiné à la diaspora et aux lecteurs internationaux, salue la mémoire d'Edina Koszmovszky avec un titre qui résume à lui seul la place qu'elle occupe dans l'histoire récente du pays. L'article reprend les grandes étapes de sa vie pour un lectorat non hongrois : son geste fondateur du 23 octobre 1956 devant la Radio hongroise, son exil en France après les recherches de l'ÁVH, ses décennies au service de la communauté hongroise à l'étranger, son retour en Hongrie en 2024 et sa décoration par l'Ordre du Mérite en 2022.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://hungarytoday.hu/farewell-to-the-girl-in-the-red-coat-a-participant-in-the-1956-revolution/" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Lire l'article (en anglais)</span>
+            <span data-lang="hu" class="inline">→ Eredeti cikk (angolul)</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 9. Képmás Magazin — 21.10.2019 / 2021 -->
+    <article class="press-article">
+      <a href="images/articles/2021-10-kepmas.jpg" target="_blank" class="article-image">
+        <img src="images/articles/2021-10-kepmas.jpg" alt="Photo Képmás Magazin" />
+      </a>
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Képmás Magazin</span> · 21.10.2019 · Jámbor-Miniska Zsejke</div>
+        <h2 class="article-title-fr">Comment la jeune fille au manteau rouge se souvient de la révolution : « Nous respirions ensemble »</h2>
+        <div class="article-title-hu">« A piros kabátos lány így emlékszik a forradalomra: „Együtt lélegeztünk" »</div>
+        <div class="article-summary">
+          <p>Cette longue interview est le témoignage le plus personnel qu'Edina ait livré de son aventure révolutionnaire. Elle raconte avoir reçu les quatorze points des mains d'étudiants ingénieurs, puis s'être retrouvée presque par hasard à la tête d'une délégation de dix personnes désignée par la foule devant le bâtiment de la Radio. Elle décrit la lecture du texte, d'abord depuis un camion, puis depuis le balcon de la station, et le discours méprisant du dirigeant communiste Ernő Gerő qualifiant les manifestants de « racaille » — discours qui, paradoxalement, déclencha la révolution.</p>
+          <p>Prévenue par son père le 13 novembre que l'ÁVO la recherchait nommément, elle quitte la Hongrie via Vienne avec l'aide de la délégation diplomatique indienne, et reste quatorze ans sans pouvoir revenir au pays. Le titre — « Nous respirions ensemble » — résume sa lecture personnelle de ces journées d'octobre : un peuple soudé dans un même souffle.</p>
+          <p>L'article a été publié en hongrois en 2019, puis traduit en anglais en 2021.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://kepmas.hu/hu/a-piros-kabatos-lany-igy-emlekszik-a-forradalomra-egyutt-lelegeztunk" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Version hongroise</span>
+            <span data-lang="hu" class="inline">→ Magyar változat</span>
+          </a>
+          <a href="https://kepmas.hu/en/how-girl-red-coat-remembers-revolution-we-breathed-together" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Version anglaise</span>
+            <span data-lang="hu" class="inline">→ Angol változat</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10. Szabad Európa — podcast Szelfi -->
+    <article class="press-article">
+      <div class="article-body-wrap">
+        <div class="article-meta"><span class="source">Szabad Európa</span> · podcast Szelfi · audio</div>
+        <h2 class="article-title-fr">1956 : l'histoire de la jeune fille au manteau rouge</h2>
+        <div class="article-title-hu">« 1956: A piros kabátos lány története »</div>
+        <div class="article-summary">
+          <p>Radio Free Europe Hongrie (Szabad Európa) consacre un épisode de son podcast « Szelfi » à l'histoire d'Edina Koszmovszky. Format long et documenté, le podcast revient sur les journées d'octobre 1956 et sur le destin de celle qu'on appellera la jeune fille au manteau rouge. À écouter directement sur le site de Szabad Európa.</p>
+        </div>
+        <div class="article-link-row">
+          <a href="https://www.szabadeuropa.hu/a/szelfi-podcast-1956-koszmovszky-edina/31547691.html" target="_blank" rel="noopener">
+            <span data-lang="fr" class="inline">→ Écouter sur szabadeuropa.hu</span>
+            <span data-lang="hu" class="inline">→ Meghallgatás a szabadeuropa.hu-n</span>
+          </a>
+        </div>
+      </div>
+    </article>
 
   </div>
 
