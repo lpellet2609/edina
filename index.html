@@ -787,7 +787,8 @@
       }
     }
 
-    // Génère un PDF A4 à partir d'une image JPG en l'adaptant à la page
+    // Génère un PDF A4 à partir d'une image JPG en l'adaptant à la page.
+    // Orientation auto-détectée : paysage si image plus large que haute, portrait sinon.
     async function downloadPdf(imageUrl, filename) {
       const btn = event && event.currentTarget;
       if (btn) { btn.disabled = true; }
@@ -800,9 +801,12 @@
           img.src = imageUrl;
         });
         const { jsPDF } = window.jspdf;
-        // A4 portrait : 210 x 297 mm. On adapte avec marges de 10mm.
-        const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
-        const pageW = 210, pageH = 297, margin = 10;
+        const isLandscape = img.width > img.height;
+        const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: isLandscape ? 'landscape' : 'portrait' });
+        // A4 : 210 x 297 mm (les dimensions s'inversent en paysage)
+        const pageW = isLandscape ? 297 : 210;
+        const pageH = isLandscape ? 210 : 297;
+        const margin = 10;
         const maxW = pageW - margin * 2;
         const maxH = pageH - margin * 2;
         const ratio = Math.min(maxW / img.width, maxH / img.height);
