@@ -202,6 +202,136 @@
       margin-top: 40px;
     }
 
+    /* Bloc invitation à envoyer un hommage */
+    .invite-block {
+      max-width: 680px;
+      margin: 24px auto 8px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .invite-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .dl-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--bordeaux);
+      border: 1px solid var(--bordeaux);
+      padding: 10px 22px;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dl-btn:hover { background: var(--bordeaux); color: white; }
+    .dl-btn-primary {
+      background: var(--bordeaux);
+      color: white;
+    }
+    .dl-btn-primary:hover { background: var(--bordeaux-dark); }
+
+    /* Modal formulaire d'hommage */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .modal.open { display: flex; }
+    .modal-box {
+      background: var(--paper);
+      max-width: 560px;
+      width: 100%;
+      padding: 32px 28px 24px;
+      border-radius: 2px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      position: relative;
+      margin: 40px auto;
+    }
+    .modal-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bordeaux);
+      font-size: 26px;
+      margin: 0 0 6px;
+      text-align: center;
+    }
+    .modal-box .modal-sub {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 22px;
+      font-size: 15px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 26px;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--bordeaux); }
+    .form-field { margin-bottom: 16px; }
+    .form-field label {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 10px 12px;
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: white;
+      box-sizing: border-box;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--bordeaux);
+    }
+    .form-field textarea { resize: vertical; min-height: 130px; }
+    .form-hint {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
     /* Language visibility */
     [data-lang] { display: none; }
     html[lang="fr"] [data-lang="fr"] { display: block; }
@@ -235,6 +365,17 @@
     </div>
   </header>
 
+  <div class="invite-block">
+    <p class="invite-text">
+      <span data-lang="fr" class="inline">Vous souhaitez partager un mot, un souvenir ou une photo en mémoire d'Edina&nbsp;? Remplissez le formulaire ci-dessous, votre hommage sera ajouté à la liste après lecture.</span>
+      <span data-lang="hu" class="inline">Szeretne egy gondolatot, emléket vagy fényképet megosztani Edina emlékére? Töltse ki az alábbi űrlapot, megemlékezése átolvasás után kerül fel a listára.</span>
+    </p>
+    <button class="dl-btn" type="button" onclick="openHommageForm()">
+      <span data-lang="fr" class="inline">✎ Envoyer un hommage</span>
+      <span data-lang="hu" class="inline">✎ Megemlékezés küldése</span>
+    </button>
+  </div>
+
   <div class="ornament">✦ ✦ ✦</div>
 
   <div class="container">
@@ -250,6 +391,75 @@
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="close" onclick="closeLightbox()">✕</button>
     <img id="lightbox-img" alt="" />
+  </div>
+
+  <!-- MODAL FORMULAIRE HOMMAGE -->
+  <div class="modal" id="hommage-modal" onclick="if(event.target===this) closeHommageForm()">
+    <div class="modal-box">
+      <button class="modal-close" type="button" onclick="closeHommageForm()" aria-label="Fermer">✕</button>
+
+      <h2>
+        <span data-lang="fr" class="inline">Envoyer un hommage</span>
+        <span data-lang="hu" class="inline">Megemlékezés küldése</span>
+      </h2>
+      <p class="modal-sub">
+        <span data-lang="fr" class="inline">En mémoire de Koszmovszky Edina Franciska</span>
+        <span data-lang="hu" class="inline">Koszmovszky Edina Franciska emlékére</span>
+      </p>
+
+      <form id="hommage-form" onsubmit="submitHommage(event)">
+        <div class="form-field">
+          <label>
+            <span data-lang="fr" class="inline">Votre nom *</span>
+            <span data-lang="hu" class="inline">Az Ön neve *</span>
+          </label>
+          <input type="text" id="form-name" required maxlength="80" />
+        </div>
+
+        <div class="form-field">
+          <label>
+            <span data-lang="fr" class="inline">Votre email *</span>
+            <span data-lang="hu" class="inline">Az Ön e-mail címe *</span>
+          </label>
+          <input type="email" id="form-email" required maxlength="120" />
+          <p class="form-hint">
+            <span data-lang="fr" class="inline">Pour vous tenir informé(e) et vous remercier — votre email ne sera jamais publié.</span>
+            <span data-lang="hu" class="inline">Hogy tájékoztassuk és megköszönjük — az e-mail címe soha nem jelenik meg nyilvánosan.</span>
+          </p>
+        </div>
+
+        <div class="form-field">
+          <label>
+            <span data-lang="fr" class="inline">Votre hommage *</span>
+            <span data-lang="hu" class="inline">Az Ön megemlékezése *</span>
+          </label>
+          <textarea id="form-message" required maxlength="3000" rows="7"></textarea>
+        </div>
+
+        <div class="form-field">
+          <p class="form-hint">
+            <span data-lang="fr" class="inline"><strong>Photos (facultatif)</strong> — vous pourrez les joindre directement à l'email qui s'ouvrira après avoir cliqué sur « Envoyer ».</span>
+            <span data-lang="hu" class="inline"><strong>Fényképek (opcionális)</strong> — közvetlenül csatolhatja őket a megnyíló e-mailhez, miután a „Küldés” gombra kattintott.</span>
+          </p>
+        </div>
+
+        <div class="form-hint" style="background: var(--cream); padding: 12px 14px; border-left: 3px solid var(--bordeaux); border-radius: 2px; margin-bottom: 8px;">
+          <span data-lang="fr" class="inline">En cliquant sur Envoyer, votre client mail s'ouvrira avec un email prêt à partir. Il vous suffira de l'envoyer (et d'y joindre des photos si vous le souhaitez). Votre hommage sera ajouté au site après lecture.</span>
+          <span data-lang="hu" class="inline">A Küldés gombra kattintva megnyílik az e-mail kliense egy elkészített üzenettel. Csak el kell küldenie (és csatolhat fényképeket is, ha szeretne). A megemlékezése átolvasás után kerül fel az oldalra.</span>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="dl-btn" onclick="closeHommageForm()">
+            <span data-lang="fr" class="inline">Annuler</span>
+            <span data-lang="hu" class="inline">Mégse</span>
+          </button>
+          <button type="submit" class="dl-btn dl-btn-primary">
+            <span data-lang="fr" class="inline">↦ Envoyer</span>
+            <span data-lang="hu" class="inline">↦ Küldés</span>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <footer>
@@ -534,6 +744,60 @@
         `;
       }).join('');
     }
+
+    // ---- Formulaire d'hommage : ouvre/ferme la modal, envoie via mailto ----
+    function openHommageForm() {
+      document.getElementById('hommage-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => { document.getElementById('form-name').focus(); }, 100);
+    }
+    function closeHommageForm() {
+      document.getElementById('hommage-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function submitHommage(e) {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value.trim();
+      const email = document.getElementById('form-email').value.trim();
+      const message = document.getElementById('form-message').value.trim();
+      const lang = document.documentElement.lang === 'hu' ? 'hu' : 'fr';
+
+      const sujet = lang === 'hu'
+        ? `Megemlékezés Edina emlékére — ${name}`
+        : `Hommage pour Edina — ${name}`;
+
+      const corps = lang === 'hu'
+        ? `Megemlékezés Koszmovszky Edina Franciska emlékére\n\n` +
+          `Név: ${name}\n` +
+          `E-mail: ${email}\n\n` +
+          `--- Megemlékezés ---\n${message}\n--- Vége ---\n\n` +
+          `(Fényképek esetén kérjük, csatolja közvetlenül ehhez az e-mailhez, mielőtt elküldi.)`
+        : `Hommage pour Koszmovszky Edina Franciska\n\n` +
+          `Nom : ${name}\n` +
+          `Email : ${email}\n\n` +
+          `--- Hommage ---\n${message}\n--- Fin ---\n\n` +
+          `(Si vous souhaitez joindre des photos, ajoutez-les directement à cet email avant de l'envoyer.)`;
+
+      const destinataire = 'reflet.82-kilos@icloud.com';
+      const mailto = 'mailto:' + encodeURIComponent(destinataire) +
+                     '?subject=' + encodeURIComponent(sujet) +
+                     '&body=' + encodeURIComponent(corps);
+
+      window.location.href = mailto;
+
+      // Ferme la modal au bout d'un instant (le temps que le client mail s'ouvre)
+      setTimeout(() => {
+        closeHommageForm();
+        document.getElementById('hommage-form').reset();
+        alert(lang === 'hu'
+          ? 'Köszönjük! Az e-mail kliens megnyílt — kérjük, küldje el az üzenetet (és csatoljon fényképeket, ha szeretne). A megemlékezést hamarosan hozzáadjuk az oldalhoz.'
+          : 'Merci ! Votre client mail s\'est ouvert — il ne vous reste qu\'à envoyer l\'email (et y joindre des photos si vous le souhaitez). Votre hommage sera ajouté au site sous peu.');
+      }, 800);
+    }
+    // Échap ferme aussi la modal
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeHommageForm();
+    });
 
     function openLightbox(src) {
       const lb = document.getElementById('lightbox');
