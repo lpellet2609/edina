@@ -37,18 +37,38 @@
     a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
     a:hover { color: var(--bordeaux-dark); }
 
-    /* Language switcher */
-    .lang-switch {
+    /* Top bar */
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
       background: var(--paper);
       border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
       display: flex;
       justify-content: center;
       gap: 8px;
-      padding: 10px 16px;
+      padding: 10px 16px 6px;
     }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 16px 10px;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
     .lang-switch button {
       background: transparent;
       border: 1px solid var(--rule);
@@ -356,9 +376,16 @@
 </head>
 <body>
 
-  <div class="lang-switch" role="navigation" aria-label="Langue">
-    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
-    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  <div class="topbar">
+    <div class="lang-switch" role="navigation" aria-label="Langue">
+      <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+      <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+    </div>
+    <nav class="navbar">
+      <a href="index.html" class="active"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+      <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+    </nav>
   </div>
 
   <header class="hero">

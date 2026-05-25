@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Album — 3 juin 2026</title>
+  <meta name="description" content="Album souvenirs des obsèques du 3 juin 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--paper); border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
+      display: flex; justify-content: center; gap: 8px; padding: 10px 16px 6px;
+    }
+    .lang-switch button {
+      background: transparent; border: 1px solid var(--rule);
+      color: var(--muted); font-family: 'Lato', sans-serif;
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 16px; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    .lang-switch button.active { background: var(--bordeaux); color: white; border-color: var(--bordeaux); }
+    .lang-switch button:hover:not(.active) { border-color: var(--bordeaux); color: var(--bordeaux); }
+    .navbar { display: flex; justify-content: center; gap: 18px; padding: 8px 16px 10px; flex-wrap: wrap; }
+    .navbar a {
+      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      padding: 4px 8px; border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    header.hero { text-align: center; padding: 32px 24px 8px; }
+    header.hero h1 { font-size: 34px; margin: 0 0 8px; line-height: 1.15; }
+    header.hero .sub { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); font-size: 17px; }
+
+    .ornament { text-align: center; color: var(--bordeaux); font-size: 18px; margin: 24px 0 8px; letter-spacing: 0.4em; }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--bordeaux);
+      font-size: 26px;
+      margin: 40px 0 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
+    .gallery img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 2px;
+      cursor: zoom-in;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .gallery img:hover { transform: scale(1.02); }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+    .empty-state .icon { font-size: 36px; color: var(--bordeaux); margin-bottom: 12px; }
+    .empty-state p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 100;
+      align-items: center; justify-content: center;
+      cursor: zoom-out; padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+    .lightbox .close {
+      position: absolute; top: 16px; right: 24px;
+      color: white; font-size: 32px; font-family: 'Cormorant Garamond', serif;
+      cursor: pointer; background: none; border: none;
+    }
+
+    footer {
+      text-align: center; color: var(--muted); font-size: 14px;
+      padding: 32px 24px; border-top: 1px solid var(--rule); margin-top: 40px;
+    }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="lang-switch" role="navigation" aria-label="Langue">
+      <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+      <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+    </div>
+    <nav class="navbar">
+      <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+      <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="album.html" class="active"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <h1>
+      <span data-lang="fr" class="inline">Album du 3 juin 2026</span>
+      <span data-lang="hu" class="inline">2026. június 3. — Album</span>
+    </h1>
+    <div class="sub">
+      <span data-lang="fr" class="inline">Souvenirs de la journée — messe, inhumation et réception</span>
+      <span data-lang="hu" class="inline">A nap emlékei — szentmise, temetés és fogadás</span>
+    </div>
+  </header>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <div class="container">
+
+    <!-- Messe -->
+    <h2 class="section-title">
+      <span data-lang="fr" class="inline">Messe — Église Saint-László</span>
+      <span data-lang="hu" class="inline">Szentmise — Szent László-templom</span>
+    </h2>
+    <div class="gallery" id="gallery-messe"></div>
+    <div class="empty-state" id="empty-messe">
+      <div class="icon">✝</div>
+      <p data-lang="fr">Les photos de la messe seront ajoutées ici après le 3 juin.</p>
+      <p data-lang="hu">A szentmise fényképei június 3. után kerülnek ide.</p>
+    </div>
+
+    <!-- Inhumation -->
+    <h2 class="section-title">
+      <span data-lang="fr" class="inline">Inhumation — Cimetière de Rákoskeresztúr</span>
+      <span data-lang="hu" class="inline">Temetés — Rákoskeresztúri temető</span>
+    </h2>
+    <div class="gallery" id="gallery-inhumation"></div>
+    <div class="empty-state" id="empty-inhumation">
+      <div class="icon">✦</div>
+      <p data-lang="fr">Les photos de l'inhumation seront ajoutées ici après le 3 juin.</p>
+      <p data-lang="hu">A temetés fényképei június 3. után kerülnek ide.</p>
+    </div>
+
+    <!-- Reception -->
+    <h2 class="section-title">
+      <span data-lang="fr" class="inline">Réception</span>
+      <span data-lang="hu" class="inline">Fogadás</span>
+    </h2>
+    <div class="gallery" id="gallery-reception"></div>
+    <div class="empty-state" id="empty-reception">
+      <div class="icon">❦</div>
+      <p data-lang="fr">Les photos de la réception seront ajoutées ici après le 3 juin.</p>
+      <p data-lang="hu">A fogadás fényképei június 3. után kerülnek ide.</p>
+    </div>
+
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="close" onclick="closeLightbox()">✕</button>
+    <img id="lightbox-img" alt="" />
+  </div>
+
+  <footer>
+    <span data-lang="fr" class="inline">En mémoire d'Edina — 3 juin 2026.</span>
+    <span data-lang="hu" class="inline">Edina emlékére — 2026. június 3.</span>
+  </footer>
+
+  <script>
+    // Pour ajouter des photos après le 3 juin :
+    // 1) Déposer les fichiers dans /images/album/messe/, /images/album/inhumation/, ou /images/album/reception/
+    // 2) Lister les noms de fichiers ci-dessous dans le bon tableau
+    const PHOTOS = {
+      messe: [
+        // exemple : "messe-01.jpg", "messe-02.jpg"
+      ],
+      inhumation: [
+        // exemple : "inhum-01.jpg"
+      ],
+      reception: [
+        // exemple : "recep-01.jpg"
+      ]
+    };
+
+    function renderSection(name) {
+      const list = PHOTOS[name] || [];
+      const gallery = document.getElementById('gallery-' + name);
+      const empty = document.getElementById('empty-' + name);
+      if (!list.length) {
+        gallery.style.display = 'none';
+        return;
+      }
+      empty.style.display = 'none';
+      gallery.innerHTML = list.map(f => {
+        const src = `images/album/${name}/${f}`;
+        return `<img src="${src}" alt="" onclick="openLightbox('${src}')" />`;
+      }).join('');
+    }
+
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.classList.add('open');
+    }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+      try { localStorage.setItem('site-lang', lang); } catch(e) {}
+    }
+    (function() {
+      let lang = 'fr';
+      try {
+        const saved = localStorage.getItem('site-lang');
+        if (saved === 'hu' || saved === 'fr') lang = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+      } catch(e) {}
+      setLang(lang);
+      ['messe','inhumation','reception'].forEach(renderSection);
+    })();
+  </script>
+
+</body>
+</html>
