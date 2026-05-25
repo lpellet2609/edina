@@ -154,6 +154,36 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.08);
       border-radius: 2px;
     }
+    .dl-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .dl-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--bordeaux);
+      border: 1px solid var(--bordeaux);
+      padding: 9px 18px;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dl-btn:hover {
+      background: var(--bordeaux);
+      color: white;
+    }
+    .dl-btn:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
 
     /* Cards */
     .cards {
@@ -441,9 +471,17 @@
 
       <div data-lang="fr">
         <img src="faire-part-fr.jpg" alt="Faire-part" class="fairpart" />
+        <div class="dl-row">
+          <a class="dl-btn" href="faire-part-fr.jpg" download="faire-part-edina-koszmovszky-fr.jpg">↓ Télécharger en JPG</a>
+          <button class="dl-btn" type="button" onclick="downloadPdf('faire-part-fr.jpg', 'faire-part-edina-koszmovszky-fr.pdf')">↓ Télécharger en PDF</button>
+        </div>
       </div>
       <div data-lang="hu">
         <img src="faire-part-hu.jpg" alt="Gyászjelentés" class="fairpart" />
+        <div class="dl-row">
+          <a class="dl-btn" href="faire-part-hu.jpg" download="gyaszjelentes-edina-koszmovszky-hu.jpg">↓ Letöltés JPG-ként</a>
+          <button class="dl-btn" type="button" onclick="downloadPdf('faire-part-hu.jpg', 'gyaszjelentes-edina-koszmovszky-hu.pdf')">↓ Letöltés PDF-ként</button>
+        </div>
       </div>
     </section>
 
@@ -678,7 +716,41 @@
     <span data-lang="hu" class="inline">Köszönettel jelenlétükért és imáikért.</span>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    // Génère un PDF A4 à partir d'une image JPG en l'adaptant à la page
+    async function downloadPdf(imageUrl, filename) {
+      const btn = event && event.currentTarget;
+      if (btn) { btn.disabled = true; }
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = imageUrl;
+        });
+        const { jsPDF } = window.jspdf;
+        // A4 portrait : 210 x 297 mm. On adapte avec marges de 10mm.
+        const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+        const pageW = 210, pageH = 297, margin = 10;
+        const maxW = pageW - margin * 2;
+        const maxH = pageH - margin * 2;
+        const ratio = Math.min(maxW / img.width, maxH / img.height);
+        const w = img.width * ratio;
+        const h = img.height * ratio;
+        const x = (pageW - w) / 2;
+        const y = (pageH - h) / 2;
+        pdf.addImage(img, 'JPEG', x, y, w, h);
+        pdf.save(filename);
+      } catch (err) {
+        alert("Erreur lors de la génération du PDF. Vous pouvez télécharger le JPG à la place.");
+        console.error(err);
+      } finally {
+        if (btn) { btn.disabled = false; }
+      }
+    }
+
     function checkRepasCode() {
       var val = document.getElementById('repas-code').value.trim();
       if (val.toLowerCase() === 'budapest') {
