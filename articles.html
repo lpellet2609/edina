@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articles de presse — Koszmovszky Edina Franciska</title>
+  <meta name="description" content="Articles de presse hongrois sur la révolution de 1956 et ses héros, en mémoire d'Edina Koszmovszky." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--bordeaux-dark); }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--paper); border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
+      display: flex; justify-content: center; gap: 8px; padding: 10px 16px 6px;
+    }
+    .lang-switch button {
+      background: transparent; border: 1px solid var(--rule);
+      color: var(--muted); font-family: 'Lato', sans-serif;
+      font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 16px; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    .lang-switch button.active { background: var(--bordeaux); color: white; border-color: var(--bordeaux); }
+    .lang-switch button:hover:not(.active) { border-color: var(--bordeaux); color: var(--bordeaux); }
+    .navbar { display: flex; justify-content: center; gap: 18px; padding: 8px 16px 10px; flex-wrap: wrap; }
+    .navbar a {
+      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      padding: 4px 8px; border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    header.hero { text-align: center; padding: 32px 24px 8px; }
+    header.hero h1 { font-size: 34px; margin: 0 0 8px; line-height: 1.15; }
+    header.hero .sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .ornament { text-align: center; color: var(--bordeaux); font-size: 18px; margin: 24px 0 8px; letter-spacing: 0.4em; }
+
+    .intro {
+      max-width: 640px;
+      margin: 0 auto 36px;
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    /* Article card */
+    .press-article {
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      padding: 28px 28px 24px;
+      border-radius: 2px;
+      margin-bottom: 36px;
+    }
+    .article-meta {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .article-title {
+      font-size: 26px;
+      color: var(--bordeaux);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+    .article-original-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+    .article-image {
+      margin: 20px -28px;
+    }
+    .article-image img {
+      width: 100%;
+      display: block;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .article-image figcaption {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 8px 16px 0;
+    }
+    .article-body {
+      margin-top: 8px;
+    }
+    .article-body p {
+      margin: 0 0 14px;
+      line-height: 1.7;
+    }
+    .article-body p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      float: left;
+      line-height: 0.9;
+      padding: 4px 8px 0 0;
+      color: var(--bordeaux);
+    }
+    .article-note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .article-link-row {
+      margin-top: 18px;
+      text-align: center;
+    }
+    .article-link-row a {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      border: 1px solid var(--bordeaux);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .article-link-row a:hover {
+      background: var(--bordeaux);
+      color: white;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+    .empty-state p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center; color: var(--muted); font-size: 14px;
+      padding: 32px 24px; border-top: 1px solid var(--rule); margin-top: 40px;
+    }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="lang-switch" role="navigation" aria-label="Langue">
+      <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+      <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+    </div>
+    <nav class="navbar">
+      <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+      <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="articles.html" class="active"><span data-lang="fr" class="inline">Articles</span><span data-lang="hu" class="inline">Cikkek</span></a>
+      <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <h1>
+      <span data-lang="fr" class="inline">Articles de presse</span>
+      <span data-lang="hu" class="inline">Sajtócikkek</span>
+    </h1>
+    <div class="sub">
+      <span data-lang="fr" class="inline">Articles parus en mémoire des héros de 1956 — dont notre mère</span>
+      <span data-lang="hu" class="inline">Az 1956-os hősök emlékére megjelent cikkek — édesanyánkról is</span>
+    </div>
+  </header>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <div class="container">
+    <p class="intro">
+      <span data-lang="fr" class="inline">Les articles sont reproduits ici avec la traduction française intégrale pour permettre à chacun, en France comme en Hongrie, d'en prendre connaissance. Chaque article comporte un lien vers la source originale.</span>
+      <span data-lang="hu" class="inline">A cikkek itt teljes francia fordításban szerepelnek, hogy Franciaországban és Magyarországon is mindenki elolvashassa őket. Minden cikkhez tartozik egy hivatkozás az eredeti forrásra.</span>
+    </p>
+
+    <!-- ARTICLE 1 — Magyar Nemzet, 23 mai 2026 -->
+    <article class="press-article">
+      <div class="article-meta">Magyar Nemzet — 23.05.2026 — Bánó Attila</div>
+
+      <h2 class="article-title">
+        <span data-lang="fr" class="inline">Les derniers héros vivants de la révolution de 1956 nous disent adieu</span>
+        <span data-lang="hu" class="inline">Búcsúznak az 1956-os forradalom még élő hősei</span>
+      </h2>
+      <div class="article-original-title" data-lang="fr">
+        Titre original : « Búcsúznak az 1956-os forradalom még élő hősei »
+      </div>
+
+      <figure class="article-image">
+        <img src="images/articles/2026-05-23-magyarnemzet-1956-heros.jpg" alt="Illustration de l'article" />
+        <figcaption>
+          <span data-lang="fr" class="inline">Illustration : Magyar Nemzet</span>
+          <span data-lang="hu" class="inline">Illusztráció: Magyar Nemzet</span>
+        </figcaption>
+      </figure>
+
+      <!-- Corps FR -->
+      <div class="article-body" data-lang="fr">
+        <p>Ils n'ont pas eu droit à une seconde vie : ni Mansfeld Péter, apprenti ouvrier qualifié exécuté à dix-huit ans après la révolution, ni Tóth Ilona, étudiante en médecine exécutée à vingt-cinq ans, ni Szeles Erika Kornélia, apprentie cuisinière d'origine juive, qui n'avait pas encore atteint son seizième anniversaire lorsque des balles de mitraillette soviétique se sont enfoncées dans son corps. Les tirs l'ont atteinte au moment précis où, vêtue de l'uniforme de la Croix-Rouge, elle courait vers un camarade blessé pour lui porter secours.</p>
+
+        <p>Szeles Erika a également été immortalisée par un photographe danois, Vagn Hansen, en pufajka (veste matelassée), souriante, mitraillette russe à tambour à la main. La célèbre photographie, parue en couverture de nombreux journaux, nous dit aujourd'hui bien plus qu'au moment de sa publication. Car nous savons quel sort le destin a réservé à cette jeune fille au regard innocent, devenue l'un des symboles de la révolution.</p>
+
+        <p>En dehors d'elle, les héros tombés du Corvin köz, de la place Széna et des autres foyers révolutionnaires n'ont pas eu non plus de seconde vie. Quant aux survivants restés au pays, ils ont connu un destin cruel : prison, torture, persécution. La dactylographe Wittner Mária, à dix-neuf ans, soignait les révolutionnaires blessés lorsqu'elle fut elle-même blessée au début de l'invasion soviétique. Après l'écrasement de la révolution, elle fut d'abord condamnée à mort, puis à la prison à vie. Elle ne fut libérée qu'en 1970, après treize années d'incarcération.</p>
+
+        <p>Tóth Ilona, elle, fut accusée dans un procès truqué d'un meurtre dont la commission n'a jamais pu être prouvée. Elle et ses co-accusés furent torturés par leurs interrogateurs, qui leur arrachèrent ainsi des aveux. Sur la base de ceux-ci, Ilona fut condamnée à mort et exécutée en juin 1957. La mise au jour des faits réels et la réhabilitation juridique n'ont été rendues possibles qu'après la chute du régime communiste.</p>
+
+        <p>C'est avant tout le destin de Mansfeld Péter qui révèle la véritable nature de la dictature qui a écrasé la révolution.</p>
+
+        <p>Ce garçon, qui entrait dans sa seizième année, livrait des armes et des vivres aux insurgés de la place Széna, et en cachait également chez lui. En 1958, avec un complice, il enleva un policier qu'ils relâchèrent ensuite. Après son arrestation, il fut d'abord condamné à la prison à vie, puis à la peine de mort. Pour procéder à l'exécution, on attendit qu'il fête son dix-huitième anniversaire. Onze jours plus tard, le 21 mars 1959, il fut exécuté.</p>
+
+        <p>On pourrait longuement énumérer les destins tragiques de ces jeunes de 1956, connus ou inconnus, mais l'essentiel est qu'ils ont véritablement écrit l'Histoire.</p>
+
+        <p>L'histoire d'un chapitre glorieux et inoubliable de l'histoire hongroise, à la mémoire éternelle, dans laquelle les jeunes d'aujourd'hui peuvent encore largement puiser.</p>
+
+        <div class="article-note">L'auteur est écrivain et journaliste.</div>
+      </div>
+
+      <!-- Corps HU (texte original) -->
+      <div class="article-body" data-lang="hu">
+        <p>Nem kapott új életet a forradalom után tizennyolc évesen kivégzett szakmunkástanuló Mansfeld Péter, a huszonöt évesen kivégzett orvostanhallgató Tóth Ilona, valamint Szeles Erika Kornélia, a zsidó származású szakácstanuló, aki még a tizenhatodik életévét sem töltötte be, amikor a testébe szovjet géppisztolylövedékek fúródtak. A lövések éppen akkor érték, amikor vöröskeresztes ruhában egy sebesült társához rohant, hogy segítsen rajta.</p>
+
+        <p>Szeles Erikát egy dán fotós, Vagn Hansen is megörökítette, amint pufajkában, dobtáras orosz géppisztollyal a kezében mosolyog. A híres, címlapokon is megjelent fénykép ma sokkal többet mond nekünk, mint megjelenésének pillanatában. Mert tudjuk, hogy mit hozott a sors ennek az ártatlan tekintetű lánynak, a forradalom egyik szimbólumának.</p>
+
+        <p>Rajta kívül a Corvin köz, a Széna tér és más forradalmi gócok elesett hősei sem kaptak új életet. Az itthon maradt túlélőkre kegyetlen sors, börtön, kínzás, üldöztetés várt. Wittner Mária gépírónő tizenkilenc évesen ápolta a sérült forradalmárokat, míg a szovjet invázió kezdetén ő is megsebesült. A forradalom leverése után előbb halálra, majd életfogytig tartó börtönre ítélték. Tizenhárom évi rabság után, 1970-ben szabadult.</p>
+
+        <p>Tóth Ilonát egy koncepciós perben vádolták olyan gyilkossággal, amelynek elkövetését nem tudták rábizonyítani. Őt és vádlott-társait vallatóik megkínozták, s így csikarták ki a vallomásokat. Ilonát ezek alapján halálra ítélték, és 1957 júniusában kivégezték. A valós tények feltárására és a jogi rehabilitációra csak a rendszerváltás nyújtott lehetőséget.</p>
+
+        <p>Leginkább Mansfeld Péter sorsa világít rá a forradalmat leverő diktatúra igazi természetére.</p>
+
+        <p>A tizenhatodik évét töltő fiú a Széna téri felkelőknek szállított fegyvert és élelmiszert, és a fegyverekből otthon is elrejtett valamennyit. 1958-ban egyik társával elraboltak egy rendőrt, akit azután elengedtek. Letartóztatása után előbb életfogytiglanra ítélték, majd halálbüntetést kapott. A végrehajtással megvárták, amíg betölti a tizennyolcadik születésnapját. Tizenegy nappal később, 1959. március 21-én végezték ki.</p>
+
+        <p>Hosszan lehetne sorolni az ismert és ismeretlen ötvenhatos fiatalok tragikus történeteit, de a lényeg az, hogy ők valóban történelmet írtak.</p>
+
+        <p>A magyar történelem dicsőséges és feledhetetlen fejezetének örök emlékű történetét, amelyből a mai fiatalok is sokat meríthetnek.</p>
+
+        <div class="article-note">A szerző író, újságíró.</div>
+      </div>
+
+      <div class="article-link-row">
+        <a href="https://magyarnemzet.hu/velemeny/2026/05/bucsu-1956-forradalom-hos-szabadsag-diktatura-zsarnoksag-fiatalsag" target="_blank" rel="noopener">
+          <span data-lang="fr" class="inline">→ Lire l'article original sur magyarnemzet.hu</span>
+          <span data-lang="hu" class="inline">→ Eredeti cikk a magyarnemzet.hu oldalon</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Pour ajouter d'autres articles : dupliquer le bloc <article class="press-article"> ci-dessus -->
+
+  </div>
+
+  <footer>
+    <span data-lang="fr" class="inline">En mémoire d'Edina Koszmovszky — héroïne de la révolution hongroise de 1956.</span>
+    <span data-lang="hu" class="inline">Koszmovszky Edina emlékére — az 1956-os magyar forradalom hősnője.</span>
+  </footer>
+
+  <script>
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+      try { localStorage.setItem('site-lang', lang); } catch(e) {}
+    }
+    (function() {
+      let lang = 'fr';
+      try {
+        const saved = localStorage.getItem('site-lang');
+        if (saved === 'hu' || saved === 'fr') lang = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+      } catch(e) {}
+      setLang(lang);
+    })();
+  </script>
+
+</body>
+</html>
