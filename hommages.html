@@ -736,7 +736,7 @@
 
     function render() {
       const container = document.getElementById('hommages');
-      container.innerHTML = [...HOMMAGES].reverse().map(h => {
+      container.innerHTML = HOMMAGES.map(h => {
         const photosHtml = h.images.length ? `
           <div class="photos">
             ${h.images.map(img => `
