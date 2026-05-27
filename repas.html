@@ -108,10 +108,20 @@
       margin: 0 0 8px;
     }
 
-    .info-block { margin: 28px 0; }
+    .intro {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--ink);
+      max-width: 580px;
+      margin: 0 auto 32px;
+    }
+
+    .info-block { margin: 32px 0; }
     .info-block h3 {
       font-size: 22px;
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--rule);
     }
@@ -121,21 +131,143 @@
     .info-block ul {
       padding-left: 22px;
     }
-    .info-block li { margin-bottom: 6px; }
+    .info-block li { margin-bottom: 8px; }
 
-    .placeholder-note {
-      text-align: center;
-      color: var(--muted);
-      font-style: italic;
-      font-size: 15px;
-      padding: 32px 0;
+    .restaurant-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      color: var(--bordeaux);
+      font-weight: 500;
+      margin-bottom: 4px;
     }
+
+    .btn {
+      display: inline-block;
+      background: var(--bordeaux);
+      color: white !important;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 8px 6px 8px 0;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--bordeaux-dark); }
+    .btn.outline {
+      background: transparent;
+      color: var(--bordeaux) !important;
+      border: 1px solid var(--bordeaux);
+    }
+    .btn.outline:hover { background: var(--bordeaux); color: white !important; }
+
+    .rsvp-box {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    .rsvp-box h3 {
+      border: none;
+      padding: 0;
+      margin: 0 0 10px;
+    }
+    .alert {
+      background: #fff7e6;
+      border-left: 4px solid #c47a00;
+      padding: 14px 18px;
+      margin: 16px 0;
+      border-radius: 3px;
+      font-size: 15px;
+    }
+    .alert strong { color: #8a4f00; }
+
+    .rsvp-deadline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--bordeaux);
+      font-size: 18px;
+      margin: 6px 0 16px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gallery img:hover { opacity: 0.85; }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95%;
+      max-height: 95%;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .contacts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .contact-card {
+      background: var(--cream);
+      padding: 16px 20px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+    }
+    .contact-card .role {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .contact-card .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      color: var(--bordeaux);
+      margin-bottom: 6px;
+    }
+    .contact-card a { font-size: 16px; }
 
     .ornament {
       text-align: center;
       color: var(--bordeaux);
       font-size: 18px;
-      margin: 32px 0;
+      margin: 40px 0;
       letter-spacing: 0.4em;
     }
 
@@ -157,6 +289,11 @@
       margin-top: 40px;
     }
 
+    @media (max-width: 560px) {
+      .contacts { grid-template-columns: 1fr; }
+      .gallery img { height: 200px; }
+    }
+
     [data-lang] { display: none; }
     html[lang="fr"] [data-lang="fr"] { display: block; }
     html[lang="hu"] [data-lang="hu"] { display: block; }
@@ -174,8 +311,8 @@
   <header class="hero">
     <div class="cross">✝︎</div>
     <h1>
-      <span data-lang="fr" class="inline">Informations — Réception</span>
-      <span data-lang="hu" class="inline">Információk — Ebéd</span>
+      <span data-lang="fr" class="inline">Réception après la cérémonie</span>
+      <span data-lang="hu" class="inline">Fogadás a szertartás után</span>
     </h1>
     <div class="subtitle">
       <span data-lang="fr" class="inline">Koszmovszky Edina Franciska — 3 juin 2026</span>
@@ -190,15 +327,179 @@
       <span data-lang="hu" class="inline">← Vissza a főoldalra</span>
     </a>
 
-    <!-- Les informations seront ajoutées ici -->
-    <section>
+    <!-- Invitation -->
+    <p class="intro">
+      <span data-lang="fr" class="inline">Après le cimetière, nous avons le plaisir de vous convier à un déjeuner pour partager un dernier moment ensemble en mémoire d'Edina.</span>
+      <span data-lang="hu" class="inline">A temető után szeretettel meghívjuk Önt egy közös ebédre, hogy együtt töltsünk egy utolsó pillanatot Edina emlékére.</span>
+    </p>
+
+    <!-- Lieu -->
+    <div class="info-block">
+      <h3>
+        <span data-lang="fr" class="inline">Le lieu</span>
+        <span data-lang="hu" class="inline">A helyszín</span>
+      </h3>
+      <div class="restaurant-name">Le Bistro Budapest</div>
+      <p>
+        <span data-lang="fr" class="inline">Bistro français à Budapest, salle privatisée pour la réception.</span>
+        <span data-lang="hu" class="inline">Francia bisztró Budapesten, a fogadásra privát terem van fenntartva.</span>
+      </p>
+      <p>
+        <a class="btn" href="https://maps.app.goo.gl/YvD6Te78iY78i9Rb8" target="_blank" rel="noopener">
+          <span data-lang="fr" class="inline">Voir sur Google Maps</span>
+          <span data-lang="hu" class="inline">Megnyitás a Google Mapsen</span>
+        </a>
+        <a class="btn outline" href="https://lebistro.hu" target="_blank" rel="noopener">
+          <span data-lang="fr" class="inline">Site du restaurant</span>
+          <span data-lang="hu" class="inline">Az étterem weboldala</span>
+        </a>
+      </p>
+
+      <div class="gallery">
+        <img src="images/repas/bistro-exterieur.jpg" alt="Le Bistro — extérieur" onclick="openLightbox(this.src)">
+        <img src="images/repas/bistro-interieur.jpg" alt="Le Bistro — salle intérieure" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <!-- Horaires -->
+    <div class="info-block">
+      <h3>
+        <span data-lang="fr" class="inline">Horaires</span>
+        <span data-lang="hu" class="inline">Időpontok</span>
+      </h3>
       <div data-lang="fr">
-        <p class="placeholder-note">Les informations concernant la réception au restaurant seront ajoutées prochainement.</p>
+        <ul>
+          <li><strong>Trajet :</strong> directement du cimetière au restaurant, après l'inhumation.</li>
+          <li><strong>Arrivée prévue :</strong> à partir de 13h30 (le restaurant nous attend à cette heure-là).</li>
+          <li><strong>Salle réservée :</strong> jusqu'à 18h30 — prévoyez l'après-midi.</li>
+          <li>Si vous arrivez plus tôt, vous serez accueillis sans problème.</li>
+        </ul>
       </div>
       <div data-lang="hu">
-        <p class="placeholder-note">Az éttermi ebéddel kapcsolatos információk hamarosan elérhetők lesznek.</p>
+        <ul>
+          <li><strong>Útvonal:</strong> közvetlenül a temetőből az étterembe, a temetés után.</li>
+          <li><strong>Érkezés:</strong> 13:30-tól (az étterem ekkortól vár minket).</li>
+          <li><strong>A terem foglalva:</strong> 18:30-ig — számoljanak a délutánnal.</li>
+          <li>Ha korábban érkeznek, természetesen fogadják Önöket.</li>
+        </ul>
       </div>
-    </section>
+    </div>
+
+    <!-- Accès -->
+    <div class="info-block">
+      <h3>
+        <span data-lang="fr" class="inline">Comment venir</span>
+        <span data-lang="hu" class="inline">Hogyan jutnak el</span>
+      </h3>
+      <div data-lang="fr">
+        <p><strong>Depuis le cimetière</strong> — il n'y a pas de navette organisée entre le cimetière et le restaurant. Comptez environ <strong>30 minutes de trajet en voiture</strong>. Privilégiez le <strong>covoiturage</strong> ou le <strong>taxi</strong>.</p>
+        <p style="margin-top:10px;">Compagnies de taxi recommandées (opérateurs anglophones, paiement par carte accepté) :</p>
+        <ul>
+          <li><strong>City Taxi</strong> — <a href="tel:+3612111111">+36 1 211 1111</a></li>
+          <li><strong>Főtaxi</strong> — <a href="tel:+3612222222">+36 1 222 2222</a></li>
+        </ul>
+      </div>
+      <div data-lang="hu">
+        <p><strong>A temetőből</strong> — nincs szervezett transzfer a temető és az étterem között. Az út autóval körülbelül <strong>30 percet</strong> vesz igénybe. Javasoljuk a <strong>közös autózást</strong> vagy a <strong>taxit</strong>.</p>
+        <p style="margin-top:10px;">Ajánlott taxitársaságok (angol nyelvű diszpécser, bankkártyás fizetés elfogadott):</p>
+        <ul>
+          <li><strong>City Taxi</strong> — <a href="tel:+3612111111">+36 1 211 1111</a></li>
+          <li><strong>Főtaxi</strong> — <a href="tel:+3612222222">+36 1 222 2222</a></li>
+        </ul>
+      </div>
+
+      <div data-lang="fr">
+        <p style="margin-top:24px;"><strong>En voiture — parking</strong> — un grand parking payant se trouve à environ 400 m du restaurant. Barrière avec ticket à l'entrée, paiement à l'automate par carte bancaire (cartes étrangères acceptées).</p>
+      </div>
+      <div data-lang="hu">
+        <p style="margin-top:24px;"><strong>Autóval — parkoló</strong> — egy nagy fizetős parkoló található az éttermtől körülbelül 400 méterre. Sorompós beléptetés jeggyel, fizetés az automatánál bankkártyával (külföldi kártyák elfogadva).</p>
+      </div>
+      <div class="gallery">
+        <img src="images/repas/parking-vue.jpg" alt="Parking BUDAPART" onclick="openLightbox(this.src)">
+        <img src="images/repas/parking-automate.jpg" alt="Automate de paiement du parking" onclick="openLightbox(this.src)">
+      </div>
+
+      <div class="alert" data-lang="fr">
+        <strong>⚠️ Important — alcool au volant en Hongrie :</strong> la tolérance est de <strong>0,00 g/L</strong>.
+      </div>
+      <div class="alert" data-lang="hu">
+        <strong>⚠️ Fontos — alkohol és vezetés Magyarországon:</strong> a megengedett véralkoholszint <strong>0,00 g/l</strong>.
+      </div>
+
+      <div data-lang="fr">
+        <p style="margin-top:24px;"><strong>Du parking au restaurant — navette ou marche</strong> — environ <strong>400 m à pied</strong> par une allée piétonne. Une <strong>navette du restaurant</strong> fait des allers-retours en continu entre le parking et l'entrée du Bistro, sans réservation. <strong>Recommandée</strong> pour les personnes âgées, avec bébé, jeunes enfants ou bagages.</p>
+        <p><a class="btn outline" href="https://maps.app.goo.gl/MsF3VNiRFNtYMp8AA?g_st=ic" target="_blank" rel="noopener">Voir l'itinéraire à pied sur Maps</a></p>
+      </div>
+      <div data-lang="hu">
+        <p style="margin-top:24px;"><strong>A parkolótól az étteremig — transzfer vagy gyaloglás</strong> — körülbelül <strong>400 méter gyalog</strong> egy sétányon keresztül. Az <strong>étterem transzfere</strong> folyamatosan közlekedik a parkoló és a Bistro bejárata között, foglalás nélkül. <strong>Idősebbek, babával, kisgyermekkel vagy csomaggal érkezők számára ajánlott.</strong></p>
+        <p><a class="btn outline" href="https://maps.app.goo.gl/MsF3VNiRFNtYMp8AA?g_st=ic" target="_blank" rel="noopener">Gyalogos útvonal a Mapsen</a></p>
+      </div>
+      <div class="gallery">
+        <img src="images/repas/trajet-esplanade.jpg" alt="Esplanade depuis le parking" onclick="openLightbox(this.src)">
+        <img src="images/repas/trajet-allee.jpg" alt="Allée piétonne du parking vers le restaurant" onclick="openLightbox(this.src)">
+      </div>
+
+    </div>
+
+    <!-- Apporter -->
+    <div class="info-block">
+      <h3>
+        <span data-lang="fr" class="inline">Apportez vos souvenirs</span>
+        <span data-lang="hu" class="inline">Hozzák magukkal emlékeiket</span>
+      </h3>
+      <div data-lang="fr">
+        <p>Une télévision avec câble HDMI sera disponible sur place. Si vous souhaitez partager des photos ou des vidéos d'Edina, apportez-les sur une <strong>clé USB</strong> — nous les projetterons pendant le déjeuner.</p>
+      </div>
+      <div data-lang="hu">
+        <p>A helyszínen egy televízió HDMI-kábellel az Önök rendelkezésére áll. Ha szeretnének Edináról fényképeket vagy videókat megosztani, hozzák magukkal <strong>USB-kulcson</strong> — az ebéd alatt levetítjük.</p>
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp-box">
+      <h3>
+        <span data-lang="fr" class="inline">Merci de confirmer votre présence</span>
+        <span data-lang="hu" class="inline">Kérjük, erősítsék meg részvételüket</span>
+      </h3>
+      <div class="rsvp-deadline">
+        <span data-lang="fr" class="inline">avant vendredi 29 mai au matin</span>
+        <span data-lang="hu" class="inline">2026. május 29., péntek reggelig</span>
+      </div>
+      <p>
+        <span data-lang="fr" class="inline">Merci de répondre directement à Philippe (par retour du message qu'il vous a envoyé), afin qu'il puisse confirmer les quantités au restaurant.</span>
+        <span data-lang="hu" class="inline">Kérjük, válaszoljanak közvetlenül Philippe-nek (annak az üzenetnek a válaszában, amelyet küldött), hogy meg tudja erősíteni a mennyiségeket az étteremmel.</span>
+      </p>
+    </div>
+
+    <!-- Contacts -->
+    <div class="info-block">
+      <h3>
+        <span data-lang="fr" class="inline">Contacts le jour J</span>
+        <span data-lang="hu" class="inline">Kapcsolattartók aznap</span>
+      </h3>
+      <p>
+        <span data-lang="fr" class="inline">En cas de question, de retard ou si vous ne trouvez pas la navette. Laurent et Philippe parlent tous les deux français et hongrois — les deux numéros ci-dessous (un français, un hongrois) sont juste là pour vous éviter les frais d'appel international :</span>
+        <span data-lang="hu" class="inline">Kérdés, késés esetén, vagy ha nem találják a transzfert. Laurent és Philippe is beszél franciául és magyarul — az alábbi két szám (egy francia, egy magyar) csak azért van, hogy elkerüljék a nemzetközi hívás díját:</span>
+      </p>
+      <div class="contacts">
+        <div class="contact-card">
+          <div class="role">
+            <span data-lang="fr" class="inline">Numéro français</span>
+            <span data-lang="hu" class="inline">Francia szám</span>
+          </div>
+          <div class="name">Laurent Pellet</div>
+          <a href="tel:+33762251238">+33 7 62 25 12 38</a>
+        </div>
+        <div class="contact-card">
+          <div class="role">
+            <span data-lang="fr" class="inline">Numéro hongrois</span>
+            <span data-lang="hu" class="inline">Magyar szám</span>
+          </div>
+          <div class="name">Philippe Pellet</div>
+          <a href="tel:+36304932559">+36 30 493 25 59</a>
+        </div>
+      </div>
+    </div>
 
     <div class="ornament">✦</div>
 
@@ -207,6 +508,12 @@
       <span data-lang="hu" class="inline">Az örök világosság fényeskedjék neki.</span>
     </p>
 
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer">×</button>
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <footer>
@@ -230,6 +537,17 @@
       } catch(e) {}
       setLang(lang);
     })();
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
   </script>
 
 </body>
