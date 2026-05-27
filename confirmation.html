@@ -361,26 +361,26 @@
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbwcJPZall6hgn3y5DLzWVqz82uJvodj6-BtHaLlaU1OTQi6lrxEA-MyOgIVBUWU7-vMYg/exec';
 
+    var currentRows = [];
+    var currentRowToConfirm = null;
+    var currentRowToDecline = null;
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
       document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
       try { localStorage.setItem('site-lang', lang); } catch(e) {}
-      if (typeof currentRows !== 'undefined' && currentRows.length) renderList();
+      if (currentRows && currentRows.length) renderList();
     }
     (function() {
-      let lang = 'fr';
+      var lang = 'fr';
       try {
-        const saved = localStorage.getItem('site-lang');
+        var saved = localStorage.getItem('site-lang');
         if (saved === 'hu' || saved === 'fr') lang = saved;
         else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
       } catch(e) {}
       setLang(lang);
     })();
-
-    let currentRows = [];
-    let currentRowToConfirm = null;
-    let currentRowToDecline = null;
 
     async function loadList() {
       try {
