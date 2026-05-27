@@ -366,6 +366,7 @@
       document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
       document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
       try { localStorage.setItem('site-lang', lang); } catch(e) {}
+      if (typeof currentRows !== 'undefined' && currentRows.length) renderList();
     }
     (function() {
       let lang = 'fr';
