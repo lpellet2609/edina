@@ -218,12 +218,14 @@
 
     <div class="intro">
       <div data-lang="fr">
-        Trouvez votre nom dans la liste ci-dessous et cliquez sur <strong>« Je confirme »</strong>. Vous serez invité à laisser votre e-mail (obligatoire) et votre téléphone (facultatif) — c'est juste pour éviter les clics accidentels.
-        <span class="deadline">Merci de confirmer avant le jeudi 28 mai 2026 à minuit.</span>
+        Chaque ligne correspond à une personne. Trouvez votre nom et cliquez sur <strong style="color:var(--green);">✓ Je confirme</strong> ou <strong style="color:var(--red);">✗ Je décline</strong>. E-mail obligatoire (téléphone facultatif) — pour éviter les clics accidentels.<br>
+        <em style="color:var(--muted);font-size:14px;">Pour confirmer plusieurs membres d'une famille, cliquez sur chaque ligne individuellement (vous pouvez réutiliser le même e-mail).</em>
+        <span class="deadline">Merci de répondre avant le jeudi 28 mai 2026 à minuit.</span>
       </div>
       <div data-lang="hu">
-        Keresse meg nevét az alábbi listában és kattintson a <strong>« Megerősítem »</strong> gombra. Meg kell adnia az e-mail-címét (kötelező) és a telefonszámát (opcionális) — ez csak a véletlen kattintások elkerülésére szolgál.
-        <span class="deadline">Kérjük, erősítse meg részvételét 2026. május 28. (csütörtök) éjfélig.</span>
+        Minden sor egy személyt jelöl. Keresse meg nevét és kattintson a <strong style="color:var(--green);">✓ Megerősítem</strong> vagy <strong style="color:var(--red);">✗ Visszautasítom</strong> gombra. Az e-mail kötelező (a telefonszám opcionális) — a véletlen kattintások elkerülésére.<br>
+        <em style="color:var(--muted);font-size:14px;">Egy család több tagjának megerősítéséhez kattintson minden soron külön (ugyanazt az e-mailt használhatja).</em>
+        <span class="deadline">Kérjük, válaszoljon 2026. május 28. (csütörtök) éjfélig.</span>
       </div>
     </div>
 
@@ -251,10 +253,6 @@
         <span data-lang="hu" class="inline">Részvétel megerősítése</span>
       </h2>
       <div class="target" id="confirm-target"></div>
-
-      <label data-lang="fr">Nombre de personnes (vous inclus)</label>
-      <label data-lang="hu">Személyek száma (Önnel együtt)</label>
-      <input type="number" id="confirm-count" min="1" max="20">
 
       <label data-lang="fr">E-mail <span style="text-transform:none;color:var(--bordeaux);">(obligatoire)</span></label>
       <label data-lang="hu">E-mail <span style="text-transform:none;color:var(--bordeaux);">(kötelező)</span></label>
@@ -404,30 +402,28 @@
         hu: { confirm: '✓ Megerősítem', decline: '✗ Visszautasítom', confirmed: 'Megerősítve', declined: 'Visszautasítva', persons: 'fő', personsP: 'fő', by: 'a következőtől:' }
       }[lang];
 
-      let totalConfirmed = 0, totalDeclined = 0, totalPersons = 0, totalConfirmedPersons = 0;
+      let totalConfirmed = 0, totalDeclined = 0;
       currentRows.forEach(r => {
-        totalPersons += Number(r.prevus) || 0;
         const isDecline = (r.statut === 'Decline');
-        if (r.email && !isDecline) { totalConfirmed++; totalConfirmedPersons += Number(r.confirmes) || 0; }
+        if (r.email && !isDecline) totalConfirmed++;
         if (isDecline) totalDeclined++;
       });
       const totalRepondu = totalConfirmed + totalDeclined;
+      const totalEnAttente = currentRows.length - totalRepondu;
       document.getElementById('stats').innerHTML = (lang === 'fr'
-        ? `<span><strong>${totalRepondu}</strong> / ${currentRows.length} réponses</span> · <span><strong style="color:var(--green);">${totalConfirmed}</strong> confirmées</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> déclinées</span> · <span><strong>${totalConfirmedPersons}</strong> / ${totalPersons} personnes attendues</span>`
-        : `<span><strong>${totalRepondu}</strong> / ${currentRows.length} válasz</span> · <span><strong style="color:var(--green);">${totalConfirmed}</strong> megerősítve</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> visszautasítva</span> · <span><strong>${totalConfirmedPersons}</strong> / ${totalPersons} várt fő</span>`);
+        ? `<span><strong style="color:var(--green);">${totalConfirmed}</strong> confirmés</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> déclinés</span> · <span><strong>${totalEnAttente}</strong> en attente</span> · <span>${currentRows.length} invités</span>`
+        : `<span><strong style="color:var(--green);">${totalConfirmed}</strong> megerősítve</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> visszautasítva</span> · <span><strong>${totalEnAttente}</strong> még válaszra vár</span> · <span>${currentRows.length} vendég</span>`);
 
       list.innerHTML = currentRows.map(r => {
         const isDecline = (r.statut === 'Decline');
         const isConfirm = (!!r.email && !isDecline);
-        const personLabel = (Number(r.prevus) > 1) ? labels.personsP : labels.persons;
         if (isConfirm) {
-          const confirmesLabel = (Number(r.confirmes) > 1) ? labels.personsP : labels.persons;
           const phone = r.telephone ? ' / ' + escapeHtml(r.telephone) : '';
           return `
             <div class="row confirmed">
               <div class="name">${escapeHtml(r.nom)}</div>
-              <div class="count">${r.confirmes} ${confirmesLabel}</div>
-              <div class="confirmed-info">✓ ${labels.confirmed} ${labels.by} ${escapeHtml(r.email)}${phone}</div>
+              <div class="count">✓ ${labels.confirmed}</div>
+              <div class="confirmed-info">${labels.by} ${escapeHtml(r.email)}${phone}</div>
             </div>`;
         }
         if (isDecline) {
@@ -435,14 +431,13 @@
           return `
             <div class="row declined">
               <div class="name">${escapeHtml(r.nom)}</div>
-              <div class="count">${labels.declined}</div>
-              <div class="declined-info">✗ ${labels.declined} ${labels.by} ${escapeHtml(r.email)}${phone}</div>
+              <div class="count">✗ ${labels.declined}</div>
+              <div class="declined-info">${labels.by} ${escapeHtml(r.email)}${phone}</div>
             </div>`;
         }
         return `
           <div class="row">
             <div class="name">${escapeHtml(r.nom)}</div>
-            <div class="count">${r.prevus} ${personLabel}</div>
             <div class="btn-group">
               <button class="btn confirm" onclick="openConfirmModal(${r.id})">${labels.confirm}</button>
               <button class="btn decline" onclick="openDeclineModal(${r.id})">${labels.decline}</button>
@@ -460,7 +455,6 @@
       if (!row) return;
       currentRowToConfirm = row;
       document.getElementById('confirm-target').textContent = row.nom;
-      document.getElementById('confirm-count').value = row.prevus || 1;
       document.getElementById('confirm-email').value = '';
       document.getElementById('confirm-phone').value = '';
       document.getElementById('confirm-error').textContent = '';
@@ -524,10 +518,8 @@
     async function submitConfirm() {
       const email = document.getElementById('confirm-email').value.trim();
       const phone = document.getElementById('confirm-phone').value.trim();
-      const count = parseInt(document.getElementById('confirm-count').value, 10);
       const err = document.getElementById('confirm-error');
       if (!validEmail(email)) { err.textContent = '⚠️ E-mail invalide.'; return; }
-      if (!count || count < 1) { err.textContent = '⚠️ Nombre de personnes invalide.'; return; }
       const btn = document.getElementById('confirm-submit');
       btn.disabled = true; err.textContent = '';
       try {
@@ -537,7 +529,7 @@
           body: JSON.stringify({
             action: 'confirm',
             id: currentRowToConfirm.id,
-            email, telephone: phone, confirmes: count
+            email, telephone: phone, confirmes: 1
           })
         });
         const data = await res.json();
