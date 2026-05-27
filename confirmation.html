@@ -21,7 +21,11 @@
       --muted: #6b6b6b;
       --rule: #d9cdb8;
       --green: #4a7c4e;
+      --green-dark: #3a5d3d;
       --green-bg: #eaf4eb;
+      --red: #a63a3a;
+      --red-dark: #862e2e;
+      --red-bg: #f4e8e8;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -96,20 +100,29 @@
       flex-wrap: wrap;
     }
     .row.confirmed { background: var(--green-bg); border-color: var(--green); }
+    .row.declined { background: var(--red-bg); border-color: var(--red); }
     .row .name { flex: 1; min-width: 200px;
       font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--ink); }
     .row.confirmed .name { color: var(--green); }
+    .row.declined .name { color: var(--red); }
     .row .count {
       font-size: 13px; color: var(--muted);
       padding: 3px 8px; background: var(--paper); border-radius: 10px;
       white-space: nowrap;
     }
     .row.confirmed .count { background: white; color: var(--green); border: 1px solid var(--green); }
+    .row.declined .count { background: white; color: var(--red); border: 1px solid var(--red); }
     .row .confirmed-info {
       flex-basis: 100%; font-size: 13px; color: var(--green);
       padding-top: 4px; border-top: 1px dashed var(--green);
       margin-top: 4px;
     }
+    .row .declined-info {
+      flex-basis: 100%; font-size: 13px; color: var(--red);
+      padding-top: 4px; border-top: 1px dashed var(--red);
+      margin-top: 4px;
+    }
+    .row .btn-group { display: flex; gap: 6px; }
 
     .btn {
       display: inline-block; background: var(--bordeaux); color: white !important;
@@ -124,6 +137,10 @@
       border: 1px solid var(--bordeaux); }
     .btn.outline:hover { background: var(--bordeaux); color: white !important; }
     .btn.big { padding: 12px 26px; font-size: 14px; }
+    .btn.confirm { background: var(--green); }
+    .btn.confirm:hover { background: var(--green-dark); }
+    .btn.decline { background: var(--red); }
+    .btn.decline:hover { background: var(--red-dark); }
 
     .add-row { text-align: center; margin: 24px 0; }
 
@@ -262,6 +279,42 @@
     </div>
   </div>
 
+  <!-- Modal décline -->
+  <div class="modal-bg" id="decline-modal" onclick="if(event.target===this)closeModal('decline-modal')">
+    <div class="modal">
+      <h2>
+        <span data-lang="fr" class="inline">Décliner l'invitation</span>
+        <span data-lang="hu" class="inline">Meghívás visszautasítása</span>
+      </h2>
+      <div class="target" id="decline-target"></div>
+      <p style="font-size:14px;color:var(--muted);margin:0 0 10px;">
+        <span data-lang="fr" class="inline">Merci de nous prévenir de votre absence afin d'ajuster les quantités.</span>
+        <span data-lang="hu" class="inline">Köszönjük, hogy jelzi a távollétét, így pontosíthatjuk a mennyiségeket.</span>
+      </p>
+
+      <label data-lang="fr">E-mail <span style="text-transform:none;color:var(--bordeaux);">(obligatoire)</span></label>
+      <label data-lang="hu">E-mail <span style="text-transform:none;color:var(--bordeaux);">(kötelező)</span></label>
+      <input type="email" id="decline-email" placeholder="ex. prenom@example.com">
+
+      <label data-lang="fr">Téléphone <span style="text-transform:none;color:var(--muted);">(facultatif)</span></label>
+      <label data-lang="hu">Telefon <span style="text-transform:none;color:var(--muted);">(opcionális)</span></label>
+      <input type="tel" id="decline-phone" placeholder="+33...">
+
+      <div class="error" id="decline-error"></div>
+
+      <div class="actions">
+        <button class="btn outline" onclick="closeModal('decline-modal')">
+          <span data-lang="fr" class="inline">Annuler</span>
+          <span data-lang="hu" class="inline">Mégse</span>
+        </button>
+        <button class="btn decline" id="decline-submit" onclick="submitDecline()">
+          <span data-lang="fr" class="inline">Je décline</span>
+          <span data-lang="hu" class="inline">Visszautasítom</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal ajout -->
   <div class="modal-bg" id="add-modal" onclick="if(event.target===this)closeModal('add-modal')">
     <div class="modal">
@@ -326,6 +379,7 @@
 
     let currentRows = [];
     let currentRowToConfirm = null;
+    let currentRowToDecline = null;
 
     async function loadList() {
       try {
@@ -345,23 +399,27 @@
       list.className = 'list';
       const lang = document.documentElement.lang;
       const labels = {
-        fr: { confirm: 'Je confirme', confirmed: 'Confirmé', persons: 'personne', personsP: 'personnes', by: 'par' },
-        hu: { confirm: 'Megerősítem', confirmed: 'Megerősítve', persons: 'fő', personsP: 'fő', by: 'a következőtől:' }
+        fr: { confirm: '✓ Je confirme', decline: '✗ Je décline', confirmed: 'Confirmé', declined: 'Décliné', persons: 'personne', personsP: 'personnes', by: 'par' },
+        hu: { confirm: '✓ Megerősítem', decline: '✗ Visszautasítom', confirmed: 'Megerősítve', declined: 'Visszautasítva', persons: 'fő', personsP: 'fő', by: 'a következőtől:' }
       }[lang];
 
-      let totalConfirmed = 0, totalPersons = 0, totalConfirmedPersons = 0;
+      let totalConfirmed = 0, totalDeclined = 0, totalPersons = 0, totalConfirmedPersons = 0;
       currentRows.forEach(r => {
         totalPersons += Number(r.prevus) || 0;
-        if (r.email) { totalConfirmed++; totalConfirmedPersons += Number(r.confirmes) || 0; }
+        const isDecline = (r.statut === 'Decline');
+        if (r.email && !isDecline) { totalConfirmed++; totalConfirmedPersons += Number(r.confirmes) || 0; }
+        if (isDecline) totalDeclined++;
       });
+      const totalRepondu = totalConfirmed + totalDeclined;
       document.getElementById('stats').innerHTML = (lang === 'fr'
-        ? `<span><strong>${totalConfirmed}</strong> sur ${currentRows.length} entrées confirmées</span> · <span><strong>${totalConfirmedPersons}</strong> sur ${totalPersons} personnes attendues</span>`
-        : `<span><strong>${totalConfirmed}</strong> a ${currentRows.length} bejegyzésből megerősítve</span> · <span><strong>${totalConfirmedPersons}</strong> a ${totalPersons} várt főből</span>`);
+        ? `<span><strong>${totalRepondu}</strong> / ${currentRows.length} réponses</span> · <span><strong style="color:var(--green);">${totalConfirmed}</strong> confirmées</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> déclinées</span> · <span><strong>${totalConfirmedPersons}</strong> / ${totalPersons} personnes attendues</span>`
+        : `<span><strong>${totalRepondu}</strong> / ${currentRows.length} válasz</span> · <span><strong style="color:var(--green);">${totalConfirmed}</strong> megerősítve</span> · <span><strong style="color:var(--red);">${totalDeclined}</strong> visszautasítva</span> · <span><strong>${totalConfirmedPersons}</strong> / ${totalPersons} várt fő</span>`);
 
       list.innerHTML = currentRows.map(r => {
-        const confirmed = !!r.email;
+        const isDecline = (r.statut === 'Decline');
+        const isConfirm = (!!r.email && !isDecline);
         const personLabel = (Number(r.prevus) > 1) ? labels.personsP : labels.persons;
-        if (confirmed) {
+        if (isConfirm) {
           const confirmesLabel = (Number(r.confirmes) > 1) ? labels.personsP : labels.persons;
           const phone = r.telephone ? ' / ' + escapeHtml(r.telephone) : '';
           return `
@@ -371,11 +429,23 @@
               <div class="confirmed-info">✓ ${labels.confirmed} ${labels.by} ${escapeHtml(r.email)}${phone}</div>
             </div>`;
         }
+        if (isDecline) {
+          const phone = r.telephone ? ' / ' + escapeHtml(r.telephone) : '';
+          return `
+            <div class="row declined">
+              <div class="name">${escapeHtml(r.nom)}</div>
+              <div class="count">${labels.declined}</div>
+              <div class="declined-info">✗ ${labels.declined} ${labels.by} ${escapeHtml(r.email)}${phone}</div>
+            </div>`;
+        }
         return `
           <div class="row">
             <div class="name">${escapeHtml(r.nom)}</div>
             <div class="count">${r.prevus} ${personLabel}</div>
-            <button class="btn" onclick="openConfirmModal(${r.id})">${labels.confirm}</button>
+            <div class="btn-group">
+              <button class="btn confirm" onclick="openConfirmModal(${r.id})">${labels.confirm}</button>
+              <button class="btn decline" onclick="openDeclineModal(${r.id})">${labels.decline}</button>
+            </div>
           </div>`;
       }).join('');
     }
@@ -394,6 +464,45 @@
       document.getElementById('confirm-phone').value = '';
       document.getElementById('confirm-error').textContent = '';
       document.getElementById('confirm-modal').classList.add('open');
+    }
+
+    function openDeclineModal(id) {
+      const row = currentRows.find(r => String(r.id) === String(id));
+      if (!row) return;
+      currentRowToDecline = row;
+      document.getElementById('decline-target').textContent = row.nom;
+      document.getElementById('decline-email').value = '';
+      document.getElementById('decline-phone').value = '';
+      document.getElementById('decline-error').textContent = '';
+      document.getElementById('decline-modal').classList.add('open');
+    }
+
+    async function submitDecline() {
+      const email = document.getElementById('decline-email').value.trim();
+      const phone = document.getElementById('decline-phone').value.trim();
+      const err = document.getElementById('decline-error');
+      if (!validEmail(email)) { err.textContent = '⚠️ E-mail invalide.'; return; }
+      const btn = document.getElementById('decline-submit');
+      btn.disabled = true; err.textContent = '';
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'decline',
+            id: currentRowToDecline.id,
+            email, telephone: phone
+          })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'erreur');
+        closeModal('decline-modal');
+        await loadList();
+      } catch (e) {
+        err.textContent = '⚠️ Erreur : ' + e.message;
+      } finally {
+        btn.disabled = false;
+      }
     }
 
     function openAddModal() {
