@@ -107,7 +107,15 @@
       object-fit: cover;
       display: block;
     }
-    .article-body-wrap { padding: 24px 28px 22px; }
+    .article-body-wrap { padding: 24px 28px 22px; display: flex; flex-direction: column; }
+    .article-body-wrap > .article-meta { order: 1; }
+    .article-body-wrap > .article-title-fr { order: 2; }
+    .article-body-wrap > .article-title-hu { order: 3; }
+    .article-body-wrap > .article-summary { order: 4; }
+    .article-body-wrap > .article-link-row { order: 5; }
+    /* En mode HU, le titre HU passe avant le titre FR */
+    html[lang="hu"] .article-body-wrap > .article-title-hu { order: 2; }
+    html[lang="hu"] .article-body-wrap > .article-title-fr { order: 3; }
     .article-meta {
       font-size: 12px;
       letter-spacing: 0.12em;
@@ -117,21 +125,44 @@
       font-weight: 700;
     }
     .article-meta .source { color: var(--bordeaux); }
-    .article-title-fr {
+    /* Styles partages des titres d'articles */
+    .article-title-fr,
+    .article-title-hu {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    /* Mode FR : titre FR principal, titre HU sous-titre italique */
+    html[lang="fr"] .article-title-fr {
       font-size: 23px;
       color: var(--bordeaux);
       margin: 0 0 4px;
       line-height: 1.25;
-      font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
+      font-style: normal;
     }
-    .article-title-hu {
-      font-family: 'Cormorant Garamond', serif;
+    html[lang="fr"] .article-title-hu {
       font-style: italic;
       color: var(--muted);
       font-size: 16px;
-      margin-bottom: 14px;
+      margin: 0 0 14px;
       line-height: 1.35;
+      font-weight: 400;
+    }
+    /* Mode HU : titre HU principal, titre FR sous-titre italique */
+    html[lang="hu"] .article-title-hu {
+      font-size: 23px;
+      color: var(--bordeaux);
+      margin: 0 0 4px;
+      line-height: 1.25;
+      font-weight: 500;
+      font-style: normal;
+    }
+    html[lang="hu"] .article-title-fr {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0 0 14px;
+      line-height: 1.35;
+      font-weight: 400;
     }
     .article-summary { margin-top: 12px; }
     .article-summary p { margin: 0 0 12px; line-height: 1.65; }
