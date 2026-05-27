@@ -33,7 +33,8 @@ hommages.html    — 38 hommages bilingues + formulaire mailto pour en envoyer
 articles.html    — revue de presse (10 articles + 3 vidéos)
 album.html       — album souvenirs (vide, à remplir après le 3 juin)
 repas.html       — page protégée par code "Budapest" pour les invités au déjeuner
-                   ⚠️ CONTENU À AJOUTER (prochain track)
+                   ✅ Contenu complet bilingue (Bistro Budapest, horaires, accès,
+                      taxis, parking, alerte alcool, WhatsApp, contacts)
 data/
   hommages-raw.json          — texte brut des hommages scrapés sur Inmemori
   invites-inmemori.csv       — 33 invités Inmemori (nom, email, statut)
@@ -44,6 +45,8 @@ images/
   articles/                  — vignettes presse
   videos/                    — vignettes YouTube
   album/                     — sous-dossiers messe/, inhumation/, reception/ (vides)
+  repas/                     — 6 photos du Bistro/parking/trajet (extérieur, intérieur,
+                                parking-vue, parking-automate, trajet-esplanade, trajet-allee)
 CNAME            — domaine GitHub Pages (ne pas supprimer)
 CLAUDE.md        — ce fichier
 HANDOFF.md       — bilan des tracks terminés
@@ -78,6 +81,20 @@ HANDOFF.md       — bilan des tracks terminés
 - Vide pour l'instant
 - Photos à ajouter dans `images/album/{messe,inhumation,reception}/` puis lister dans le tableau `PHOTOS` au bas du fichier
 
+### Page Réception (`repas.html`)
+- Bilingue FR/HU, accès par code « **Budapest** » depuis le bas de l'accueil
+- **Le Bistro Budapest** (sans t final), lien Maps + site `lebistro.hu`, 2 photos
+- Horaires : arrivée 13h30, salle jusqu'à 18h30 — pas de navette cimetière↔resto
+- Accès : taxis (City Taxi, Főtaxi), parking BUDAPART CB (400 m), alerte alcool **0,00 g/L**, navette resto entre parking et entrée OU marche par allée piétonne
+- TV + HDMI pour photos/vidéos via clé USB
+- RSVP via Philippe avant **jeudi 28 mai minuit**
+- 2 contacts (Laurent +33 7 62 25 12 38, Philippe +36 30 493 25 59) — les deux parlent FR et HU, les 2 numéros c'est juste pour les frais d'appel
+- **2 groupes WhatsApp séparés** (la traduction WhatsApp ne supporte pas le hongrois) :
+  - FR · Réception Edina — 3 juin : https://chat.whatsapp.com/IeypPp5ipA98gooKuV5qEP
+  - HU · Búcsú Edinától · június 3. : https://chat.whatsapp.com/BqzmjVrEjs6AHsBBCc3yEC
+- Pictos WhatsApp : rond vert 38px + drapeau en badge top-right (style discret)
+- Photos dans `images/repas/` : `bistro-{exterieur,interieur}.jpg`, `parking-{vue,automate}.jpg`, `trajet-{esplanade,allee}.jpg`
+
 ### Veille presse automatisée
 3 alertes Google Alerts actives sur `lpellet@gmail.com` (créées le 26 mai) :
 - `Koszmovszky Edina`
@@ -100,19 +117,24 @@ Workflow : quand un nouvel article tombe, Laurent transfère le lien → je réc
 - Jamais le `"` ASCII droit comme fermant → casse le JavaScript
 - Vérifier la syntaxe avant push si du texte HU contient des guillemets : `node -e "new Function(fs.readFileSync('hommages.html','utf8'))"` ou équivalent
 
-## Statut actuel (2026-05-26)
+## Statut actuel (2026-05-27)
 
 ✅ Site en ligne sur les deux domaines custom (HTTPS).
-✅ Toutes les pages principales en place et bilingues.
+✅ Toutes les pages principales en place et bilingues (accueil, hommages, articles, album, repas).
+✅ Page Réception complète avec infos pratiques, 2 groupes WhatsApp et alerte alcool.
 ✅ Veille presse active.
 
-➡️ **Prochain track : page Réception (`repas.html`)**
-Le contenu est vide. Le frère doit communiquer les infos du restaurant pour le déjeuner du 3 juin après l'inhumation. Voir HANDOFF.md pour le détail.
+➡️ **Prochain track : Feuille de messe bilingue (`messe.html` ou section dédiée dans `index.html`)**
+
+La messe d'enterrement (3 juin, ~9h, Budapest) sera en hongrois. Les invités francophones ne pourront pas suivre. Idée : préparer une **feuille de messe bilingue** (lectures, chants, homélie si rédigée) à mettre sur le site avant le 2 juin au soir.
+
+→ Philippe doit récupérer auprès du prêtre : homélie écrite (si possible), liste des lectures, chants prévus, ordre liturgique.
+→ Possibilité d'équilibrer : 1 lecture en FR, 1 en HU, traductions disponibles sur le site pour chaque communauté.
 
 ## Backlog (reporté, pas pour le prochain track)
 
-### Transcription en direct de la messe (3 juin 2026, 9h00, Budapest)
-**Architecture validée** :
+### Transcription en direct de la messe (abandonnée pour le 3 juin)
+**Architecture initialement prévue** :
 ```
 Téléphone (micro) → Railway WebSocket → AssemblyAI (transcription + détection FR/HU)
                                               │
@@ -122,8 +144,12 @@ Téléphone (micro) → Railway WebSocket → AssemblyAI (transcription + détec
                   Fenêtre prompteur FR                  Fenêtre prompteur HU
 ```
 
-Comptes : AssemblyAI ✅ (existant), DeepL ❌ (à créer), Railway ✅ (existant).
-Affichage : 2 boutons popup discrets sur `index.html`, style prompteur, texte large.
+Tentative jugée trop fragile (problèmes d'outils, pas d'IA en cause). Remplacée par la feuille de messe pré-traduite (cf. prochain track). À ressortir éventuellement pour un autre événement.
+
+Comptes : AssemblyAI ✅ (existant), DeepL ❌ (jamais créé), Railway ✅ (existant).
+
+### Page Album (à remplir après le 3 juin)
+Structure déjà en place dans `album.html` (Messe / Inhumation / Réception). À nourrir avec les photos du jour J.
 
 ## Workflow Git
 
