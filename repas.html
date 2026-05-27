@@ -162,24 +162,53 @@
     }
     .btn.outline:hover { background: var(--bordeaux); color: white !important; }
 
-    .btn-whatsapp {
+    .wa-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .wa-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      background: #25D366;
-      color: white !important;
+      gap: 14px;
       text-decoration: none;
-      padding: 11px 22px;
-      border-radius: 3px;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      margin: 8px 6px 8px 0;
-      transition: background 0.2s;
-      font-weight: 400;
+      color: var(--ink);
+      padding: 6px 4px;
+      border-radius: 4px;
+      transition: opacity 0.2s;
     }
-    .btn-whatsapp:hover { background: #128C7E; }
-    .btn-whatsapp svg { flex-shrink: 0; }
-    .btn-whatsapp .flag { font-size: 18px; line-height: 1; }
+    .wa-link:hover { opacity: 0.7; color: var(--ink); }
+    .wa-icon {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      background: #25D366;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .wa-icon svg { width: 22px; height: 22px; fill: currentColor; }
+    .wa-icon .flag {
+      position: absolute;
+      top: -4px;
+      right: -6px;
+      font-size: 16px;
+      line-height: 1;
+      background: var(--paper);
+      border-radius: 50%;
+      padding: 1px;
+      box-shadow: 0 0 0 1px var(--rule);
+    }
+    .wa-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--bordeaux);
+    }
 
     .rsvp-box {
       background: var(--cream);
@@ -527,24 +556,28 @@
         <span data-lang="hu" class="inline">WhatsApp csoportok</span>
       </h3>
       <p>
-        <span data-lang="fr" class="inline">Pour faciliter la coordination le jour J (retards, navette, questions de dernière minute), nous avons créé deux groupes WhatsApp — un en français, un en hongrois. Rejoignez celui de votre langue, ou les deux si vous êtes à l'aise dans les deux.</span>
-        <span data-lang="hu" class="inline">Az aznapi egyeztetés megkönnyítésére (késések, transzfer, utolsó pillanatos kérdések) létrehoztunk két WhatsApp-csoportot — egyet franciául, egyet magyarul. Csatlakozzanak ahhoz, amelyiknek a nyelvét beszélik, vagy mindkettőhöz, ha kétnyelvűek.</span>
+        <span data-lang="fr" class="inline">Pour faciliter la coordination le jour J (retards, navette, questions de dernière minute), nous avons créé deux groupes WhatsApp. Rejoignez le ou les groupes :</span>
+        <span data-lang="hu" class="inline">Az aznapi egyeztetés megkönnyítésére (késések, transzfer, utolsó pillanatos kérdések) létrehoztunk két WhatsApp-csoportot. Csatlakozzon az egyikhez vagy mindkettőhöz:</span>
       </p>
+      <div class="wa-list">
+        <a class="wa-link" href="https://chat.whatsapp.com/IeypPp5ipA98gooKuV5qEP" target="_blank" rel="noopener">
+          <span class="wa-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span class="flag">🇫🇷</span>
+          </span>
+          <span class="wa-label">Réception Edina — 3 juin</span>
+        </a>
+        <a class="wa-link" href="https://chat.whatsapp.com/BqzmjVrEjs6AHsBBCc3yEC" target="_blank" rel="noopener">
+          <span class="wa-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span class="flag">🇭🇺</span>
+          </span>
+          <span class="wa-label">Búcsú Edinától · június 3.</span>
+        </a>
+      </div>
       <p style="font-size:15px; color:var(--muted); font-style:italic;">
         <span data-lang="fr" class="inline">Ces groupes sont réservés aux personnes invitées au déjeuner. Les informations pratiques qui y seront partagées ne seront pas relayées sur la page d'accueil du site, qui reste publique.</span>
         <span data-lang="hu" class="inline">Ezek a csoportok kizárólag az ebédre meghívott vendégeknek szólnak. Az itt megosztott gyakorlati információk nem fognak megjelenni a weboldal főoldalán, amely nyilvános.</span>
-      </p>
-      <p style="text-align:center; margin-top:18px;">
-        <a class="btn-whatsapp" href="https://chat.whatsapp.com/IeypPp5ipA98gooKuV5qEP" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          <span class="flag">🇫🇷</span>
-          <span>Réception Edina — 3 juin</span>
-        </a>
-        <a class="btn-whatsapp" href="https://chat.whatsapp.com/BqzmjVrEjs6AHsBBCc3yEC" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          <span class="flag">🇭🇺</span>
-          <span>Búcsú Edinától · június 3.</span>
-        </a>
       </p>
     </div>
 
