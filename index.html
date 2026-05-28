@@ -279,6 +279,45 @@
       margin-top: 6px;
     }
 
+    /* Fleuristes */
+    .florists-note {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 16px 0 0;
+    }
+    .florists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 14px 0 4px;
+    }
+    @media (max-width: 600px) { .florists { grid-template-columns: 1fr; } }
+    .florist-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 5px;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 18px 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .florist-card:hover {
+      border-color: var(--bordeaux);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .florist-icon { color: var(--bordeaux); font-size: 24px; line-height: 1; }
+    .florist-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      color: var(--bordeaux);
+      font-weight: 500;
+    }
+    .florist-domain { font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
+
     /* Ornament */
     .ornament {
       text-align: center;
@@ -694,6 +733,86 @@
             <a class="dl-btn" href="infos-hu.jpg" download="terkep-utvonal-hu.jpg">↓ Letöltés JPG-ként</a>
             <button class="dl-btn" type="button" onclick="downloadPdf('infos-hu.jpg', 'terkep-utvonal-hu.pdf')">↓ Letöltés PDF-ként</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament">✦ ✦ ✦</div>
+
+    <!-- FLEURS ET COURONNES -->
+    <section>
+      <h2 data-lang="fr">Fleurs et couronnes</h2>
+      <h2 data-lang="hu">Virágok és koszorúk</h2>
+      <p class="section-sub" data-lang="fr">Pour celles et ceux qui souhaitent honorer la mémoire d'Edina.</p>
+      <p class="section-sub" data-lang="hu">Azok számára, akik virággal szeretnének tisztelegni Edina emléke előtt.</p>
+
+      <!-- Couronnes : FR -->
+      <div data-lang="fr">
+        <div class="info-block">
+          <h3>Couronnes</h3>
+          <ul>
+            <li>Il est conseillé de les commander à l'avance, par internet ou par téléphone, auprès d'un fleuriste situé dans le Nouveau cimetière de Rákoskeresztúr.</li>
+            <li>Précisez bien que la cérémonie a lieu au <strong>Centre des visiteurs 1956</strong>, à côté de la <strong>parcelle 300</strong>.</li>
+            <li>Le fleuriste se chargera d'apporter la couronne directement sur le lieu des obsèques.</li>
+          </ul>
+          <p class="florists-note">Quelques fleuristes du cimetière — vous pouvez aussi en trouver d'autres en ligne :</p>
+        </div>
+      </div>
+
+      <!-- Couronnes : HU -->
+      <div data-lang="hu">
+        <div class="info-block">
+          <h3>Koszorúk</h3>
+          <ul>
+            <li>Ajánlott előre megrendelni, interneten vagy telefonon, a Rákoskeresztúri Új Köztemetőben működő valamelyik virágüzletnél.</li>
+            <li>Kérjük, jelezzék pontosan, hogy a szertartás az <strong>1956-os Látogatóközpontban</strong> lesz, a <strong>300-as parcella</strong> mellett.</li>
+            <li>A virágüzlet gondoskodik a koszorú helyszínre szállításáról.</li>
+          </ul>
+          <p class="florists-note">Néhány temetői virágüzlet — másokat is találhatnak az interneten:</p>
+        </div>
+      </div>
+
+      <!-- Fleuristes (liens communs aux deux langues) -->
+      <div class="florists">
+        <a class="florist-card" href="https://evivirag.hu/megrendeles/" target="_blank" rel="noopener">
+          <span class="florist-icon">❀</span>
+          <span class="florist-name">Évi virágbolt</span>
+          <span class="florist-domain">evivirag.hu</span>
+        </a>
+        <a class="florist-card" href="https://10.kerulet.ittlakunk.hu/holmi/uzletek/florus-viraguzlet-kozma-utca" target="_blank" rel="noopener">
+          <span class="florist-icon">❀</span>
+          <span class="florist-name">Florus Virágüzlet</span>
+          <span class="florist-domain">Kozma utca</span>
+        </a>
+        <a class="florist-card" href="https://viragklub.hu/koszoru-rendeles-uj-koztemeto/" target="_blank" rel="noopener">
+          <span class="florist-icon">❀</span>
+          <span class="florist-name">Virágklub</span>
+          <span class="florist-domain">viragklub.hu</span>
+        </a>
+        <a class="florist-card" href="https://www.koszoruk.hu/" target="_blank" rel="noopener">
+          <span class="florist-icon">❀</span>
+          <span class="florist-name">Koszorúk.hu</span>
+          <span class="florist-domain">koszoruk.hu</span>
+        </a>
+      </div>
+
+      <!-- Fleurs : FR -->
+      <div data-lang="fr">
+        <div class="info-block">
+          <h3>Fleurs</h3>
+          <ul>
+            <li>Vous pouvez les acheter à l'avance, ou sur place auprès des nombreux fleuristes situés juste après l'entrée du cimetière.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Fleurs : HU -->
+      <div data-lang="hu">
+        <div class="info-block">
+          <h3>Virágok</h3>
+          <ul>
+            <li>A virágokat előre is megvásárolhatják, vagy a helyszínen, a temető bejárata után található számos virágüzlet egyikénél.</li>
+          </ul>
         </div>
       </div>
     </section>
