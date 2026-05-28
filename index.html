@@ -292,6 +292,7 @@
       margin: 14px 0 4px;
     }
     @media (max-width: 600px) { .florists { grid-template-columns: 1fr; } }
+    .florists-single { grid-template-columns: 1fr; max-width: 340px; margin-left: auto; margin-right: auto; }
     .florist-card {
       display: flex;
       flex-direction: column;
@@ -746,29 +747,19 @@
       <p class="section-sub" data-lang="fr">Pour celles et ceux qui souhaitent honorer la mémoire d'Edina.</p>
       <p class="section-sub" data-lang="hu">Azok számára, akik virággal szeretnének tisztelegni Edina emléke előtt.</p>
 
-      <!-- Couronnes : FR -->
+      <!-- Couronnes : intro avant les cartes -->
       <div data-lang="fr">
         <div class="info-block">
           <h3>Couronnes</h3>
-          <ul>
-            <li>Il est conseillé de les commander à l'avance, par internet ou par téléphone, auprès d'un fleuriste situé dans le Nouveau cimetière de Rákoskeresztúr.</li>
-            <li>Précisez bien que la cérémonie a lieu au <strong>Centre des visiteurs 1956</strong>, à côté de la <strong>parcelle 300</strong>.</li>
-            <li>Le fleuriste se chargera d'apporter la couronne directement sur le lieu des obsèques.</li>
-          </ul>
-          <p class="florists-note">Quelques fleuristes du cimetière — vous pouvez aussi en trouver d'autres en ligne :</p>
+          <p>Il est conseillé de les commander à l'avance, par internet ou par téléphone, auprès d'un fleuriste situé dans le Nouveau cimetière de Rákoskeresztúr.</p>
+          <p class="florists-note">Voici les sites de quelques fleuristes du cimetière — vous pouvez également en trouver d'autres en ligne :</p>
         </div>
       </div>
-
-      <!-- Couronnes : HU -->
       <div data-lang="hu">
         <div class="info-block">
           <h3>Koszorúk</h3>
-          <ul>
-            <li>Ajánlott előre megrendelni, interneten vagy telefonon, a Rákoskeresztúri Új Köztemetőben működő valamelyik virágüzletnél.</li>
-            <li>Kérjük, jelezzék pontosan, hogy a szertartás az <strong>1956-os Látogatóközpontban</strong> lesz, a <strong>300-as parcella</strong> mellett.</li>
-            <li>A virágüzlet gondoskodik a koszorú helyszínre szállításáról.</li>
-          </ul>
-          <p class="florists-note">Néhány temetői virágüzlet — másokat is találhatnak az interneten:</p>
+          <p>Ajánlott előre megrendelni, interneten vagy telefonon, a Rákoskeresztúri Új Köztemetőben működő valamelyik virágüzletnél.</p>
+          <p class="florists-note">Néhány temetői virágüzlet honlapja — másokat is találhatnak az interneten:</p>
         </div>
       </div>
 
@@ -794,6 +785,30 @@
           <span class="florist-name">Koszorúk.hu</span>
           <span class="florist-domain">koszoruk.hu</span>
         </a>
+      </div>
+
+      <!-- Couronnes : suite après les cartes -->
+      <div data-lang="fr">
+        <p class="florists-note">Ces sites ne sont disponibles qu'en hongrois. Avec Google Chrome, vous pouvez les faire traduire : cliquez sur les trois points verticaux en haut à droite, puis « Traduire ».</p>
+        <p>Ces fleuristes se chargeront d'apporter la couronne directement sur le lieu des obsèques.</p>
+        <p class="florists-note">Si vous n'êtes pas à l'aise avec les sites en hongrois, ce site international propose une version anglaise et peut livrer au cimetière :</p>
+        <div class="florists florists-single">
+          <a class="florist-card" href="https://www.fleurop.hu/en/categories/188-sympathy-funeral" target="_blank" rel="noopener">
+            <span class="florist-icon">✿</span>
+            <span class="florist-name">Fleurop</span>
+            <span class="florist-domain">fleurop.hu · version anglaise</span>
+          </a>
+        </div>
+        <div class="alert" style="margin-top:18px;">
+          <strong>Attention !</strong> Dans tous les cas, précisez bien que la cérémonie a lieu à <strong>11 h du matin</strong> au <strong>Centre des visiteurs 1956</strong>, à côté de la <strong>parcelle 300</strong>.<br>
+          <span style="color:var(--muted);">En hongrois : <em>Rákoskeresztúri Újköztemető 1956-os Látogatóközpontja, a 300-as parcella mellett.</em></span>
+        </div>
+      </div>
+      <div data-lang="hu">
+        <p>A virágüzletek gondoskodnak a koszorú helyszínre szállításáról.</p>
+        <div class="alert" style="margin-top:18px;">
+          <strong>Figyelem!</strong> Minden esetben jelezzék pontosan, hogy a szertartás <strong>délelőtt 11 órakor</strong> lesz a <strong>Rákoskeresztúri Újköztemető 1956-os Látogatóközpontjában</strong>, a <strong>300-as parcella mellett</strong>.
+        </div>
       </div>
 
       <!-- Fleurs : FR -->
