@@ -167,6 +167,9 @@
     .article-summary { margin-top: 12px; }
     .article-summary p { margin: 0 0 12px; line-height: 1.65; }
     .article-summary p:last-child { margin-bottom: 0; }
+    /* En vue hongroise : pas de resume IA, on garde titres + meta + lien */
+    html[lang="hu"] .article-summary,
+    html[lang="hu"] .video-desc { display: none; }
 
     .article-link-row {
       margin-top: 18px;
@@ -342,7 +345,7 @@
   <div class="container">
     <p class="intro">
       <span data-lang="fr" class="inline">Pour chaque article, un résumé éditorial et un lien vers la version originale. Articles classés du plus récent au plus ancien.</span>
-      <span data-lang="hu" class="inline">Minden cikkhez szerkesztői összefoglaló és link az eredeti változathoz. A cikkek a legújabbtól a legrégebbiig rendezve.</span>
+      <span data-lang="hu" class="inline">Linkek az eredeti cikkekhez, a legújabbtól a legrégebbiig rendezve.</span>
     </p>
 
     <!-- 1. Magyar Nemzet — 23.05.2026 -->
