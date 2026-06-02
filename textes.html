@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Textes de la cérémonie — Koszmovszky Edina Franciska</title>
+  <meta name="description" content="Textes bibliques de la cérémonie du 3 juin 2026 — bilingues français et hongrois." />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--bordeaux-dark); }
+
+    /* Top bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 6px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .lang-switch button.active {
+      background: var(--bordeaux); color: white; border-color: var(--bordeaux);
+    }
+    .lang-switch button:hover:not(.active) {
+      border-color: var(--bordeaux); color: var(--bordeaux);
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 16px 10px;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    header.hero { text-align: center; padding: 32px 24px 16px; }
+    header.hero h1 { font-size: 34px; margin: 0 0 8px; line-height: 1.2; }
+    header.hero .sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--bordeaux);
+      font-size: 18px;
+      margin: 24px 0 8px;
+      letter-spacing: 0.4em;
+    }
+
+    /* Intro note */
+    .intro-note {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      margin: 12px auto 32px;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Section header (Mass / Cemetery) */
+    .ceremony-section {
+      margin: 48px 0 32px;
+      text-align: center;
+    }
+    .ceremony-section h2 {
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+    }
+    .ceremony-section .section-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--bordeaux);
+      margin: 0 auto;
+      opacity: 0.4;
+    }
+
+    /* Reading card */
+    .reading-card {
+      margin-bottom: 40px;
+    }
+    .reading-header {
+      margin-bottom: 16px;
+    }
+    .reading-type {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .reading-ref {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      color: var(--bordeaux);
+      font-weight: 500;
+      margin: 0 0 2px;
+    }
+    .reading-ref-hu {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      color: var(--muted);
+      font-style: italic;
+      margin: 0;
+    }
+
+    /* Two-column grid for parallel text */
+    .text-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+    }
+    @media (max-width: 640px) {
+      .text-grid { grid-template-columns: 1fr; }
+    }
+
+    .text-col {
+      padding: 24px 28px;
+    }
+    .text-col + .text-col {
+      border-left: 1px solid var(--rule);
+    }
+    @media (max-width: 640px) {
+      .text-col + .text-col {
+        border-left: none;
+        border-top: 1px solid var(--rule);
+      }
+    }
+
+    .text-col-lang {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bordeaux);
+      opacity: 0.65;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .text-col-lang::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .verse {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      line-height: 1.65;
+    }
+    .verse-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--bordeaux);
+      opacity: 0.55;
+      min-width: 20px;
+      padding-top: 4px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .verse-text {
+      font-size: 15.5px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+    .verse-text em {
+      font-style: italic;
+    }
+
+    /* Highlight the user's language column */
+    html[lang="fr"] .text-col.col-fr { background: white; }
+    html[lang="hu"] .text-col.col-hu { background: white; }
+
+    hr.section-sep {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lang-switch" role="navigation" aria-label="Langue">
+    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  </div>
+  <nav class="navbar">
+    <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+    <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+    <a href="textes.html" class="active"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
+    <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
+    <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+  </nav>
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="ornament">✝&#xFE0E;</div>
+    <h1 data-lang="fr">Textes de la cérémonie</h1>
+    <h1 data-lang="hu">A szertartás szövegei</h1>
+    <p class="sub" data-lang="fr">3 juin 2026 — Budapest</p>
+    <p class="sub" data-lang="hu">2026. június 3. — Budapest</p>
+  </header>
+
+  <p class="intro-note" data-lang="fr">Les lectures seront faites en hongrois et en français. Ces textes vous permettent de suivre dans les deux langues.</p>
+  <p class="intro-note" data-lang="hu">Az olvasmányok magyar és francia nyelven hangzanak el. Ezek a szövegek mindkét nyelven lehetővé teszik a követést.</p>
+
+  <!-- === MESSE === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">À la messe</h2>
+    <h2 data-lang="hu">A misén</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Première lecture : Romains 5, 5-11 -->
+  <div class="reading-card">
+    <div class="reading-header">
+      <div class="reading-type" data-lang="fr">Première lecture</div>
+      <div class="reading-type" data-lang="hu">Első olvasat</div>
+      <p class="reading-ref">Romains 5, 5-11</p>
+      <p class="reading-ref-hu">Rómaiak 5, 5–11</p>
+    </div>
+    <div class="text-grid">
+      <div class="text-col col-fr">
+        <div class="text-col-lang">Français</div>
+        <div class="verse"><span class="verse-num">5</span><span class="verse-text">Or l'espérance ne déçoit pas, parce que l'amour de Dieu a été répandu dans nos cœurs par l'Esprit Saint qui nous a été donné.</span></div>
+        <div class="verse"><span class="verse-num">6</span><span class="verse-text">Alors que nous étions encore sans force, au temps fixé, le Christ est mort pour des impies.</span></div>
+        <div class="verse"><span class="verse-num">7</span><span class="verse-text">À peine mourrait-on pour un homme juste ; pour un homme de bien peut-être oserait-on mourir.</span></div>
+        <div class="verse"><span class="verse-num">8</span><span class="verse-text">Mais Dieu montre l'amour qu'il a pour nous : quand nous étions encore pécheurs, le Christ est mort pour nous.</span></div>
+        <div class="verse"><span class="verse-num">9</span><span class="verse-text">À plus forte raison, maintenant que nous sommes devenus justes par son sang, serons-nous sauvés par lui de la colère.</span></div>
+        <div class="verse"><span class="verse-num">10</span><span class="verse-text">Car si, alors que nous étions ennemis de Dieu, nous avons été réconciliés avec lui par la mort de son Fils, à plus forte raison, une fois réconciliés, serons-nous sauvés par sa vie.</span></div>
+        <div class="verse"><span class="verse-num">11</span><span class="verse-text">Non seulement cela, mais nous mettons notre fierté en Dieu, par notre Seigneur Jésus Christ, par qui maintenant nous avons obtenu la réconciliation.</span></div>
+      </div>
+      <div class="text-col col-hu">
+        <div class="text-col-lang">Magyar</div>
+        <div class="verse"><span class="verse-num">5</span><span class="verse-text">A remény pedig nem szégyenít meg, mivel Isten szeretete kiáradt szívünkbe a nekünk adott Szentlélek által.</span></div>
+        <div class="verse"><span class="verse-num">6</span><span class="verse-text">Krisztus ugyanis, amikor még erőtlenek voltunk, a maga idejében meghalt az istentelenekért.</span></div>
+        <div class="verse"><span class="verse-num">7</span><span class="verse-text">Hiszen az igazért is aligha hal meg valaki, legfeljebb a jóért vállal valaki halált.</span></div>
+        <div class="verse"><span class="verse-num">8</span><span class="verse-text">Isten azonban azzal mutatta meg irántunk való szeretetét, hogy Krisztus meghalt értünk, amikor még bűnösök voltunk.</span></div>
+        <div class="verse"><span class="verse-num">9</span><span class="verse-text">Mivel tehát most már megigazultunk az ő vére árán, még inkább megmenekülünk általa a haragtól.</span></div>
+        <div class="verse"><span class="verse-num">10</span><span class="verse-text">Ha ugyanis, mint ellenségeket, megbékéltetett minket Istennel Fia halála által, akkor megbékélve mennyivel inkább megmenekülünk az ő élete által.</span></div>
+        <div class="verse"><span class="verse-num">11</span><span class="verse-text">Sőt nemcsak ebben reménykedünk, hanem büszkék is vagyunk Istenre a mi Urunk Jézus Krisztus által, akiben most megkaptuk a megbékélést.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Évangile : Jean 12, 23-28 -->
+  <div class="reading-card">
+    <div class="reading-header">
+      <div class="reading-type" data-lang="fr">Évangile</div>
+      <div class="reading-type" data-lang="hu">Evangélium</div>
+      <p class="reading-ref">Jean 12, 23-28</p>
+      <p class="reading-ref-hu">János 12, 23–28</p>
+    </div>
+    <div class="text-grid">
+      <div class="text-col col-fr">
+        <div class="text-col-lang">Français</div>
+        <div class="verse"><span class="verse-num">23</span><span class="verse-text">Jésus leur répondit : <em>« L'heure est venue où le Fils de l'homme doit être glorifié.</em></span></div>
+        <div class="verse"><span class="verse-num">24</span><span class="verse-text"><em>En vérité, en vérité, je vous le dis : si le grain de blé tombé en terre ne meurt pas, il reste seul ; mais s'il meurt, il porte beaucoup de fruit.</em></span></div>
+        <div class="verse"><span class="verse-num">25</span><span class="verse-text"><em>Qui aime sa vie la perd, et qui s'en détache en ce monde la gardera pour la vie éternelle.</em></span></div>
+        <div class="verse"><span class="verse-num">26</span><span class="verse-text"><em>Celui qui me sert, qu'il me suive : là où je suis, là aussi sera mon serviteur. Celui qui me sert, mon Père l'honorera.</em></span></div>
+        <div class="verse"><span class="verse-num">27</span><span class="verse-text"><em>Maintenant mon âme est bouleversée. Que puis-je dire ? "Père, sauve-moi de cette heure ?" — Mais non ! c'est pour cela que je suis venu à cette heure.</em></span></div>
+        <div class="verse"><span class="verse-num">28</span><span class="verse-text"><em>Père, glorifie ton nom ! »</em> Alors, du ciel vint une voix : <em>« Je l'ai glorifié et je le glorifierai encore. »</em></span></div>
+      </div>
+      <div class="text-col col-hu">
+        <div class="text-col-lang">Magyar</div>
+        <div class="verse"><span class="verse-num">23</span><span class="verse-text">Jézus így felelt nekik: <em>„Eljött az óra, hogy megdicsőüljön az Emberfia.</em></span></div>
+        <div class="verse"><span class="verse-num">24</span><span class="verse-text"><em>Bizony, bizony mondom nektek: ha a búzaszem nem esik a földbe és nem hal meg, egymaga marad; de ha meghal, sok gyümölcsöt hoz.</em></span></div>
+        <div class="verse"><span class="verse-num">25</span><span class="verse-text"><em>Aki szereti az ő életét, elveszíti azt, aki gyűlöli életét e világban, megőrzi azt az örök életre.</em></span></div>
+        <div class="verse"><span class="verse-num">26</span><span class="verse-text"><em>Ha valaki nekem szolgál, kövessen engem, és ahol én vagyok, ott lesz az én szolgám is. Ha valaki nekem szolgál, azt megbecsüli az Atya.</em></span></div>
+        <div class="verse"><span class="verse-num">27</span><span class="verse-text"><em>Most megrendült a lelkem, és mit mondjak? Atyám, szabadíts meg ettől az órától! De hiszen ezért jöttem erre az órára.</em></span></div>
+        <div class="verse"><span class="verse-num">28</span><span class="verse-text"><em>Atyám, dicsőítsd meg nevedet!"</em> Ekkor hang jött az égből: <em>„Megdicsőítettem, és ismét megdicsőítem."</em></span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- === CIMETIÈRE === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">Au cimetière</h2>
+    <h2 data-lang="hu">A temetőben</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Lecture au cimetière : Matthieu 25, 31-46 -->
+  <div class="reading-card">
+    <div class="reading-header">
+      <div class="reading-type" data-lang="fr">Lecture</div>
+      <div class="reading-type" data-lang="hu">Olvasat</div>
+      <p class="reading-ref">Matthieu 25, 31-46</p>
+      <p class="reading-ref-hu">Máté 25, 31–46</p>
+    </div>
+    <div class="text-grid">
+      <div class="text-col col-fr">
+        <div class="text-col-lang">Français</div>
+        <div class="verse"><span class="verse-num">31</span><span class="verse-text"><em>« Quand le Fils de l'homme viendra dans sa gloire, escorté de tous les anges, alors il prendra place sur son trône de gloire.</em></span></div>
+        <div class="verse"><span class="verse-num">32</span><span class="verse-text"><em>Toutes les nations seront rassemblées devant lui ; il séparera les hommes les uns des autres, comme le berger sépare les brebis des boucs.</em></span></div>
+        <div class="verse"><span class="verse-num">33</span><span class="verse-text"><em>Il placera les brebis à sa droite, et les boucs à sa gauche.</em></span></div>
+        <div class="verse"><span class="verse-num">34</span><span class="verse-text"><em>Alors le Roi dira à ceux qui sont à sa droite : "Venez, les bénis de mon Père, recevez en héritage le Royaume préparé pour vous depuis la fondation du monde.</em></span></div>
+        <div class="verse"><span class="verse-num">35</span><span class="verse-text"><em>Car j'avais faim, et vous m'avez donné à manger ; j'avais soif, et vous m'avez donné à boire ; j'étais un étranger, et vous m'avez accueilli ;</em></span></div>
+        <div class="verse"><span class="verse-num">36</span><span class="verse-text"><em>j'étais nu, et vous m'avez habillé ; j'étais malade, et vous m'avez visité ; j'étais en prison, et vous êtes venus jusqu'à moi !"</em></span></div>
+        <div class="verse"><span class="verse-num">37</span><span class="verse-text">Alors les justes lui répondront : <em>"Seigneur, quand est-ce que nous t'avons vu avoir faim, et nous t'avons nourri ? Quand est-ce que nous t'avons vu avoir soif, et nous t'avons donné à boire ?</em></span></div>
+        <div class="verse"><span class="verse-num">38</span><span class="verse-text"><em>Quand est-ce que nous t'avons vu étranger, et nous t'avons accueilli ? Nu, et nous t'avons habillé ?</em></span></div>
+        <div class="verse"><span class="verse-num">39</span><span class="verse-text"><em>Quand est-ce que nous t'avons vu malade ou en prison, et nous sommes venus jusqu'à toi ?"</em></span></div>
+        <div class="verse"><span class="verse-num">40</span><span class="verse-text">Et le Roi leur répondra : <em>"En vérité, je vous le dis : chaque fois que vous l'avez fait à l'un de ces petits qui sont mes frères, c'est à moi que vous l'avez fait."</em></span></div>
+        <div class="verse"><span class="verse-num">41</span><span class="verse-text">Alors il dira à ceux qui sont à sa gauche : <em>"Allez-vous-en loin de moi, maudits, dans le feu éternel préparé pour le diable et ses anges.</em></span></div>
+        <div class="verse"><span class="verse-num">42</span><span class="verse-text"><em>Car j'avais faim, et vous ne m'avez pas donné à manger ; j'avais soif, et vous ne m'avez pas donné à boire ;</em></span></div>
+        <div class="verse"><span class="verse-num">43</span><span class="verse-text"><em>j'étais un étranger, et vous ne m'avez pas accueilli ; nu, et vous ne m'avez pas habillé ; malade et en prison, et vous ne m'avez pas visité."</em></span></div>
+        <div class="verse"><span class="verse-num">44</span><span class="verse-text">Alors eux aussi lui répondront : <em>"Seigneur, quand est-ce que nous t'avons vu avoir faim, avoir soif, être étranger, être nu, être malade ou en prison, sans nous mettre à ton service ?"</em></span></div>
+        <div class="verse"><span class="verse-num">45</span><span class="verse-text">Alors il leur répondra : <em>"En vérité, je vous le dis : chaque fois que vous ne l'avez pas fait à l'un de ces petits, c'est à moi que vous ne l'avez pas fait."</em></span></div>
+        <div class="verse"><span class="verse-num">46</span><span class="verse-text"><em>Et ils s'en iront, ceux-ci au châtiment éternel, et les justes à la vie éternelle. »</em></span></div>
+      </div>
+      <div class="text-col col-hu">
+        <div class="text-col-lang">Magyar</div>
+        <div class="verse"><span class="verse-num">31</span><span class="verse-text"><em>„Amikor az Emberfia eljön az ő dicsőségében, és vele minden angyal, akkor odaül dicsőséges trónjára.</em></span></div>
+        <div class="verse"><span class="verse-num">32</span><span class="verse-text"><em>Összegyűjtenek elé minden népet, és elválasztja egymástól őket, ahogyan a pásztor elválasztja a juhokat a kecskéktől.</em></span></div>
+        <div class="verse"><span class="verse-num">33</span><span class="verse-text"><em>A juhokat a jobb keze felé állítja, a kecskéket pedig a bal keze felé.</em></span></div>
+        <div class="verse"><span class="verse-num">34</span><span class="verse-text"><em>Akkor a Király így szól a jobb keze felőliekhez: Jöjjetek, Atyám áldottai, vegyétek birtokokba a világ kezdete óta számotokra elkészített országot!</em></span></div>
+        <div class="verse"><span class="verse-num">35</span><span class="verse-text"><em>Mert éheztem, és ennem adtatok, szomjaztam, és innom adtatok, jövevény voltam, és befogadtatok,</em></span></div>
+        <div class="verse"><span class="verse-num">36</span><span class="verse-text"><em>mezítelen voltam, és felruháztatok, beteg voltam, és meglátogattatok, börtönben voltam, és eljöttetek hozzám.</em></span></div>
+        <div class="verse"><span class="verse-num">37</span><span class="verse-text">Ekkor az igazak így szólnak majd hozzá: <em>Uram, mikor láttunk téged éhezni, és adtunk enned, vagy szomjazni, és adtunk inni?</em></span></div>
+        <div class="verse"><span class="verse-num">38</span><span class="verse-text"><em>Mikor láttuk, hogy jövevény vagy, és befogadtunk, vagy mezítelen vagy, és felruháztunk?</em></span></div>
+        <div class="verse"><span class="verse-num">39</span><span class="verse-text"><em>Mikor láttuk, hogy beteg vagy, vagy börtönben vagy, és eljöttünk hozzád?</em></span></div>
+        <div class="verse"><span class="verse-num">40</span><span class="verse-text">A Király így felel majd nekik: <em>Bizony mondom nektek, amikor megtettétek ezeket akárcsak eggyel is a legkisebb testvéreim közül, velem tettétek meg.</em></span></div>
+        <div class="verse"><span class="verse-num">41</span><span class="verse-text">Akkor a bal keze felőliekhez szól: <em>Menjetek el tőlem, átkozottak, az ördögnek és angyalainak elkészített örök tűzre!</em></span></div>
+        <div class="verse"><span class="verse-num">42</span><span class="verse-text"><em>Mert éheztem, és nem adtatok ennem, szomjaztam, és nem adtatok innom,</em></span></div>
+        <div class="verse"><span class="verse-num">43</span><span class="verse-text"><em>jövevény voltam, és nem fogadtatok be, mezítelen voltam, és nem ruháztatok fel, beteg voltam, és börtönben voltam, és nem látogattatok meg engem.</em></span></div>
+        <div class="verse"><span class="verse-num">44</span><span class="verse-text">Akkor ezek is így szólnak majd: <em>Uram, mikor láttuk, hogy éhezel vagy szomjazol, jövevény vagy mezítelen vagy, beteg vagy börtönben vagy, és nem szolgáltunk neked?</em></span></div>
+        <div class="verse"><span class="verse-num">45</span><span class="verse-text">Erre így felel majd nekik: <em>Bizony mondom nektek, amikor nem tettétek meg ezeket eggyel sem a legkisebbek közül, velem sem tettétek meg.</em></span></div>
+        <div class="verse"><span class="verse-num">46</span><span class="verse-text"><em>És ezek elmennek az örök büntetésre, az igazak pedig az örök életre."</em></span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+    try { localStorage.setItem('site-lang', lang); } catch(e) {}
+  }
+  (function() {
+    let lang = 'fr';
+    try {
+      const saved = localStorage.getItem('site-lang');
+      if (saved === 'hu' || saved === 'fr') lang = saved;
+      else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+    } catch(e) {}
+    setLang(lang);
+  })();
+</script>
+
+</body>
+</html>
