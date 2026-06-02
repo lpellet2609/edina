@@ -342,6 +342,65 @@
       .gallery img { height: 200px; }
     }
 
+    .covoit-section {
+      margin-top: 28px;
+      padding: 20px 22px;
+      background: var(--cream);
+      border-left: 4px solid var(--bordeaux);
+      border-radius: 3px;
+    }
+    .covoit-section h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--bordeaux);
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .covoit-table-wrap {
+      overflow-x: auto;
+      margin-top: 18px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .covoit-table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 560px;
+      font-size: 14px;
+      background: white;
+    }
+    .covoit-table th, .covoit-table td {
+      border: 1px solid var(--rule);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .covoit-table th {
+      background: var(--bordeaux);
+      color: white;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .covoit-table th:first-child {
+      background: var(--bordeaux-dark);
+    }
+    .covoit-table td:first-child {
+      background: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--bordeaux);
+      font-weight: 500;
+    }
+    .covoit-table td:empty::before { content: '—'; color: var(--rule); }
+    .covoit-loading {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      padding: 24px;
+    }
+
     [data-lang] { display: none; }
     html[lang="fr"] [data-lang="fr"] { display: block; }
     html[lang="hu"] [data-lang="hu"] { display: block; }
@@ -454,6 +513,34 @@
           <li><strong>City Taxi</strong> — <a href="tel:+3612111111">+36 1 211 1111</a></li>
           <li><strong>Főtaxi</strong> — <a href="tel:+3612222222">+36 1 222 2222</a></li>
         </ul>
+      </div>
+
+      <!-- Covoiturage -->
+      <div class="covoit-section">
+        <h4>
+          <span data-lang="fr" class="inline">🚗 Plan de covoiturage</span>
+          <span data-lang="hu" class="inline">🚗 Telekocsi-terv</span>
+        </h4>
+        <div data-lang="fr">
+          <p>Voici le plan de covoiturage du cimetière au restaurant Le Bistro.</p>
+          <p>Nous vous demandons impérativement de vous retrouver entre chauffeurs et passagers <strong>dès la fin de la cérémonie</strong> des funérailles, et de quitter rapidement le cimetière pour vous rendre au restaurant.</p>
+          <p>En effet, nous avons réservé le restaurant à partir de <strong>13h30</strong>. Nous ne pouvons pas retarder le début de la réception. Il est donc impératif que tous les invités arrivent à l'heure.</p>
+        </div>
+        <div data-lang="hu">
+          <p>Ez a temetőtől a Le Bistro étteremig tartó telekocsi-terv.</p>
+          <p>Kérünk Titeket, hogy a temetési szertartás befejezése után <strong>haladéktalanul</strong> gyülekezzenek a sofőrök és az utasok, és mielőbb hagyjátok el a temetőt, hogy az étterembe induljatok.</p>
+          <p>A helyszínt <strong>13:30-tól</strong> foglaltuk le. A fogadás kezdetét nem tudjuk késleltetni, ezért elengedhetetlen, hogy minden vendég időben megérkezzen.</p>
+        </div>
+        <div class="covoit-table-wrap">
+          <div id="covoit-table" class="covoit-loading">
+            <span data-lang="fr" class="inline">Chargement du plan de covoiturage…</span>
+            <span data-lang="hu" class="inline">Telekocsi-terv betöltése…</span>
+          </div>
+        </div>
+        <p style="font-size:14px; color:var(--muted); margin-top:12px;">
+          <span data-lang="fr" class="inline"><em>Ce plan peut être ajusté jusqu'au jour J. Rechargez cette page pour voir la version à jour.</em></span>
+          <span data-lang="hu" class="inline"><em>Ez a terv a temetés napjáig módosulhat. Frissítsd ezt az oldalt a legfrissebb verzióhoz.</em></span>
+        </p>
       </div>
 
       <div data-lang="fr">
@@ -612,6 +699,55 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeLightbox();
     });
+
+    // Covoiturage : fetch + render dynamique
+    var COVOIT_API = 'https://script.google.com/macros/s/AKfycbwcJPZall6hgn3y5DLzWVqz82uJvodj6-BtHaLlaU1OTQi6lrxEA-MyOgIVBUWU7-vMYg/exec?sheet=covoiturage';
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+      });
+    }
+    function renderCovoiturage(rows) {
+      if (!rows || !rows.length) {
+        document.getElementById('covoit-table').innerHTML = '';
+        return;
+      }
+      var header = rows[0];
+      var body = rows.slice(1).filter(function(r) { return r.some(function(c) { return String(c).trim() !== ''; }); });
+      var lang = document.documentElement.lang;
+      var headerLabels = lang === 'hu'
+        ? ['Sofőr', '1. utas', '2. utas', '3. utas', '4. utas', '5. utas', '6. utas']
+        : ['Conducteur', 'Passager 1', 'Passager 2', 'Passager 3', 'Passager 4', 'Passager 5', 'Passager 6'];
+      var maxCols = Math.max.apply(null, rows.map(function(r) { return r.length; }));
+      var ths = '';
+      for (var i = 0; i < maxCols; i++) {
+        ths += '<th>' + escapeHtml(headerLabels[i] || header[i] || '') + '</th>';
+      }
+      var trs = body.map(function(r) {
+        var tds = '';
+        for (var i = 0; i < maxCols; i++) tds += '<td>' + escapeHtml(r[i] || '') + '</td>';
+        return '<tr>' + tds + '</tr>';
+      }).join('');
+      document.getElementById('covoit-table').outerHTML =
+        '<table id="covoit-table" class="covoit-table"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table>';
+    }
+    var covoitRows = null;
+    fetch(COVOIT_API + '&t=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.ok) { covoitRows = d.rows; renderCovoiturage(d.rows); }
+        else throw new Error(d.error || 'erreur');
+      })
+      .catch(function(e) {
+        var el = document.getElementById('covoit-table');
+        if (el) el.innerHTML = '<span style="color:#b00020;">Erreur de chargement : ' + e.message + '</span>';
+      });
+    // Re-render si on change de langue
+    var origSetLang = setLang;
+    setLang = function(lang) {
+      origSetLang(lang);
+      if (covoitRows) renderCovoiturage(covoitRows);
+    };
   </script>
 
 </body>
