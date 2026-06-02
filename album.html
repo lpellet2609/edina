@@ -63,6 +63,11 @@
     }
     .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
     .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
 
     .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
 
