@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arbre généalogique · Koszmovszky Edina</title>
+  <meta name="description" content="Arbre généalogique de la famille de Koszmovszky Edina Franciska (1938–2026)." />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+      --gold: #c9a84c;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, .serif { font-family: 'Cormorant Garamond', serif; font-weight: 500; color: var(--bordeaux); }
+    a { color: var(--bordeaux); }
+
+    /* Top bar */
+    .topbar { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--rule); }
+    .lang-switch { display: flex; justify-content: center; gap: 8px; padding: 10px 16px 6px; }
+    .navbar { display: flex; justify-content: center; gap: 18px; padding: 8px 16px 10px; flex-wrap: wrap; }
+    .navbar a { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 4px 8px; border-bottom: 1px solid transparent; }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
+    .lang-switch button { background: transparent; border: 1px solid var(--rule); color: var(--muted); font-family: 'Lato', sans-serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 16px; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+    .lang-switch button.active { background: var(--bordeaux); color: white; border-color: var(--bordeaux); }
+    .lang-switch button:hover:not(.active) { border-color: var(--bordeaux); color: var(--bordeaux); }
+
+    /* Page header */
+    .page-header { text-align: center; padding: 36px 24px 20px; }
+    .page-header .cross { color: var(--bordeaux); font-size: 24px; margin-bottom: 10px; }
+    .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 34px; margin: 0 0 8px; color: var(--bordeaux); }
+    .page-header .subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); font-size: 17px; margin: 0; }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+
+    /* Tree container */
+    #tree-outer {
+      width: 100%;
+      background: var(--cream);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+    #tree-svg {
+      display: block;
+      width: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+    #tree-svg:active { cursor: grabbing; }
+
+    /* Zoom controls */
+    .zoom-controls {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 10;
+    }
+    .zoom-btn {
+      width: 34px; height: 34px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      color: var(--bordeaux);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .zoom-btn:hover { background: var(--cream); }
+
+    /* SVG node styles */
+    .node-circle { stroke-width: 1.8; }
+    .node-circle.male { fill: var(--paper); stroke: #9a3530; }
+    .node-circle.female { fill: #f5ede0; stroke: #9a3530; }
+    .node-circle.central { fill: var(--gold); stroke: var(--bordeaux-dark); stroke-width: 3; }
+
+    .node-name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; fill: var(--ink); text-anchor: middle; pointer-events: none; }
+    .node-name.central { font-size: 16px; font-weight: 600; fill: var(--bordeaux-dark); }
+    .node-years { font-family: 'Lato', sans-serif; font-size: 11px; fill: var(--muted); text-anchor: middle; pointer-events: none; }
+    .node-years.central { font-size: 12px; fill: var(--bordeaux); }
+
+    .family-line { stroke: #9a6060; stroke-width: 1.4; fill: none; opacity: 0.7; }
+    .couple-line { stroke: #9a6060; stroke-width: 1.4; opacity: 0.5; }
+
+    .node-group { transition: opacity 0.2s; }
+    .node-group:hover .node-circle { stroke-width: 2.5; }
+
+    /* Tooltip */
+    #tooltip {
+      position: fixed;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 10px 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--ink);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      max-width: 240px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      z-index: 200;
+      border-radius: 2px;
+    }
+    #tooltip strong { font-weight: 600; display: block; color: var(--bordeaux); }
+    #tooltip .tip-years { font-size: 13px; color: var(--muted); font-style: italic; }
+    #tooltip .tip-rel { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: 'Lato', sans-serif; }
+
+    /* Page meta */
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .tree-hint {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 16px 24px 12px;
+      font-style: italic;
+    }
+    .tree-note {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      padding: 16px 24px 40px;
+      font-style: italic;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 24px 6px;
+      flex-wrap: wrap;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    .legend-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid #9a3530; flex-shrink: 0; }
+    .legend-dot.male { background: var(--paper); }
+    .legend-dot.female { background: #f5ede0; }
+    .legend-dot.central { background: var(--gold); border-color: var(--bordeaux-dark); border-width: 2px; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lang-switch" role="navigation" aria-label="Langue">
+    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  </div>
+  <nav class="navbar">
+    <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+    <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+    <a href="textes.html"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
+    <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
+    <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+    <a href="arbre.html" class="active"><span data-lang="fr" class="inline">Arbre généalogique</span><span data-lang="hu" class="inline">Családfa</span></a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <div class="cross">✝&#xFE0E;</div>
+  <h1>
+    <span data-lang="fr" class="inline">Arbre généalogique</span>
+    <span data-lang="hu" class="inline">Családfa</span>
+  </h1>
+  <p class="subtitle">
+    <span data-lang="fr" class="inline">Pintér · Takáts · Kozmovszky · Pellet</span>
+    <span data-lang="hu" class="inline">Pintér · Takáts · Kozmovszky · Pellet família</span>
+  </p>
+</div>
+
+<div class="tree-hint">
+  <span data-lang="fr" class="inline">Pincer pour zoomer · glisser pour naviguer · survoler un nom pour les détails</span>
+  <span data-lang="hu" class="inline">Csípje össze a nagyításhoz · húzza a navigáláshoz · vigye fölé az egeret a részletekért</span>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot male"></div>
+    <span data-lang="fr" class="inline">Homme</span><span data-lang="hu" class="inline">Férfi</span>
+  </div>
+  <div class="legend-item"><div class="legend-dot female"></div>
+    <span data-lang="fr" class="inline">Femme</span><span data-lang="hu" class="inline">Nő</span>
+  </div>
+  <div class="legend-item"><div class="legend-dot central"></div>
+    <span data-lang="fr" class="inline">Edina</span><span data-lang="hu" class="inline">Edina</span>
+  </div>
+</div>
+
+<div id="tree-outer">
+  <svg id="tree-svg"></svg>
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="btn-zoom-in" title="Zoom +">+</button>
+    <button class="zoom-btn" id="btn-zoom-reset" title="Réinitialiser" style="font-size:13px;">⌂</button>
+    <button class="zoom-btn" id="btn-zoom-out" title="Zoom −">−</button>
+  </div>
+</div>
+
+<div class="tree-note">
+  <span data-lang="fr" class="inline">Arbre reconstitué d'après le panneau calligraphié par la famille et exposé lors de la cérémonie du 3 juin 2026.
+  Certains prénoms ou dates peuvent être approximatifs — merci de signaler toute correction.</span>
+  <span data-lang="hu" class="inline">A 2026. június 3-i szertartáson kiállított, kézzel rajzolt panelről rekonstruált leszármazási fa.
+  Egyes nevek vagy dátumok hozzávetőlegesek lehetnek — köszönjük a javítási javaslatokat.</span>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+// ─── Family data ───────────────────────────────────────────────────────────
+
+// Node radius
+const R  = 28;   // regular
+const CR = 38;   // Edina (central)
+
+// Generation Y positions
+const Y = { ggp: 90, gp: 240, par: 390, edina: 540, child: 700, gc: 860 };
+
+// ─── People ────────────────────────────────────────────────────────────────
+// x, y: center of circle
+// gender: 'm' | 'f'
+// central: true for Edina
+// relation (for tooltip, in current lang)
+const people = [
+
+  // ── Great-grandparents ──────────────────────────────────────────────────
+
+  // Parents of Takáts Ödön
+  { id:'tl',     firstName:'Lajos',   lastName:'Takáts',        years:'1843–1918', gender:'m', x:860,  y:Y.ggp,
+    rel_fr:'arrière-grand-père maternel d\'Edina (côté paternel de Klára)',
+    rel_hu:'Edina dédapai ágán (Klára apai ágán)' },
+  { id:'hi',     firstName:'Ilona',   lastName:'Horváth',       years:'1861–1933', gender:'f', x:940,  y:Y.ggp,
+    rel_fr:'arrière-grand-mère maternelle d\'Edina',
+    rel_hu:'Edina dédanyai ágán' },
+
+  // Parents of Pintér Margit
+  { id:'pg',     firstName:'Gyula',   lastName:'Pintér',        years:'1859–1925', gender:'m', x:1180, y:Y.ggp,
+    rel_fr:'arrière-grand-père d\'Edina (côté maternel de Klára)',
+    rel_hu:'Edina dédapai ágán (Klára anyai ágán)' },
+  { id:'fj',     firstName:'Janka',   lastName:'Fanda',         years:'1867–1943', gender:'f', x:1260, y:Y.ggp,
+    rel_fr:'arrière-grand-mère d\'Edina',
+    rel_hu:'Edina dédanyai ágán' },
+
+  // ── Grandparents ────────────────────────────────────────────────────────
+
+  { id:'odon',   firstName:'Ödön',    lastName:'Takáts',        years:'1884–1946', gender:'m', x:900,  y:Y.gp,
+    rel_fr:'grand-père d\'Edina (père de Klára)',
+    rel_hu:'Edina nagyapja (Klára apja)' },
+  { id:'margit', firstName:'Margit',  lastName:'Pintér',        years:'1887–1953', gender:'f', x:1200, y:Y.gp,
+    rel_fr:'grand-mère d\'Edina (mère de Klára)',
+    rel_hu:'Edina nagyanyja (Klára anyja)' },
+
+  // ── Parents ─────────────────────────────────────────────────────────────
+
+  { id:'tibor',  firstName:'Tibor',   lastName:'Dr. Kozmovszky', gender:'m',       x:990,  y:Y.par,
+    rel_fr:'père d\'Edina',
+    rel_hu:'Edina édesapja' },
+  { id:'klara',  firstName:'Klára',   lastName:'Takáts',        gender:'f',        x:1070, y:Y.par,
+    rel_fr:'mère d\'Edina (née Takáts)',
+    rel_hu:'Edina édesanyja (született Takáts)' },
+
+  // ── Edina's generation ──────────────────────────────────────────────────
+
+  { id:'telegdy', firstName:'Miklós', lastName:'Telegdy',       gender:'m',        x:370,  y:Y.edina,
+    rel_fr:'beau-frère d\'Edina (mari d\'Éva)',
+    rel_hu:'Edina sógora (Éva férje)' },
+  { id:'eva',    firstName:'Éva',     lastName:'Kozmovszky',    gender:'f',        x:450,  y:Y.edina,
+    rel_fr:'sœur d\'Edina',
+    rel_hu:'Edina nővére' },
+
+  { id:'edina',  firstName:'Edina',   lastName:'Koszmovszky',   years:'1938 – 2026', gender:'f', x:1030, y:Y.edina, central:true,
+    rel_fr:'— Edina elle-même —',
+    rel_hu:'— maga Edina —' },
+  { id:'bernard', firstName:'Bernard', lastName:'Pellet',       gender:'m',        x:1110, y:Y.edina,
+    rel_fr:'époux d\'Edina',
+    rel_hu:'Edina férje' },
+
+  { id:'peter',  firstName:'Péter',   lastName:'Kozmovszky',   gender:'m',        x:1600, y:Y.edina,
+    rel_fr:'frère d\'Edina',
+    rel_hu:'Edina fivére' },
+
+  // ── Edina's siblings' children ──────────────────────────────────────────
+
+  { id:'laszlo', firstName:'László',  lastName:'Telegdy',       gender:'m',        x:360,  y:Y.child,
+    rel_fr:'neveu d\'Edina (fils d\'Éva)',
+    rel_hu:'Edina unokaöccse (Éva fia)' },
+  { id:'andras', firstName:'András',  lastName:'Telegdy',       gender:'m',        x:490,  y:Y.child,
+    rel_fr:'neveu d\'Edina (fils d\'Éva)',
+    rel_hu:'Edina unokaöccse (Éva fia)' },
+
+  // ── Edina's children ────────────────────────────────────────────────────
+
+  { id:'eric',   firstName:'Éric',    lastName:'Pellet',        gender:'m',        x:970,  y:Y.child,
+    rel_fr:'fils d\'Edina',
+    rel_hu:'Edina fia' },
+  { id:'laurent', firstName:'Laurent', lastName:'Pellet',       gender:'m',        x:1110, y:Y.child,
+    rel_fr:'fils d\'Edina',
+    rel_hu:'Edina fia' },
+
+  // ── Edina's grandchildren (via Éric) ────────────────────────────────────
+
+  { id:'mark',     firstName:'Mark',     lastName:'Pellet',    gender:'m',         x:860,  y:Y.gc,
+    rel_fr:'petit-fils d\'Edina (fils d\'Éric)',
+    rel_hu:'Edina unokája (Éric fia)' },
+  { id:'philippe', firstName:'Philippe', lastName:'Pellet',    gender:'m',         x:970,  y:Y.gc,
+    rel_fr:'petit-fils d\'Edina (fils d\'Éric)',
+    rel_hu:'Edina unokája (Éric fia)' },
+  { id:'edouard',  firstName:'Édouard',  lastName:'Pellet',    gender:'m',         x:1080, y:Y.gc,
+    rel_fr:'petit-fils d\'Edina (fils d\'Éric)',
+    rel_hu:'Edina unokája (Éric fia)' },
+];
+
+// ─── Couples (marriage lines) ──────────────────────────────────────────────
+const couples = [
+  ['tl','hi'], ['pg','fj'],
+  ['odon','margit'],
+  ['tibor','klara'],
+  ['telegdy','eva'],
+  ['edina','bernard'],
+];
+
+// ─── Parent-child relationships ────────────────────────────────────────────
+// parents: 1 or 2 person ids (couple)
+// children: array of person ids
+// If 2 parents, descent starts from their midpoint x
+// If 1 parent, descent starts from that person's x
+const families = [
+  { parents:['tl','hi'],      children:['odon'] },
+  { parents:['pg','fj'],      children:['margit'] },
+  { parents:['odon','margit'], children:['klara'] },
+  { parents:['tibor','klara'], children:['eva','edina','peter'] },
+  { parents:['telegdy','eva'], children:['laszlo','andras'] },
+  { parents:['edina','bernard'], children:['eric','laurent'] },
+  { parents:['eric'],          children:['mark','philippe','edouard'] },
+];
+
+// ─── Sub-family text labels (great-grandchildren, shown as name lists) ──────
+const subLabels = [
+  { under: 'laszlo', names: 'Krisztina · Aliz · Luca' },
+  { under: 'andras', names: 'Máté · Bálint · Mátyás · Júlia' },
+  { under: 'mark',   names: '0.Didier · Martin\nJanusz · Kristóf · Lajos' },
+  { under: 'philippe', names: 'Kristóf · Dávid\nRebeka · Teréz · Hanne' },
+  { under: 'edouard',  names: 'Marina · Júlia · Émilie' },
+];
+
+// ─── Index by id ───────────────────────────────────────────────────────────
+const byId = {};
+people.forEach(p => byId[p.id] = p);
+
+// ─── SVG setup ─────────────────────────────────────────────────────────────
+const TREE_W = 2100, TREE_H = 1060;
+
+const svg = d3.select('#tree-svg')
+  .attr('width', TREE_W)
+  .attr('height', TREE_H);
+
+const g = svg.append('g').attr('id', 'zoom-group');
+
+// ─── Zoom ───────────────────────────────────────────────────────────────────
+const outerEl = document.getElementById('tree-outer');
+const svgEl   = document.getElementById('tree-svg');
+
+const zoom = d3.zoom()
+  .scaleExtent([0.25, 3])
+  .on('zoom', ev => g.attr('transform', ev.transform));
+
+svg.call(zoom);
+
+function getInitTransform() {
+  const w = outerEl.clientWidth || 900;
+  const h = Math.min(600, Math.max(420, w * 0.55));
+  outerEl.style.height = h + 'px';
+  svgEl.style.height   = h + 'px';
+  const scale = Math.min(w / TREE_W, h / TREE_H) * 0.96;
+  const tx = (w - TREE_W * scale) / 2;
+  const ty = (h - TREE_H * scale) / 2;
+  return d3.zoomIdentity.translate(tx, ty).scale(scale);
+}
+
+function resetView() {
+  svg.transition().duration(500).call(zoom.transform, getInitTransform());
+}
+resetView();
+window.addEventListener('resize', resetView);
+
+document.getElementById('btn-zoom-in').addEventListener('click', () =>
+  svg.transition().duration(250).call(zoom.scaleBy, 1.4));
+document.getElementById('btn-zoom-out').addEventListener('click', () =>
+  svg.transition().duration(250).call(zoom.scaleBy, 0.72));
+document.getElementById('btn-zoom-reset').addEventListener('click', resetView);
+
+// ─── Draw connections ───────────────────────────────────────────────────────
+const lineLayer = g.append('g').attr('id', 'lines');
+
+// Couple lines (center to center — circles drawn on top)
+couples.forEach(([id1, id2]) => {
+  const a = byId[id1], b = byId[id2];
+  lineLayer.append('line')
+    .attr('class', 'couple-line')
+    .attr('x1', a.x).attr('y1', a.y)
+    .attr('x2', b.x).attr('y2', b.y);
+});
+
+// Parent → child paths
+families.forEach(fam => {
+  const pNodes   = fam.parents.map(id => byId[id]);
+  const cNodes   = fam.children.map(id => byId[id]);
+  const fromX    = pNodes.length === 2 ? (pNodes[0].x + pNodes[1].x) / 2 : pNodes[0].x;
+  const fromY    = pNodes[0].y;
+  const toY      = cNodes[0].y;
+  const jY       = fromY + (toY - fromY) * 0.5;
+
+  if (cNodes.length === 1) {
+    const cx = cNodes[0].x;
+    const cr = cNodes[0].central ? CR : R;
+    if (Math.abs(fromX - cx) < 3) {
+      // Straight vertical
+      lineLayer.append('line')
+        .attr('class', 'family-line')
+        .attr('x1', fromX).attr('y1', fromY)
+        .attr('x2', cx).attr('y2', toY - cr);
+    } else {
+      // Right-angle path: down → across → down
+      lineLayer.append('path')
+        .attr('class', 'family-line')
+        .attr('d', `M${fromX},${fromY} L${fromX},${jY} L${cx},${jY} L${cx},${toY - cr}`);
+    }
+  } else {
+    const xs     = cNodes.map(c => c.x);
+    const leftX  = Math.min(...xs);
+    const rightX = Math.max(...xs);
+
+    // Vertical drop from parent midpoint to junction
+    lineLayer.append('line')
+      .attr('class', 'family-line')
+      .attr('x1', fromX).attr('y1', fromY)
+      .attr('x2', fromX).attr('y2', jY);
+
+    // If fromX outside [leftX,rightX], add bridge
+    if (fromX < leftX - 1 || fromX > rightX + 1) {
+      const bridgeX = fromX < leftX ? leftX : rightX;
+      lineLayer.append('line')
+        .attr('class', 'family-line')
+        .attr('x1', fromX).attr('y1', jY)
+        .attr('x2', bridgeX).attr('y2', jY);
+    }
+
+    // Horizontal comb
+    lineLayer.append('line')
+      .attr('class', 'family-line')
+      .attr('x1', leftX).attr('y1', jY)
+      .attr('x2', rightX).attr('y2', jY);
+
+    // Drop to each child
+    cNodes.forEach(c => {
+      const cr = c.central ? CR : R;
+      lineLayer.append('line')
+        .attr('class', 'family-line')
+        .attr('x1', c.x).attr('y1', jY)
+        .attr('x2', c.x).attr('y2', toY - cr);
+    });
+  }
+});
+
+// ─── Sub-family labels (great-grandchildren as compact text) ────────────────
+const labelLayer = g.append('g').attr('id', 'sublabels');
+
+subLabels.forEach(sl => {
+  const p = byId[sl.under];
+  if (!p) return;
+  const lines = sl.names.split('\n');
+  const startY = p.y + R + 26;
+
+  // Small vertical drop line
+  labelLayer.append('line')
+    .attr('class', 'family-line')
+    .attr('x1', p.x).attr('y1', p.y + R)
+    .attr('x2', p.x).attr('y2', startY - 8)
+    .attr('stroke-dasharray', '4 3')
+    .attr('opacity', 0.4);
+
+  lines.forEach((line, i) => {
+    labelLayer.append('text')
+      .attr('x', p.x)
+      .attr('y', startY + i * 20)
+      .attr('text-anchor', 'middle')
+      .attr('font-family', 'Cormorant Garamond, serif')
+      .attr('font-size', 13)
+      .attr('fill', '#9a6060')
+      .attr('opacity', 0.8)
+      .text(line);
+  });
+});
+
+// ─── Draw nodes ─────────────────────────────────────────────────────────────
+const nodeLayer  = g.append('g').attr('id', 'nodes');
+const tooltip    = d3.select('#tooltip');
+let   currentLang = document.documentElement.lang || 'fr';
+
+people.forEach(person => {
+  const r = person.central ? CR : R;
+  const nodeG = nodeLayer.append('g')
+    .attr('class', 'node-group')
+    .attr('transform', `translate(${person.x},${person.y})`)
+    .style('cursor', 'default');
+
+  // Circle
+  nodeG.append('circle')
+    .attr('r', r)
+    .attr('class', 'node-circle ' + (person.central ? 'central' : person.gender === 'f' ? 'female' : 'male'));
+
+  // Name rendering
+  const lineH = 18;
+  if (person.central) {
+    // Show only first name large + years
+    nodeG.append('text').attr('class', 'node-name central').attr('y', r + lineH).text('Edina');
+    nodeG.append('text').attr('class', 'node-years central').attr('y', r + lineH + 16).text(person.years);
+  } else {
+    // First name above surname (or combined if short)
+    const fullName = person.firstName + ' ' + person.lastName;
+    // Split: if last name starts with "Dr.", put on first line with last name, given on second
+    // Otherwise: firstName on one line, lastName on another (Hungarian: last name first visually)
+    // For readability in tree: show lastName\nfirstName (Hungarian convention)
+    nodeG.append('text').attr('class', 'node-name').attr('y', r + lineH).text(person.lastName);
+    nodeG.append('text').attr('class', 'node-name').attr('y', r + lineH + 16).text(person.firstName);
+    if (person.years) {
+      nodeG.append('text').attr('class', 'node-years').attr('y', r + lineH + 30).text(person.years);
+    }
+  }
+
+  // Hover tooltip
+  nodeG.on('mouseover', function(event) {
+      const rel = currentLang === 'hu' ? person.rel_hu : person.rel_fr;
+      tooltip
+        .html(`<strong>${person.lastName} ${person.firstName}</strong>${person.years ? '<br><span class="tip-years">' + person.years + '</span>' : ''}${rel ? '<br><span class="tip-rel">' + rel + '</span>' : ''}`)
+        .style('left',  (event.clientX + 14) + 'px')
+        .style('top',   (event.clientY - 40) + 'px')
+        .style('opacity', 1);
+    })
+    .on('mousemove', function(event) {
+      tooltip.style('left', (event.clientX + 14) + 'px').style('top', (event.clientY - 40) + 'px');
+    })
+    .on('mouseout', function() {
+      tooltip.style('opacity', 0);
+    });
+});
+
+// ─── Generation labels ───────────────────────────────────────────────────────
+const genLabels_fr = [
+  { y: Y.ggp,   label: 'Arrière-grands-parents' },
+  { y: Y.gp,    label: 'Grands-parents' },
+  { y: Y.par,   label: 'Parents' },
+  { y: Y.edina, label: 'Edina & ses frère et sœur' },
+  { y: Y.child, label: 'Enfants & neveux' },
+  { y: Y.gc,    label: 'Petits-enfants d\'Edina' },
+];
+const genLabels_hu = [
+  { y: Y.ggp,   label: 'Dédszülők' },
+  { y: Y.gp,    label: 'Nagyszülők' },
+  { y: Y.par,   label: 'Szülők' },
+  { y: Y.edina, label: 'Edina, fivére és nővére' },
+  { y: Y.child, label: 'Gyermekek és unokaöccsök' },
+  { y: Y.gc,    label: 'Edina unokái' },
+];
+
+const genLabelLayer = g.append('g').attr('id', 'gen-labels');
+const GEN_LABEL_X   = 60;
+
+function renderGenLabels(lang) {
+  genLabelLayer.selectAll('text').remove();
+  const labels = lang === 'hu' ? genLabels_hu : genLabels_fr;
+  labels.forEach(gl => {
+    genLabelLayer.append('text')
+      .attr('x', GEN_LABEL_X)
+      .attr('y', gl.y + 6)
+      .attr('text-anchor', 'end')
+      .attr('font-family', 'Cormorant Garamond, serif')
+      .attr('font-size', 15)
+      .attr('font-style', 'italic')
+      .attr('fill', '#b8a090')
+      .attr('opacity', 0.85)
+      .text(gl.label);
+  });
+}
+
+// Horizontal generation rules
+[Y.ggp, Y.gp, Y.par, Y.edina, Y.child, Y.gc].forEach(gy => {
+  g.insert('line', ':first-child')
+    .attr('x1', 80).attr('y1', gy)
+    .attr('x2', TREE_W - 80).attr('y2', gy)
+    .attr('stroke', '#d9cdb8').attr('stroke-width', 0.5).attr('opacity', 0.4);
+});
+
+// ─── Language switch ────────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+  renderGenLabels(lang);
+  try { localStorage.setItem('site-lang', lang); } catch(e) {}
+}
+
+(function() {
+  let lang = 'fr';
+  try {
+    const saved = localStorage.getItem('site-lang');
+    if (saved === 'hu' || saved === 'fr') lang = saved;
+    else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+  } catch(e) {}
+  setLang(lang);
+})();
+</script>
+
+</body>
+</html>
