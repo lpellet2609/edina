@@ -200,14 +200,6 @@ const people = [
   { id:'lois', firstName:'Lois', lastName:'Doherty', gender:'f', x:1950, y:Y.e,
     rel_fr:'épouse de Péter Kozmovszky', rel_hu:'Péter Kozmovszky felesége' },
 
-  // ── Péter's children ────────────────────────────────────────────────────
-  { id:'kristina',  firstName:'Kristina',  lastName:'Kozmovszky', gender:'f', x:1820, y:Y.c,
-    rel_fr:'nièce d\'Edina (fille de Péter)', rel_hu:'Edina unokahúga (Péter lánya)' },
-  { id:'elizabeth', firstName:'Elizabeth', lastName:'Stuart Perry', gender:'f', x:1910, y:Y.c,
-    rel_fr:'nièce d\'Edina (fille de Péter, d\'une autre relation)', rel_hu:'Edina unokahúga (Péter lánya, más kapcsolatból)' },
-  { id:'justin',    firstName:'Justin',    lastName:'Kozmovszky', gender:'m', x:2000, y:Y.c,
-    rel_fr:'neveu d\'Edina (fils de Péter)', rel_hu:'Edina unokaöccse (Péter fia)' },
-
   // ── Éva's children ──────────────────────────────────────────────────────
   { id:'laszlo', firstName:'László', lastName:'Telegdy', gender:'m', x:245, y:Y.c,
     rel_fr:'neveu d\'Edina (fils d\'Éva)', rel_hu:'Edina unokaöccse (Éva fia)' },
@@ -300,8 +292,6 @@ const families = [
   { parents:['philippe','ildiko'], children:['christophe','david','sebastien','these','jeanne'] },
   { parents:['laurent','eszter'], children:['marina','julie','emilie'] },
   { parents:['eric','isabelle'],  children:['thais','livie','marie'] },
-  { parents:['peter','lois'],     children:['kristina','justin'] },
-  { parents:['peter'],            children:['elizabeth'] },
 ];
 
 // ─── Index ─────────────────────────────────────────────────────────────────
@@ -401,21 +391,30 @@ families.forEach(fam => {
   }
 });
 
-// ─── Sub-family labels (children of László and András — text compact) ────────
+// ─── Sub-family labels (compact text for collateral children) ─────────────────
+// midX: override horizontal center (e.g. midpoint of a couple)
 const subLabels = [
   { under:'laszlo', names:'Kriszta · Ákos · Luca' },
   { under:'andras', names:'Márton · Bálint · Mátyás · Júlia' },
+  { under:'lois', midX:1910, names:'Kristina · Elizabeth Stuart Perry · Justin' },
 ];
 
 const subLayer = g.append('g').attr('id', 'sublabels');
 subLabels.forEach(sl => {
   const p = byId[sl.under];
   if (!p) return;
-  // Place label well below the node, inside a small rounded box
-  const boxX = p.x;
+  const boxX = sl.midX !== undefined ? sl.midX : p.x;
   const boxY = p.y + R + 48;
   const boxW = sl.names.length * 6.8 + 20;
   const boxH = 22;
+
+  // Short drop line from node/couple midpoint to box
+  const lineY1 = sl.midX !== undefined ? p.y : p.y + R + 4;
+  subLayer.append('line')
+    .attr('x1', boxX).attr('y1', lineY1)
+    .attr('x2', boxX).attr('y2', boxY - 14)
+    .attr('stroke', '#9a6060').attr('stroke-width', 1.2).attr('opacity', 0.5);
+
   subLayer.append('rect')
     .attr('x', boxX - boxW/2).attr('y', boxY - 14)
     .attr('width', boxW).attr('height', boxH)
