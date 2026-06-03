@@ -195,10 +195,18 @@ const people = [
   { id:'bernard', firstName:'Bernard', lastName:'Pellet', years:'1934', gender:'m', x:1235, y:Y.e,
     rel_fr:'époux d\'Edina', rel_hu:'Edina férje' },
 
-  { id:'peter', firstName:'Péter', lastName:'Kozmovszky', gender:'m', x:1870, y:Y.e,
+  { id:'peter', firstName:'Péter', lastName:'Kozmovszky', gender:'m', x:1880, y:Y.e,
     rel_fr:'frère d\'Edina', rel_hu:'Edina fivére' },
-  { id:'lois', firstName:'Lois', lastName:'Doherty', gender:'f', x:1950, y:Y.e,
+  { id:'lois', firstName:'Lois', lastName:'Doherty', gender:'f', x:1960, y:Y.e,
     rel_fr:'épouse de Péter Kozmovszky', rel_hu:'Péter Kozmovszky felesége' },
+
+  // ── Péter's children ────────────────────────────────────────────────────
+  { id:'kristina',  firstName:'Kristina',  lastName:'Kozmovszky',  gender:'f', x:1880, y:Y.c,
+    rel_fr:'nièce d\'Edina (fille de Péter et Lois)', rel_hu:'Edina unokahúga (Péter és Lois lánya)' },
+  { id:'elizabeth', firstName:'Elizabeth', lastName:'Stuart Perry', gender:'f', x:1970, y:Y.c,
+    rel_fr:'nièce d\'Edina (fille de Péter, autre relation)', rel_hu:'Edina unokahúga (Péter lánya, más kapcsolatból)' },
+  { id:'justin',    firstName:'Justin',    lastName:'Kozmovszky',  gender:'m', x:2060, y:Y.c,
+    rel_fr:'neveu d\'Edina (fils de Péter et Lois)', rel_hu:'Edina unokaöccse (Péter és Lois fia)' },
 
   // ── Éva's children ──────────────────────────────────────────────────────
   { id:'laszlo', firstName:'László', lastName:'Telegdy', gender:'m', x:245, y:Y.c,
@@ -391,27 +399,48 @@ families.forEach(fam => {
   }
 });
 
+// ─── Péter branch: manual descent lines ───────────────────────────────────────
+{
+  const pN  = byId['peter'], lN = byId['lois'];
+  const krN = byId['kristina'], elN = byId['elizabeth'], juN = byId['justin'];
+  const pMidX = (pN.x + lN.x) / 2;                // 1920 — couple midpoint
+  const jYP   = pN.y + (Y.c - pN.y) * 0.5;        // 585  — junction y
+
+  const la = s => s.attr('stroke','#9a6060').attr('stroke-width',1.4).attr('fill','none').attr('opacity',0.7);
+
+  // Péter + Lois → Kristina + Justin (standard comb, no drop at Elizabeth)
+  la(lineLayer.append('line')).attr('x1',pMidX).attr('y1',pN.y).attr('x2',pMidX).attr('y2',jYP);
+  la(lineLayer.append('line')).attr('x1',krN.x).attr('y1',jYP).attr('x2',juN.x).attr('y2',jYP);
+  la(lineLayer.append('line')).attr('x1',krN.x).attr('y1',jYP).attr('x2',krN.x).attr('y2',Y.c - R);
+  la(lineLayer.append('line')).attr('x1',juN.x).attr('y1',jYP).attr('x2',juN.x).attr('y2',Y.c - R);
+
+  // Péter → Elizabeth: dashed path going LEFT from Peter, bypassing Kristina on the left,
+  // then turning right below the comb bar and dropping to Elizabeth
+  const bpX    = pN.x - R - 34;  // ~1824 — left of Kristina's left edge (1880-22=1858)
+  const jYEliz = jYP + 38;       // ~623 — below comb bar (585), above Kristina circle top (638)
+  lineLayer.append('path')
+    .attr('d', `M${pN.x},${pN.y} L${bpX},${pN.y} L${bpX},${jYEliz} L${elN.x},${jYEliz} L${elN.x},${Y.c - R}`)
+    .attr('stroke','#9a6060').attr('stroke-width',1.2).attr('fill','none').attr('opacity',0.6)
+    .attr('stroke-dasharray','6,4');
+}
+
 // ─── Sub-family labels (compact text for collateral children) ─────────────────
-// midX: override horizontal center (e.g. midpoint of a couple)
 const subLabels = [
   { under:'laszlo', names:'Kriszta · Ákos · Luca' },
   { under:'andras', names:'Márton · Bálint · Mátyás · Júlia' },
-  { under:'lois', midX:1910, names:'Kristina · Elizabeth Stuart Perry · Justin' },
 ];
 
 const subLayer = g.append('g').attr('id', 'sublabels');
 subLabels.forEach(sl => {
   const p = byId[sl.under];
   if (!p) return;
-  const boxX = sl.midX !== undefined ? sl.midX : p.x;
+  const boxX = p.x;
   const boxY = p.y + R + 48;
   const boxW = sl.names.length * 6.8 + 20;
   const boxH = 22;
 
-  // Short drop line from node/couple midpoint to box
-  const lineY1 = sl.midX !== undefined ? p.y : p.y + R + 4;
   subLayer.append('line')
-    .attr('x1', boxX).attr('y1', lineY1)
+    .attr('x1', boxX).attr('y1', p.y + R + 4)
     .attr('x2', boxX).attr('y2', boxY - 14)
     .attr('stroke', '#9a6060').attr('stroke-width', 1.2).attr('opacity', 0.5);
 
