@@ -93,6 +93,11 @@
     }
     .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
     .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
 
     .container { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
 
@@ -355,6 +360,7 @@
     <nav class="navbar">
       <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
       <a href="hommages.html" class="active"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="textes.html"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
       <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
       <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
     </nav>
@@ -476,6 +482,24 @@
   <script>
     // Each hommage: text_fr + text_hu (translated). Captions same. Lang field = original language.
     const HOMMAGES = [
+      {
+        author: "Joëlle Bolot",
+        text_fr: "A l'heure où la Hongrie dit Adieu à son héroïne de 1956.... En a-t-elle eu une autre depuis ? A l'heure où sa famille est réunie à Budapest pour la confier à Dieu, mes prières et ma pensée vont vers Edina. Qu'elle ait auprès du Seigneur la véritable paix dans le véritable amour.",
+        text_hu: "Abban az órában, amelyben Magyarország búcsút vesz 1956 hősnőjétől… Volt-e azóta más hozzá hasonló? Abban az órában, amelyben családja Budapesten gyűlt össze, hogy Istenre bízza őt, imáim és gondolataim Edinához szállnak. Legyen az Úrnál igazi béke és igazi szeretet.",
+        images: []
+      },
+      {
+        author: "Alexandre Bally",
+        text_fr: "Chère Edina, 40 ans la première fois où tu m'as invité à L'avenue St Colette pour partir à l'aventure avec Marc en tant que chef scout, et puis plus tard avec Laurent et Eric. Aux nombreuses fêtes de Pâques ces dernières années, chez moi à Bellet avec Maman, Monseigneur Guy, le chanoine Stéphane, le Dr Jean Édouard où ton rire nous mettait en joie ainsi que des discussions historiques. Tu nous manqueras ainsi que ton fameux Almás pite ! Repose en paix chère Edina et dans la lumière du Seigneur",
+        text_hu: "Kedves Edina, 40 évvel ezelőtt először hívtál meg az avenue St Colette-re, hogy Marc társaságában cserkészvezetőként kalandba induljunk, majd később Laurenttel és Érickel. A húsvéti ünnepségeken az elmúlt években, nálam Belletben Mamával, Guy püspök úrral, Stéphane kanonokkal, Jean Édouard doktorral — nevetésed örömet hozott nekünk, ahogy a történelmi eszmecserék is. Hiányozni fogsz, akárcsak a híres Almás pitéd! Nyugodj békében, kedves Edina, az Úr fényében.",
+        images: [
+          {file: "alexandre-bally-p1.jpg", caption_fr: "", caption_hu: ""},
+          {file: "alexandre-bally-p2.jpg", caption_fr: "", caption_hu: ""},
+          {file: "alexandre-bally-p3.jpg", caption_fr: "", caption_hu: ""},
+          {file: "alexandre-bally-p4.jpg", caption_fr: "", caption_hu: ""},
+          {file: "alexandre-bally-p5.jpg", caption_fr: "", caption_hu: ""}
+        ]
+      },
       {
         author: "Françoise Jacquelin Pellet",
         text_fr: "Je suis présente auprès de vous par la pensée et le cœur, sachant combien le départ d'un être aimé est douloureux.\nEdina, je me souviens de toi lorsque tu es arrivée dans notre famille. J'avais 12 ans, j'étais subjuguée par cette jeune fille blonde à l'accent d'ailleurs, à l'allure sportive, à l'énergie communicative.\nTout au long de ta vie et malgré ses embûches, tu as su rester pleine de vie, d'enthousiasme, d'authenticité. Ton rire en cascades résonne encore dans mes oreilles.\nBernard, mon compagnon de vie, t'appréciait beaucoup lui aussi. Je repense avec émotion à vos fous rires complices, vos discussions, votre goût du bon vin partagé.\nEdina, repose en paix dans la lumière, entourée de ceux que tu as aimés.",

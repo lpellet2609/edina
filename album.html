@@ -63,6 +63,11 @@
     }
     .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
     .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
 
     .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
 
@@ -153,6 +158,7 @@
     <nav class="navbar">
       <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
       <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="textes.html"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
       <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
       <a href="album.html" class="active"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
     </nav>

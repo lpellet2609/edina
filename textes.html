@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Textes de la cérémonie — Koszmovszky Edina Franciska</title>
+  <meta name="description" content="Textes bibliques de la cérémonie du 3 juin 2026 — bilingues français et hongrois." />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--bordeaux-dark); }
+
+    /* Top bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 6px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .lang-switch button.active {
+      background: var(--bordeaux); color: white; border-color: var(--bordeaux);
+    }
+    .lang-switch button:hover:not(.active) {
+      border-color: var(--bordeaux); color: var(--bordeaux);
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 16px 10px;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    header.hero { text-align: center; padding: 32px 24px 16px; }
+    header.hero h1 { font-size: 34px; margin: 0 0 8px; line-height: 1.2; }
+    header.hero .sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--bordeaux);
+      font-size: 18px;
+      margin: 24px 0 8px;
+      letter-spacing: 0.4em;
+    }
+
+    .intro-note {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      margin: 12px auto 32px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Section header */
+    .ceremony-section {
+      margin: 48px 0 28px;
+      text-align: center;
+    }
+    .ceremony-section h2 {
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .ceremony-section .section-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--bordeaux);
+      margin: 0 auto;
+      opacity: 0.4;
+    }
+
+    /* Reading card */
+    .reading-card {
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .reading-type {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .reading-ref {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      color: var(--bordeaux);
+      font-weight: 500;
+      margin: 0 0 16px;
+    }
+
+    /* Verse */
+    .verse {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+    .verse-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--bordeaux);
+      opacity: 0.5;
+      min-width: 22px;
+      padding-top: 5px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .verse-text {
+      font-size: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.75;
+    }
+    .verse-text em { font-style: italic; }
+
+    /* Speech cards */
+    .speech-card {
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .speech-card p {
+      font-size: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.8;
+      margin: 0 0 14px;
+    }
+    .speech-card p:last-child { margin-bottom: 0; }
+    .speech-opening { font-style: italic; color: var(--muted); }
+    .speech-section-title { font-weight: 600; color: var(--bordeaux); margin-top: 22px !important; }
+    .speech-verse {
+      padding: 10px 0 10px 20px;
+      border-left: 2px solid var(--rule);
+      margin: 12px 0;
+      font-style: italic;
+      line-height: 1.9;
+    }
+    .speech-sep { text-align: center; color: var(--bordeaux); opacity: 0.35; letter-spacing: 0.4em; margin: 20px 0; }
+    .speech-placeholder { color: var(--muted) !important; font-style: italic !important; }
+
+    hr.section-sep {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lang-switch" role="navigation" aria-label="Langue">
+    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  </div>
+  <nav class="navbar">
+    <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+    <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+    <a href="textes.html" class="active"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
+    <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
+    <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
+  </nav>
+</div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="ornament">✝&#xFE0E;</div>
+    <h1 data-lang="fr">Textes de la cérémonie</h1>
+    <h1 data-lang="hu">A szertartás szövegei</h1>
+    <p class="sub" data-lang="fr">3 juin 2026 — Budapest</p>
+    <p class="sub" data-lang="hu">2026. június 3. — Budapest</p>
+  </header>
+
+  <p class="intro-note" data-lang="fr">Lectures faites à l'église et au cimetière.</p>
+  <p class="intro-note" data-lang="hu">A misén és a temetőben elhangzott szövegek.</p>
+
+  <!-- === MESSE === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">À la messe</h2>
+    <h2 data-lang="hu">A misén</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Première lecture : Romains 5, 5-11 -->
+  <div class="reading-card">
+    <div class="reading-type" data-lang="fr">Première lecture</div>
+    <div class="reading-type" data-lang="hu">Első olvasat</div>
+
+    <p class="reading-ref" data-lang="fr">Romains 5, 5-11</p>
+    <p class="reading-ref" data-lang="hu">Rómaiak 5, 5–11</p>
+
+    <div data-lang="fr">
+      <div class="verse"><span class="verse-num">5</span><span class="verse-text">Or l'espérance ne déçoit pas, parce que l'amour de Dieu a été répandu dans nos cœurs par l'Esprit Saint qui nous a été donné.</span></div>
+      <div class="verse"><span class="verse-num">6</span><span class="verse-text">Alors que nous étions encore sans force, au temps fixé, le Christ est mort pour des impies.</span></div>
+      <div class="verse"><span class="verse-num">7</span><span class="verse-text">À peine mourrait-on pour un homme juste ; pour un homme de bien peut-être oserait-on mourir.</span></div>
+      <div class="verse"><span class="verse-num">8</span><span class="verse-text">Mais Dieu montre l'amour qu'il a pour nous : quand nous étions encore pécheurs, le Christ est mort pour nous.</span></div>
+      <div class="verse"><span class="verse-num">9</span><span class="verse-text">À plus forte raison, maintenant que nous sommes devenus justes par son sang, serons-nous sauvés par lui de la colère.</span></div>
+      <div class="verse"><span class="verse-num">10</span><span class="verse-text">Car si, alors que nous étions ennemis de Dieu, nous avons été réconciliés avec lui par la mort de son Fils, à plus forte raison, une fois réconciliés, serons-nous sauvés par sa vie.</span></div>
+      <div class="verse"><span class="verse-num">11</span><span class="verse-text">Non seulement cela, mais nous mettons notre fierté en Dieu, par notre Seigneur Jésus Christ, par qui maintenant nous avons obtenu la réconciliation.</span></div>
+    </div>
+
+    <div data-lang="hu">
+      <div class="verse"><span class="verse-num">5</span><span class="verse-text">A remény pedig nem szégyenít meg, mivel Isten szeretete kiáradt szívünkbe a nekünk adott Szentlélek által.</span></div>
+      <div class="verse"><span class="verse-num">6</span><span class="verse-text">Krisztus ugyanis, amikor még erőtlenek voltunk, a maga idejében meghalt az istentelenekért.</span></div>
+      <div class="verse"><span class="verse-num">7</span><span class="verse-text">Hiszen az igazért is aligha hal meg valaki, legfeljebb a jóért vállal valaki halált.</span></div>
+      <div class="verse"><span class="verse-num">8</span><span class="verse-text">Isten azonban azzal mutatta meg irántunk való szeretetét, hogy Krisztus meghalt értünk, amikor még bűnösök voltunk.</span></div>
+      <div class="verse"><span class="verse-num">9</span><span class="verse-text">Mivel tehát most már megigazultunk az ő vére árán, még inkább megmenekülünk általa a haragtól.</span></div>
+      <div class="verse"><span class="verse-num">10</span><span class="verse-text">Ha ugyanis, mint ellenségeket, megbékéltetett minket Istennel Fia halála által, akkor megbékélve mennyivel inkább megmenekülünk az ő élete által.</span></div>
+      <div class="verse"><span class="verse-num">11</span><span class="verse-text">Sőt nemcsak ebben reménykedünk, hanem büszkék is vagyunk Istenre a mi Urunk Jézus Krisztus által, akiben most megkaptuk a megbékélést.</span></div>
+    </div>
+  </div>
+
+  <!-- Évangile : Jean 12, 23-28 -->
+  <div class="reading-card">
+    <div class="reading-type" data-lang="fr">Évangile</div>
+    <div class="reading-type" data-lang="hu">Evangélium</div>
+
+    <p class="reading-ref" data-lang="fr">Jean 12, 23-28</p>
+    <p class="reading-ref" data-lang="hu">János 12, 23–28</p>
+
+    <div data-lang="fr">
+      <div class="verse"><span class="verse-num">23</span><span class="verse-text">Jésus leur répondit : <em>« L'heure est venue où le Fils de l'homme doit être glorifié.</em></span></div>
+      <div class="verse"><span class="verse-num">24</span><span class="verse-text"><em>En vérité, en vérité, je vous le dis : si le grain de blé tombé en terre ne meurt pas, il reste seul ; mais s'il meurt, il porte beaucoup de fruit.</em></span></div>
+      <div class="verse"><span class="verse-num">25</span><span class="verse-text"><em>Qui aime sa vie la perd, et qui s'en détache en ce monde la gardera pour la vie éternelle.</em></span></div>
+      <div class="verse"><span class="verse-num">26</span><span class="verse-text"><em>Celui qui me sert, qu'il me suive : là où je suis, là aussi sera mon serviteur. Celui qui me sert, mon Père l'honorera.</em></span></div>
+      <div class="verse"><span class="verse-num">27</span><span class="verse-text"><em>Maintenant mon âme est bouleversée. Que puis-je dire ? "Père, sauve-moi de cette heure ?" — Mais non ! c'est pour cela que je suis venu à cette heure.</em></span></div>
+      <div class="verse"><span class="verse-num">28</span><span class="verse-text"><em>Père, glorifie ton nom ! »</em> Alors, du ciel vint une voix : <em>« Je l'ai glorifié et je le glorifierai encore. »</em></span></div>
+    </div>
+
+    <div data-lang="hu">
+      <div class="verse"><span class="verse-num">23</span><span class="verse-text">Jézus így felelt nekik: <em>„Eljött az óra, hogy megdicsőüljön az Emberfia.</em></span></div>
+      <div class="verse"><span class="verse-num">24</span><span class="verse-text"><em>Bizony, bizony mondom nektek: ha a búzaszem nem esik a földbe és nem hal meg, egymaga marad; de ha meghal, sok gyümölcsöt hoz.</em></span></div>
+      <div class="verse"><span class="verse-num">25</span><span class="verse-text"><em>Aki szereti az ő életét, elveszíti azt, aki gyűlöli életét e világban, megőrzi azt az örök életre.</em></span></div>
+      <div class="verse"><span class="verse-num">26</span><span class="verse-text"><em>Ha valaki nekem szolgál, kövessen engem, és ahol én vagyok, ott lesz az én szolgám is. Ha valaki nekem szolgál, azt megbecsüli az Atya.</em></span></div>
+      <div class="verse"><span class="verse-num">27</span><span class="verse-text"><em>Most megrendült a lelkem, és mit mondjak? Atyám, szabadíts meg ettől az órától! De hiszen ezért jöttem erre az órára.</em></span></div>
+      <div class="verse"><span class="verse-num">28</span><span class="verse-text"><em>Atyám, dicsőítsd meg nevedet!"</em> Ekkor hang jött az égből: <em>„Megdicsőítettem, és ismét megdicsőítem."</em></span></div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- === CIMETIÈRE === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">Au cimetière</h2>
+    <h2 data-lang="hu">A temetőben</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Lecture au cimetière : Matthieu 25, 31-46 -->
+  <div class="reading-card">
+    <div class="reading-type" data-lang="fr">Lecture</div>
+    <div class="reading-type" data-lang="hu">Olvasat</div>
+
+    <p class="reading-ref" data-lang="fr">Matthieu 25, 31-46</p>
+    <p class="reading-ref" data-lang="hu">Máté 25, 31–46</p>
+
+    <div data-lang="fr">
+      <div class="verse"><span class="verse-num">31</span><span class="verse-text"><em>« Quand le Fils de l'homme viendra dans sa gloire, escorté de tous les anges, alors il prendra place sur son trône de gloire.</em></span></div>
+      <div class="verse"><span class="verse-num">32</span><span class="verse-text"><em>Toutes les nations seront rassemblées devant lui ; il séparera les hommes les uns des autres, comme le berger sépare les brebis des boucs.</em></span></div>
+      <div class="verse"><span class="verse-num">33</span><span class="verse-text"><em>Il placera les brebis à sa droite, et les boucs à sa gauche.</em></span></div>
+      <div class="verse"><span class="verse-num">34</span><span class="verse-text"><em>Alors le Roi dira à ceux qui sont à sa droite : "Venez, les bénis de mon Père, recevez en héritage le Royaume préparé pour vous depuis la fondation du monde.</em></span></div>
+      <div class="verse"><span class="verse-num">35</span><span class="verse-text"><em>Car j'avais faim, et vous m'avez donné à manger ; j'avais soif, et vous m'avez donné à boire ; j'étais un étranger, et vous m'avez accueilli ;</em></span></div>
+      <div class="verse"><span class="verse-num">36</span><span class="verse-text"><em>j'étais nu, et vous m'avez habillé ; j'étais malade, et vous m'avez visité ; j'étais en prison, et vous êtes venus jusqu'à moi !"</em></span></div>
+      <div class="verse"><span class="verse-num">37</span><span class="verse-text">Alors les justes lui répondront : <em>"Seigneur, quand est-ce que nous t'avons vu avoir faim, et nous t'avons nourri ? Quand est-ce que nous t'avons vu avoir soif, et nous t'avons donné à boire ?</em></span></div>
+      <div class="verse"><span class="verse-num">38</span><span class="verse-text"><em>Quand est-ce que nous t'avons vu étranger, et nous t'avons accueilli ? Nu, et nous t'avons habillé ?</em></span></div>
+      <div class="verse"><span class="verse-num">39</span><span class="verse-text"><em>Quand est-ce que nous t'avons vu malade ou en prison, et nous sommes venus jusqu'à toi ?"</em></span></div>
+      <div class="verse"><span class="verse-num">40</span><span class="verse-text">Et le Roi leur répondra : <em>"En vérité, je vous le dis : chaque fois que vous l'avez fait à l'un de ces petits qui sont mes frères, c'est à moi que vous l'avez fait."</em></span></div>
+      <div class="verse"><span class="verse-num">41</span><span class="verse-text">Alors il dira à ceux qui sont à sa gauche : <em>"Allez-vous-en loin de moi, maudits, dans le feu éternel préparé pour le diable et ses anges.</em></span></div>
+      <div class="verse"><span class="verse-num">42</span><span class="verse-text"><em>Car j'avais faim, et vous ne m'avez pas donné à manger ; j'avais soif, et vous ne m'avez pas donné à boire ;</em></span></div>
+      <div class="verse"><span class="verse-num">43</span><span class="verse-text"><em>j'étais un étranger, et vous ne m'avez pas accueilli ; nu, et vous ne m'avez pas habillé ; malade et en prison, et vous ne m'avez pas visité."</em></span></div>
+      <div class="verse"><span class="verse-num">44</span><span class="verse-text">Alors eux aussi lui répondront : <em>"Seigneur, quand est-ce que nous t'avons vu avoir faim, avoir soif, être étranger, être nu, être malade ou en prison, sans nous mettre à ton service ?"</em></span></div>
+      <div class="verse"><span class="verse-num">45</span><span class="verse-text">Alors il leur répondra : <em>"En vérité, je vous le dis : chaque fois que vous ne l'avez pas fait à l'un de ces petits, c'est à moi que vous ne l'avez pas fait."</em></span></div>
+      <div class="verse"><span class="verse-num">46</span><span class="verse-text"><em>Et ils s'en iront, ceux-ci au châtiment éternel, et les justes à la vie éternelle. »</em></span></div>
+    </div>
+
+    <div data-lang="hu">
+      <div class="verse"><span class="verse-num">31</span><span class="verse-text"><em>„Amikor az Emberfia eljön az ő dicsőségében, és vele minden angyal, akkor odaül dicsőséges trónjára.</em></span></div>
+      <div class="verse"><span class="verse-num">32</span><span class="verse-text"><em>Összegyűjtenek elé minden népet, és elválasztja egymástól őket, ahogyan a pásztor elválasztja a juhokat a kecskéktől.</em></span></div>
+      <div class="verse"><span class="verse-num">33</span><span class="verse-text"><em>A juhokat a jobb keze felé állítja, a kecskéket pedig a bal keze felé.</em></span></div>
+      <div class="verse"><span class="verse-num">34</span><span class="verse-text"><em>Akkor a Király így szól a jobb keze felőliekhez: Jöjjetek, Atyám áldottai, vegyétek birtokokba a világ kezdete óta számotokra elkészített országot!</em></span></div>
+      <div class="verse"><span class="verse-num">35</span><span class="verse-text"><em>Mert éheztem, és ennem adtatok, szomjaztam, és innom adtatok, jövevény voltam, és befogadtatok,</em></span></div>
+      <div class="verse"><span class="verse-num">36</span><span class="verse-text"><em>mezítelen voltam, és felruháztatok, beteg voltam, és meglátogattatok, börtönben voltam, és eljöttetek hozzám.</em></span></div>
+      <div class="verse"><span class="verse-num">37</span><span class="verse-text">Ekkor az igazak így szólnak majd hozzá: <em>Uram, mikor láttunk téged éhezni, és adtunk enned, vagy szomjazni, és adtunk inni?</em></span></div>
+      <div class="verse"><span class="verse-num">38</span><span class="verse-text"><em>Mikor láttuk, hogy jövevény vagy, és befogadtunk, vagy mezítelen vagy, és felruháztunk?</em></span></div>
+      <div class="verse"><span class="verse-num">39</span><span class="verse-text"><em>Mikor láttuk, hogy beteg vagy, vagy börtönben vagy, és eljöttünk hozzád?</em></span></div>
+      <div class="verse"><span class="verse-num">40</span><span class="verse-text">A Király így felel majd nekik: <em>Bizony mondom nektek, amikor megtettétek ezeket akárcsak eggyel is a legkisebb testvéreim közül, velem tettétek meg.</em></span></div>
+      <div class="verse"><span class="verse-num">41</span><span class="verse-text">Akkor a bal keze felőliekhez szól: <em>Menjetek el tőlem, átkozottak, az ördögnek és angyalainak elkészített örök tűzre!</em></span></div>
+      <div class="verse"><span class="verse-num">42</span><span class="verse-text"><em>Mert éheztem, és nem adtatok ennem, szomjaztam, és nem adtatok innom,</em></span></div>
+      <div class="verse"><span class="verse-num">43</span><span class="verse-text"><em>jövevény voltam, és nem fogadtatok be, mezítelen voltam, és nem ruháztatok fel, beteg voltam, és börtönben voltam, és nem látogattatok meg engem.</em></span></div>
+      <div class="verse"><span class="verse-num">44</span><span class="verse-text">Akkor ezek is így szólnak majd: <em>Uram, mikor láttuk, hogy éhezel vagy szomjazol, jövevény vagy mezítelen vagy, beteg vagy börtönben vagy, és nem szolgáltunk neked?</em></span></div>
+      <div class="verse"><span class="verse-num">45</span><span class="verse-text">Erre így felel majd nekik: <em>Bizony mondom nektek, amikor nem tettétek meg ezeket eggyel sem a legkisebbek közül, velem sem tettétek meg.</em></span></div>
+      <div class="verse"><span class="verse-num">46</span><span class="verse-text"><em>És ezek elmennek az örök büntetésre, az igazak pedig az örök életre."</em></span></div>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <!-- === DISCOURS AU CIMETIÈRE === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">Discours au cimetière</h2>
+    <h2 data-lang="hu">Temetői beszédek</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Hommage de la famille / Emlékezés -->
+  <div class="speech-card">
+    <div class="reading-type" data-lang="fr">Hommage de la famille</div>
+    <div class="reading-type" data-lang="hu">Emlékezés</div>
+    <p class="reading-ref" data-lang="fr">Hommage de la famille</p>
+    <p class="reading-ref" data-lang="hu">Emlékezés</p>
+
+    <div data-lang="fr">
+      <p><em>Koszmovszky Edina, « la fille au manteau rouge », cette « grande dame » qui est notre petite mère chérie, et que ses petits-enfants appellent « Manon ».</em></p>
+      <p>Chers membres de la famille proche et lointaine venus de Hongrie, mais aussi venus de France, d'Angleterre, des États-Unis et de Suède ;<br>
+      Chers amis proches, chères connaissances plus lointaines d'Edina ;<br>
+      Chers membres des associations, fondations et institutions qui lui sont liées, et tous ceux qui honorent par leur présence ici sa mémoire et son engagement.</p>
+      <p>C'est avec tristesse mêlée d'une ferme espérance dans la Résurrection que nous faisons aujourd'hui mémoire de notre mère décédée le 12 mai 2026 à Sződliget. Elle est la dernière de sa fratrie à avoir quitté cette terre. Sa grande sœur Éva est décédée en 2016, et son petit frère Péter il y a quelques mois.</p>
+      <p>Notre mère a traversé une vie semée d'épreuves : Il y a celles, connues de tous, qui sont la conséquence de la Grande Histoire : après un bref temps d'enfance insouciante, le traumatisme de la guerre, la discrimination injuste du régime communiste en raison de ses origines nobles ; l'absence du père pendant la plus grande partie de son enfance et de son adolescence, celui-ci ayant été condamné à neuf ans de prison à l'issue de la guerre ; la nécessité de fuir à 18 ans sa chère patrie qu'elle avait courageusement défendue en octobre 1956.</p>
+      <p>Mais il y a eu bien d'autres épreuves dont nous, ses enfants, avons été témoins. Des épreuves qui, bien que moins visibles, n'en ont sans doute pas été moins douloureuses. Ses difficultés dans son mariage, et la vie de solitude qui s'en suivit. La mort prématurée en 2014 de son fils aîné Marc, à l'âge de 53 ans. Le poids psychologique énorme qu'elle portait, trop seule, dans son poste d'accompagnatrice spirituelle en hôpital psychiatrique, mission dans laquelle elle s'est engagée pleinement, corps et âme, pendant plus de vingt années. L'éloignement des membres de sa famille, en particulier de ses enfants et petits-enfants qui vivaient tous loin de Nice, où elle vécut entre 1964 et 2024. Le décès progressif de tous ses amis proches, la plongeant dans une solitude grandissante. Son déclin physique, qui s'accéléra pendant la pandémie du COVID en raison du confinement imposé.</p>
+      <p>Mais ce dont nous sommes aussi témoins, c'est sa force morale exceptionnelle avec laquelle elle a traversé toutes ses épreuves. Malgré les souffrances, et même sans doute grâce à elles, notre mère a porté beaucoup de beaux fruits dans sa vie, beaucoup de joie autour d'elle. Elle respirait la joie et la bonne humeur, avec sa façon unique de rire qui était contagieux. Si elle a tenu courageusement et qu'elle dégageait la joie, c'était non seulement grâce à sa propre force morale exceptionnelle, mais aussi par sa profonde foi en Dieu, qui lui permettait d'être imprégnée des trois vertus théologales : Foi, Espérance, Charité, auxquelles s'ajoutaient ses propres vertus de Courage, Force, Justice, et Générosité.</p>
+      <p>Notre mère avait trois vocations dans sa vie, qu'elle a mis en œuvre jusqu'au bout, même lorsqu'elle ne pouvait plus se lever de son lit dans sa dernière année. Ces trois vocations sont : La Famille, la Patrie, et le Service auprès des exclus.</p>
+      <p class="speech-section-title">Première vocation : la Famille.</p>
+      <p>Comme elle l'a exprimé il y a quelques années lors d'un témoignage sur sa vie, c'est la famille de Chalembert, qui l'a accueillie à Paris où elle s'était réfugiée en novembre 1956, qui a été pour elle un modèle de vie familiale. C'est cette famille généreuse qui lui a indubitablement révélé cette première vocation. Voici ce qu'elle en dit dans son témoignage : <em>« J'ai été accueillie par une famille française qui a été déterminante pour mon avenir, car pour la première fois de ma vie, je voyais un vrai schéma de famille, avec père, mère et enfants, une famille catholique pratiquante où la tolérance, la bonté, la générosité, l'Amour étaient en abondance ».</em></p>
+      <p>Pendant trente ans, elle n'a exercé aucune profession afin de pouvoir s'occuper pleinement de ses enfants. Même après, elle n'a jamais cessé de consacrer son temps et beaucoup d'amour à ses enfants et petits-enfants. Son esprit de famille, elle a réussi à nous le transmettre, nous ses fils, pour notre plus grand bonheur : nous sommes tous des pères de famille nombreuses comblés.</p>
+      <p>Avec son mari Bernard, elle est l'aïeule de quatre enfants, quinze petits-enfants et six arrière-petits-enfants, dont le dernier-né, une fille du nom de Céleste, a vu le jour le 13 mai 2026, le lendemain du décès de « Manon » !</p>
+      <p class="speech-section-title">Deuxième vocation : la Patrie.</p>
+      <p>Il y a bien sûr son action héroïque en 1956, mais son amour de la Patrie s'est aussi manifesté à travers tous les témoignages qu'inlassablement elle a transmis aux jeunes élèves et étudiants depuis l'année 2000, pratiquement jusqu'à la fin de sa vie. Témoignages qu'elle terminait ainsi après avoir raconté son expérience personnelle de la Révolution :</p>
+      <div class="speech-verse">« Je vous souhaite d'avoir des rêves dans votre vie, mais aussi des objectifs à poursuivre. Que vous sachiez les approcher et les atteindre de telle manière que vous puissiez être fiers de vous-mêmes et de votre identité hongroise. Vous rencontrerez des difficultés et des déceptions, car sans elles il n'est pas de vie véritable, mais c'est avec confiance et foi qu'il faut en chercher les solutions. La Hongrie a été, la Hongrie est, la Hongrie sera, et la Hongrie de demain, c'est vous : par votre savoir, votre droiture et votre travail. Soyez-en fiers. »</div>
+      <p>Lorsqu'en 2024, elle revint dans sa patrie d'origine après avoir vécu 68 années en France, elle prononça en arrivant cette phrase qu'elle fit sienne : <em>« C'est ici qu'il te faut vivre, et mourir. Sans jamais faiblir. »</em></p>
+      <p class="speech-section-title">Troisième vocation : le soutien aux pauvres et aux exclus.</p>
+      <p>Pendant la guerre, ayant été témoin indirect de l'exécution des juifs au bord du Danube, elle voulut porter l'étoile jaune comme eux, par compassion et solidarité.</p>
+      <p>Pendant les jours de la Révolution, elle se porta volontaire dans un hôpital pour donner son sang et soigner les blessés. Cette vocation de soutien aux pauvres, malades et exclus, elle a pu, plus tard, pleinement l'accomplir une fois ses enfants partis de la maison, dans son poste d'accompagnatrice spirituelle en hôpital psychiatrique.</p>
+      <p class="speech-sep">— ✦ —</p>
+      <p>Foi, Espérance, Charité, Courage, Force, Justice, Générosité, Compassion, Famille, Patrie, voilà les mots qui caractérisent notre mère. Mais par-dessus tout, la joie et la bonne humeur. Jusqu'à la fin, elle ne s'est jamais plainte, alors que durant les derniers seize mois de sa vie, elle était clouée dans son lit, totalement dépendante, et ne sachant même plus parler dans les derniers mois. Une telle fin de vie, elle l'avait redoutée toute sa vie, mais elle affronta cette situation avec courage et remplie d'une joie intérieure qui rayonnait à travers ses yeux pétillants et son beau sourire. Jusqu'à la fin.</p>
+      <p>L'un des derniers mots intelligibles que j'ai entendu de sa bouche a été : <em>« C'est formidable ! »</em></p>
+      <p>Merci chère maman, pour tout ce que tu as fait pour nous et pour tous ceux que tu as croisés sur le chemin de ta vie. Nous pensons à toi lorsque nous lisons ce passage de la lettre de saint Paul aux Éphésiens : <em>« C'est Dieu qui nous a faits, il nous a créés dans le Christ Jésus, en vue de la réalisation d'œuvres bonnes qu'il a préparées d'avance pour que nous les pratiquions. »</em> (Eph 2, 10)</p>
+      <p>Voilà la vraie Liberté que tu chérissais tant, cette véritable Liberté que tout homme, toute nation est appelé à poursuivre : accomplir librement sa vocation reçue de Dieu, pour l'avènement de son Royaume.</p>
+      <p>Tu as réussi, dans et par le Christ, à accomplir, dans les épreuves, la vocation que Dieu avait préparée pour toi. Nous t'en remercions et nous rendons grâce à Dieu.</p>
+    </div>
+
+    <div data-lang="hu">
+      <p><em>Koszmovszky Edina, „a piros kabátos lány", az a „nagyasszony", aki számunkra a kis, szeretett édesanyánk volt, és akit unokái „Manó"-nak szólítottak.</em></p>
+      <p>Kedves családtagok és rokonok, akik nem csak Magyarországról, de Franciaországból, Angliából, az Egyesült Államokból és Svédországból is érkeztek;<br>
+      Kedves barátok, Edina közeli és távolabbi ismerősei;<br>
+      Kedves egyesületek, alapítványok és intézmények képviselői, valamint mindazok, akik jelenlétükkel tisztelegnek emléke előtt.</p>
+      <p>Mély szomorúsággal, ugyanakkor a Feltámadásba vetett szilárd reménységgel emlékezünk ma édesanyánkra, aki 2026. május 12-én hunyt el Sződligeten. Testvérei közül ő távozott utolsóként erről a földről. Nővére, Éva 2016-ban hunyt el, öccse, Péter pedig néhány hónappal ezelőtt.</p>
+      <p>Édesanyánk élete tele volt megpróbáltatásokkal. Voltak olyanok, amelyeket mindenki ismer, mert a történelem nagy eseményeinek következményei voltak: a rövid, gondtalan gyermekkor után a háború traumája; a kommunista rendszer igazságtalan megkülönböztetése nemesi származása miatt; édesapja hiánya gyermekkorának és kamaszkorának nagy részében, mivel őt a háború után kilenc év börtönre ítélték; valamint az a kényszer, hogy tizennyolc évesen el kellett menekülnie szeretett hazájából, amelyet 1956 októberében oly bátran védelmezett.</p>
+      <p>De sok más megpróbáltatásnak is tanúi voltunk mi, a gyermekei. Olyanoknak, amelyek bár kevésbé voltak láthatók, bizonyára nem voltak kevésbé fájdalmasak. Házasságának nehézségei és az azt követő magányos élet. Legidősebb fiának, Marc-nak a korai halála 2014-ben. Az a hatalmas lelki teher, amelyet szinte egyedül hordozott pszichiátriai kórházi lelkigondozói szolgálata során, amelynek több mint húsz éven át teljes szívvel és lélekkel szentelte magát. Családtagjainak, különösen gyermekeinek és unokáinak távolsága, akik mindannyian messze éltek Nizzától, ahol 1964 és 2024 között élt. Közeli barátainak fokozatos elvesztése, amely egyre mélyebb magányba taszította. Fizikai állapotának romlása, amely a COVID-járvány idején a kényszerű lezárások miatt felgyorsult.</p>
+      <p>De tanúi voltunk annak a rendkívüli lelki erőnek is, amellyel mindezeket a próbatételeket viselte. A szenvedések ellenére, sőt talán éppen azok által, édesanyánk sok szép gyümölcsöt termett életében, és sok örömöt sugárzott maga körül. A derű és a jókedv áradt belőle, utánozhatatlan és ragályos nevetésével. Az, hogy ilyen bátorsággal helytállt, hogy ilyen örömöt sugárzott, nem csak rendkívüli lelki erejének volt köszönhető, hanem mély istenhitének is, amelynek köszönhetően áthatva élte meg a három isteni erényt: a Hitet, a Reményt és a Szeretetet. Ezekhez társultak saját erényei: a bátorság, az erő, az igazságosság és a nagylelkűség.</p>
+      <p>Édesanyánknak három hivatása volt az életben, amelyeket mindvégig meg is valósított, még akkor is, amikor utolsó évében már fel sem tudott kelni az ágyából. Ez a három hivatás: a család, a haza, és a kirekesztettek szolgálata.</p>
+      <p class="speech-section-title">Első hivatás: a Család.</p>
+      <p>Ahogyan néhány évvel ezelőtt egy életéről szóló tanúságtételében elmondta, a „de Chalembert" <em>[ejtsd: dő sálamber]</em> család, amely befogadta őt Párizsban 1956 novemberében, jelentette számára a családi élet mintáját. Ez a nagylelkű család kétségtelenül felfedeztette vele ezt az első hivatást. Így emlékezett tanúságtételében: <em>„Egy francia család fogadott be, amely meghatározó volt a jövőm szempontjából, mert életemben először láttam valódi családi mintát, apával, anyával és gyermekekkel, egy gyakorló katolikus családot, ahol a türelem, a jóság, a nagylelkűség és a szeretet bőségesen jelen volt."</em></p>
+      <p>Harminc éven át nem vállalt hivatásos munkát, hogy teljes egészében gyermekeinek szentelhesse magát. Később sem szűnt meg idejét és szeretetét gyermekeire és unokáira áldozni. A családszeretetet sikerült átadnia nekünk, fiainak, legnagyobb örömünkre: mindannyian sokgyermekes, boldog édesapák lettünk.</p>
+      <p>Férjével, Bernard-dal együtt négy gyermek, tizenöt unoka és hat dédunoka ősei. A legfiatalabb dédunoka, egy Céleste <em>[ejtsd: „széleszt"]</em> nevű kislány, a nevének jelentése: „mennyei". Céleste 2026. május 13-án született meg, „Manó" halálának másnapján!</p>
+      <p class="speech-section-title">Második hivatás: a Haza.</p>
+      <p>Természetesen ott van 1956-os hősies szerepvállalása, de hazaszeretete megmutatkozott abban a számtalan tanúságtételben is, amelyet 2000 óta fáradhatatlanul adott tovább diákoknak és egyetemistáknak, szinte élete végéig. Személyes forradalmi élményeinek elmesélése után mindig e szavakkal zárta beszédét:</p>
+      <div class="speech-verse">„Azt kívánom nektek, hogy legyenek álmaitok az életben, de legyenek céljaitok is, amelyeket követni akartok. Tudjátok megközelíteni és elérni őket úgy, hogy büszkék lehessetek önmagatokra és magyar identitásotokra. Találkozni fogtok nehézségekkel és csalódásokkal, mert ezek nélkül nincs valódi élet, de bizalommal és hittel kell keresnetek a megoldásokat. Magyarország volt, Magyarország van, Magyarország lesz, és a holnap Magyarországa ti vagytok: tudásotok, becsületességetek és munkátok által. Legyetek erre büszkék."</div>
+      <p>Amikor 2024-ben, 68 Franciaországban töltött év után visszatért szülőhazájába, érkezésekor ezt a mondatot idézte, amelyet saját hitvallásává tett: <em>„Itt kell élni, és itt kell meghalni. Soha meg nem inogva."</em></p>
+      <p class="speech-section-title">Harmadik hivatás: a szegények és kirekesztettek támogatása.</p>
+      <p>A háború alatt, amikor közvetve tanúja volt a zsidók Duna-parti kivégzésének, együttérzésből és szolidaritásból maga is viselni akarta a sárga csillagot.</p>
+      <p>A forradalom napjaiban önkéntesként jelentkezett egy kórházban, hogy vért adjon és ápolja a sebesülteket. A szegények, betegek és kirekesztettek szolgálatának hivatását később, miután gyermekei kirepültek a családi fészekből, teljes mértékben megvalósíthatta pszichiátriai kórházi lelkigondozóként.</p>
+      <p class="speech-sep">— ✦ —</p>
+      <p>Hit, Remény, Szeretet, Bátorság, Erő, Igazságosság, Nagylelkűség, Együttérzés, Család, Haza — ezek a szavak jellemzik édesanyánkat. De mindenekelőtt a derű és a jókedv. Egészen élete végéig soha nem panaszkodott, noha utolsó tizenhat hónapjában ágyhoz volt kötve, teljesen kiszolgáltatottan, és az utolsó hónapokban már beszélni sem tudott. Egész életében rettegett egy ilyen életvégtől, mégis bátorsággal nézett szembe vele, és olyan belső örömmel volt tele, amely ragyogott csillogó szemein és szép mosolyán keresztül. Egészen a végsőkig.</p>
+      <p>Az egyik utolsó érthető szó, amelyet a szájából hallottam, ez volt: <em>„Csodálatos!"</em></p>
+      <p>Köszönjük, drága Édesanyánk, mindazt, amit értünk és mindazokért tettél, akikkel életed útján találkoztál. Rád gondolunk, amikor Szent Pál efezusiakhoz írt levelének ezt a részletét olvassuk: <em>„Az Ő alkotása vagyunk: Krisztus Jézusban jótettekre teremtett minket, melyeket Isten előre elrendelt, hogy bennük éljünk."</em> (Ef 2,10)</p>
+      <p>Ez az igazi Szabadság, amelyet oly nagyon szerettél, az a szabadság, amelyre minden ember és minden nemzet hivatott törekedni: szabadon beteljesíteni Istentől kapott hivatásunkat, az Ő Országának eljöveteléért.</p>
+      <p>Te Krisztusban és Krisztus által, a megpróbáltatásokban is, beteljesítetted azt a hivatást, amelyet Isten számodra előkészített. Köszönjük ezt neked, és hálát adunk érte Istennek.</p>
+    </div>
+  </div>
+
+  <!-- Discours de Máthé Zsuzsa / Búcsúbeszéd -->
+  <div class="speech-card">
+    <div class="reading-type" data-lang="fr">Discours de Máthé Zsuzsa</div>
+    <div class="reading-type" data-lang="hu">Búcsúbeszéd — Máthé Zsuzsa</div>
+    <p class="reading-ref" data-lang="fr">Discours de Máthé Zsuzsa</p>
+    <p class="reading-ref" data-lang="hu">Búcsúbeszéd — Máthé Zsuzsa</p>
+
+    <div data-lang="fr">
+      <p class="speech-opening">Chers membres de la famille, chers amis,<br>
+      Chers témoins réunis pour lui rendre hommage,</p>
+      <p>Nous sommes réunis aujourd'hui pour faire nos adieux et rendre grâce.</p>
+      <p>Nous évoquons la mémoire d'une personnalité exceptionnelle, Edina Koszmovszky, cette « jeune fille au manteau rouge » tant aimée des Hongrois, et, à travers elle, l'une de nos héroïnes nationales.</p>
+      <p>Tous ceux qui l'ont connue, ne serait-ce que brièvement, se souviennent sans doute avant tout de son regard rieur et de la joie de vivre qui rayonnait d'elle. Je considère comme une véritable grâce d'avoir pu passer un peu de temps à ses côtés, même si ce ne fut que rarement et pour de courts instants.</p>
+      <p>Dans l'un des moments les plus sacrés de notre histoire, alors qu'elle n'était encore qu'une jeune fille, Edina Koszmovszky témoigna de son amour de la patrie devant le monde entier, sans connaître la peur, avec un sourire lumineux, une espérance sincère et un sens de la justice d'une pureté cristalline.</p>
+      <p>C'est pour cette vie si attachante, si généreuse, fidèle à sa patrie et son Créateur, que nous rendons grâce aujourd'hui.</p>
+      <p>Nous le faisons en ce lieu sacré où ont trouvé leur dernier repos les héros et les martyrs de la plus lumineuse de nos révolutions et de notre lutte pour la liberté au XXe siècle, ainsi que les victimes de la sombre terreur qui l'a noyée dans le sang avant de la réprimer sans pitié.</p>
+      <p>Celui qui vient ici pour se souvenir a le sentiment d'accomplir un pèlerinage, non seulement parce que ce lieu, volontairement à l'écart, se trouve loin de l'agitation de la ville, mais plus encore en raison de ceux qui y reposent. Que de parcours de vie différents, que d'origines familiales, de conceptions de l'existence, d'éducations et de destins divers se rejoignent dans cet espace sacré ! Aujourd'hui encore, et une fois de plus avec l'arrivée d'Edina Koszmovszky parmi eux, tous trouvent leur point commun dans un même amour de la patrie.</p>
+      <p><em>« C'est ici qu'il te faut vivre, et mourir. Sans jamais faiblir. »</em></p>
+      <p>Ils sont des exemples de courage dans la défense de la liberté hongroise, dont la mémoire doit à la fois nous incliner avec respect et nous rappeler à la droiture : la persévérance dans nos principes en tout temps, la fidélité à l'héritage de nos idéaux et de nos héros même dans les périodes difficiles, ainsi que le sentiment d'appartenance nationale — oui, tout particulièrement à la veille du 4 juin, jour de commémoration du traité de Trianon, qui a amputé la Hongrie des deux tiers de son territoire.</p>
+      <p>Edina Koszmovszky est née à Budapest le 23 août 1938, au sein d'une famille noble persécutée par le pouvoir communiste. Dès sa plus tendre enfance, l'histoire l'a confrontée aux injustices les plus graves, auxquelles son âme d'enfant, d'une pureté intacte, ne pouvait rester indifférente.</p>
+      <p>Pendant la période des persécutions, elle a vu les chaussures abandonnées sur les bords du Danube, celles des personnes juives fusillées dans le fleuve, parmi lesquelles des enfants en bas âge. Ses parents eurent beaucoup de difficulté à l'empêcher de coudre elle-même une étoile jaune sur son manteau, car elle ne pouvait accepter l'inacceptable : que des êtres humains soient condamnés à mort en raison de leur origine. À six ans, elle voulait partager, jusque dans cette injustice, le sort de ceux qui en étaient victimes.</p>
+      <p>Son père, juriste et écrivain, fut emprisonné après 1945. Il fut détenu dans la prison de Szeged, dite « Csillag ». Et précisément l'année où, après six ans, il devait être libéré, il fut néanmoins arrêté dans la rue puis déporté dans le camp de travail forcé de Recsk.</p>
+      <p>Cette même année, lors de la cérémonie de fin d'année scolaire, la jeune fille en classe de 5e dut réciter le poème de Sándor Petőfi intitulé <em>Le Prisonnier</em>.</p>
+      <div class="speech-verse">« C'est pour toi que je combattais, ô liberté,<br>
+      Et mes pieds et mes bras étaient enchaînés…<br>
+      Je te désire, ô lumière,<br>
+      Et tel une taupe, je vis sous terre… »</div>
+      <p>Ainsi commence ce chef-d'œuvre écrit sur papier en 1847, qui s'achève par les vers suivants :</p>
+      <div class="speech-verse">« Voici que s'ouvre, s'ouvre la porte de la prison…<br>
+      On lui retire les fers de la main…<br>
+      Il pousse un cri et s'effondre… pour toujours…<br>
+      Dans sa joie, son cœur s'est brisé. »</div>
+      <p>À 13 ans, Edina — en pensant à son père — éclata en sanglots en récitant ces vers. Elle arracha son foulard rouge et descendit en courant de l'estrade de l'école…</p>
+      <p>Oui, la « boussole intérieure » d'Edina Koszmovszky lui montrait quand il fallait se retirer, et quand il fallait au contraire monter courageusement sur une tribune, afin que de là puisse toujours résonner la voix de la vérité.</p>
+      <p>Comme on peut le comprendre de ce qui précède, bien qu'elle ait voulu devenir médecin, elle ne put poursuivre ses études comme tant d'autres dans cette dictature. Sa mère fit vivre la famille en cousant, en faisant des confitures et en travaillant comme femme de ménage. Edina, elle aussi, commença à travailler dès son jeune âge.</p>
+      <p>Elle travailla d'abord dans l'usine Mirelit, puis trouva un emploi de dessinatrice technique à la manufacture de porcelaine de Kőbánya. Elle accomplit avec une humble discrétion les tâches qui lui étaient confiées, sans se douter que le 23 octobre 1956 serait également pour elle un tournant décisif de son destin, comme pour celui de la nation hongroise.</p>
+      <p>Elle ne pouvait imaginer que, ce jour-là, alors qu'elle se rendait à son cours de français après son travail, dans son élégant manteau rouge, elle deviendrait la messagère de la liberté.</p>
+      <p>Nous connaissons aujourd'hui presque minute par minute les événements de ce jour gravé dans nos cœurs, ses lieux emblématiques, et nous avons tous en mémoire cette scène devenue iconique : devant le bâtiment de l'ancienne Radio hongroise, rue Bródy Sándor, une foule s'est rassemblée, et une jeune fille au visage rayonnant, tenant dans ses mains un tract fraîchement imprimé, lit à haute voix les 14 points des étudiants universitaires.</p>
+      <p>Et cent huit ans plus tard, l'histoire se répète : une jeune fille de 18 ans transmet la volonté d'une nation, tandis que dans son cœur résonnent les paroles de Petőfi : <em>« Voici que s'ouvre, s'ouvre la porte de la prison… »</em></p>
+      <p>La jeune Edina Koszmovszky reçut les « 14 points » à l'Astoria, en descendant du tram, des mains d'étudiants de l'université technique de Budapest. Emportée par la foule enthousiaste, chantant l'Hymne national, elle se dirigea elle aussi vers la rue Bródy Sándor en réponse au cri : « Libérons la Radio ! »</p>
+      <p>Là, quelqu'un demanda qui avait les 14 points, et elle leva la main. C'est ainsi qu'elle monta sur le camion de montage stationné devant le bâtiment — et avec elle, l'histoire et la vérité firent irruption sur la scène, une jeune fille élégante en manteau rouge à la mode, surgissant de la foule aux manteaux gris.</p>
+      <p>On lui donna un micro, et elle lut les revendications avec des yeux brillants. À travers ses paroles, les portes de la prison s'ouvrirent. Car à ce moment-là, les âmes étaient enchaînées : un régime tyrannique avait ligoté la nation dans des chaînes forgées par la peur. La jeune fille aux yeux lumineux déliait ces chaînes invisibles par sa seule présence belle et authentique.</p>
+      <p>Puis quelqu'un cria : <em>« Une délégation à la Radio ! »</em>, et quelques minutes plus tard, Edina, accompagnée de neuf jeunes hommes inconnus, entra dans le bâtiment de la propagande du parti étroitement surveillé. Elle s'en souvint plus tard ainsi : <em>« C'était exaltant, nous respirions ensemble, nous voulions la même chose, nous étions une nation. Dans le bâtiment, la présidente de la radio, Valéria Benke, refusa catégoriquement de diffuser sur points à l'antenne. Mais après un certain temps, la foule à l'extérieur commença à exiger que les jeunes apparaissent au balcon de la Radio. On me donna alors un micro, et pour la deuxième fois, je lus les revendications. »</em></p>
+      <p>Cependant, lorsque la voix d'Ernő Gerő, l'un des dirigeants du régime stalinien, retentit à la radio à huit heures à la place de celle d'Edina, les passions se déchaînèrent sur place, et les affrontements sanglants devinrent l'un des moments décisifs de la révolution.</p>
+      <p>Edina, en sortant du bâtiment de la Radio, ne prit pas le chemin du retour vers la maison ; son cœur lui indiqua à nouveau la direction à suivre.</p>
+      <p>Pendant les jours de la Révolution, elle se porta volontaire à l'hôpital de la rue Villányi, où elle donna son sang et soigna les blessés des combats. Son groupe sanguin O négatif est aussi symbolique : en donneur universel, elle accomplissait son devoir, aidant de tout son cœur, de toute son âme, et en donnant son propre sang aux blessés. Elle combattit dans la Révolution avec trois armes reçues de sa foi : sa voix pure, par laquelle elle transmettait le message de la nation ; ses deux bras, avec lesquels elle soignait et guérissait les blessés ; et son sang, par lequel elle pouvait donner la vie aux blessés dans un état grave.</p>
+      <p>Elle rencontra aussi la mort : déjà lors du siège de Budapest en 1944-1945, alors qu'elle était petite fille dans un abri, puis en 1956 à l'hôpital. Deux jeunes soldats soviétiques blessés moururent dans ses bras, eux qui sans doute ne savaient même pas où ni pourquoi on les avait envoyés mourir. C'est Edina qui, petite fille puis jeune femme, leur tint la main jusqu'au dernier instant et récita pour eux une prière.</p>
+      <p>Le 4 novembre, elle se réveilla chez elle au grondement des chars soviétiques, et après que la police politique eut commencé à la rechercher nommément, son père, dans la nuit du 13 novembre, alors qu'il revenait d'une promenade sur les bords du Danube, attendit sa fille d'un regard sombre. <em>« Edina, la police politique te recherche par ton nom. Fais demi-tour, n'entre dans aucun passage d'immeuble, à seize heures pars vers l'Ouest ! »</em> Et ce même jour, l'après-midi, elle partit vers l'inconnu en voiture avec des inconnus. Elle franchit la frontière avec l'épouse et la petite fille d'un ambassadeur et, du côté autrichien de la frontière — comme lors de cette ancienne cérémonie scolaire — elle s'effondra en larmes sur la barrière frontalière, regardant vers sa patrie…</p>
+      <p>Par Vienne, elle émigra vers la France qu'elle chérissait tant, où elle commença une nouvelle vie. Elle étudia deux ans à la Sorbonne, puis travailla comme dessinatrice technique. À 21 ans, en 1959, elle se maria et devint mère de quatre garçons. Après avoir vécu à Paris puis à Marseille, elle s'installa à Nice à partir de 1963. Elle aimait cette ville et s'y sentait chez elle.</p>
+      <p>Membre active de la communauté hongroise en France et de la vie ecclésiale, elle exerça pendant des décennies un service communautaire et d'accompagnement spirituel — sa vocation l'avait également trouvée : après avoir soigné les corps, elle soignait les âmes. Après que ses fils eurent pris leur envol, elle travailla entre 1992 et 2000 dans un hôpital psychiatrique de 1 200 lits à Nice, exerçant son service avec amour, humilité et un profond sens de la mission, ancrée dans sa foi. Elle rencontra à deux reprises le pape saint Jean-Paul II. Aux côtés de sa foi catholique et de sa vocation, le centre de sa vie demeura sa famille, dont elle transmit l'amour et la force d'unité à ses 4 fils, 15 petits-enfants et 6 arrière-petits-enfants.</p>
+      <p>Elle fut réhabilitée en 1969, mais ne revint pour la première fois en Hongrie qu'en 1970 avec son mari et ses trois premiers fils, quelques mois après la naissance du troisième. À partir des années 2000, elle revint régulièrement afin de parler dans les lycées et les universités aux jeunes de la Révolution de 1956, transmettant à travers son témoignage personnel le message de la liberté et de l'unité nationale. Tant que ses forces le lui permirent, elle accomplit ce service — les élèves de la classe de mon fils cadet furent ceux qui entendirent l'une de ces dernières interventions passionnées, au cours desquelles elle cita les paroles toujours profondément actuelles de Sándor Márai :</p>
+      <div class="speech-verse">« Et toujours plus nombreux à demander,<br>
+      balbutiant, car ils ne comprennent vraiment pas,<br>
+      eux qui l'ont reçue en héritage :<br>
+      — la liberté est-elle donc une chose si grande ? »</div>
+      <p>Ce fut pour elle une grande joie que l'un de ses fils, mon cher ami Philippe, s'installa en Hongrie avec sa famille en 2005, permettant ainsi à la famille, après une longue émigration, de retrouver en partie sa patrie.</p>
+      <p>Edina Koszmovszky reçut en 2022 la distinction de l'Ordre du Mérite hongrois pour son engagement exceptionnel et son activité publique. En 2024, elle revint définitivement s'installer en Hongrie. Elle passa ses dernières années dans notre village, à Sződliget.</p>
+      <p>Je suis reconnaissant d'avoir pu, à certaines occasions, lui rendre visite et lui offrir quelques fleurs nouées d'un ruban aux couleurs nationales, en remerciement pour sa vie et pour le sacrifice qu'elle a consenti pour notre patrie — un exemple qui restera gravé à jamais dans la mémoire de tous les Hongrois attachés à leur pays.</p>
+      <p><em>Chère jeune fille au manteau rouge !</em></p>
+      <p>Tu as mené le bon combat, tu as achevé ta course, et tu as gardé la foi ; ainsi as-tu pu rejoindre ton Créateur, ton Dieu.</p>
+      <p>Nous t'exprimons nos remerciements et notre reconnaissance pour ta vie bonne et juste. Nous te demandons de prier pour nous, pour ta chère patrie, pour ton peuple hongrois tant éprouvé, aujourd'hui comme demain, sans cesse.</p>
+    </div>
+
+    <div data-lang="hu">
+      <p class="speech-opening">Kedves Családtagok, Barátok, Emlékezők!<br>
+      Tisztelt gyászoló Gyülekezet!</p>
+      <p>Búcsúzni és hálát adni gyűltünk ma össze.</p>
+      <p>Egy kivételes személyiségre, Koszmovszky Edina Franciskára, a magyarság szeretett „piros kabátos lányára", s benne egy nemzeti hősünkre emlékezünk.</p>
+      <p>Aki ismerhette, akárcsak futólag is őt, elsőként bizonyára mindig nevetős szeme, a belőle sugárzó életöröm jut eszébe — igazi kegyelemnek tartom, hogy ha csak röviden és ha csak néhány alkalommal is, de tölthettem vele időt.</p>
+      <p>Koszmovszky Edina a legszentebb történelmi pillanataink egyikében fiatal lányként, félelmet nem ismerve, sugárzó mosollyal, őszinte reménységgel és kristálytiszta igazságérzettel a szívében vallotta meg ország-világ előtt hazaszeretetét.</p>
+      <p>Az ő kedves, jókedvű, hazájához és Teremtőjéhez hűséges életéért adunk ma hálát.</p>
+      <p>Tesszük ezt egy olyan szent helyen, ahol XX. századi történelmünk legfényesebb forradalmának és szabadságharcának, és az azt vérbe fojtó és kíméletlenül megtorló sötét terrornak a hősei, mártírjai találtak végső nyughelyet.</p>
+      <p>Aki ide érkezik emlékezni, nemcsak a szándékoltan eldugott, a város lüktetésétől távol eső fizikai tér miatt érezheti, hogy zarándoklaton van, még inkább az itt eltemetettek személye miatt. Mennyiféle családi háttér, hányféle életről vallott felfogás, neveltetés és milyen sokféle sors, mely ebben a szakrális térben összekapcsolódik ma is — Koszmovszky Edina érkezésével is újra — nem másban, mint a hazaszeretetben találva meg a közös nevezőt. <em>Itt élned, halnod kell. Rendületlenül.</em></p>
+      <p>Olyan példaképei ők a magyar szabadságért való kiállásnak, akiknek emléke egyszerre kell, hogy tiszteletteljes főhajtásra indítson bennünket, miközben tartásra is int: <em>kitartásra</em> elveink mellett minden korban, eszményeinek és hőseink örökségének <em>megtartására</em> nehéz időkben is, valamint nemzeti <em>összetartozásra</em>, igen, június 4-e előtt egy nappal, különösképp is.</p>
+      <p>Koszmovszky Edina Budapesten látta meg a napvilágot 1938. augusztus 23-án, a kommunista hatalom által üldözött nemesi családban. A történelem már egész pici gyermekként a legsúlyosabb igazságtalanságokkal szembesítette, amelyekre tiszta gyermeklelke nem tudott nem válaszolni.</p>
+      <p>A vészkorszakban látta a Duna-parton otthagyott cipőket, a folyóba lőtt zsidó emberek, köztük kicsi gyerekek lábbelijeit — a szülei alig tudták visszatartani attól, hogy maga is ne varrjon sárga csillagot kabátjára, mert nem tudta elfogadni az elfogadhatatlant, hogy vannak, akiket származásuk miatt halálba küldenek. Hatéves lánykaként meg osztozni akart velük ebben az igazságtalanságban.</p>
+      <p>Jogtanácsos, író édesapját 1945 után börtönbe vetették, a szegedi Csillag börtönben raboskodott, s épp abban az évben, amikor 6 év után szabadulnia kellett volna, az utcán elkapva mégis Recskre hurcolták. Ebben az évben egy iskolai tanévzáró ünnepségen kellett szavalja a hetedikes kamaszlánynak Petőfi Sándor <em>A rab</em> című versét.</p>
+      <div class="speech-verse">„Te éretted harcolék, szabadság<br>
+      S láncraverve lábam és karom…<br>
+      Világosság, téged szomjazlak,<br>
+      S mint vakondok, föld alatt lakom…"</div>
+      <p>indul az 1847-ben papírra vetett remekmű, mely az alábbi sorokkal ér véget:</p>
+      <div class="speech-verse">„Nyílik, nyílik ím a börtönajtó…<br>
+      Leveszik kezéről a vasat…<br>
+      Fölsikolt és összerogy… örökre…<br>
+      Örömében szíve meghasadt."</div>
+      <p>A 13 éves Edina — édesapjára gondolva — e sorok szavalása közben zokogásban tört ki, letépte piros nyakkendőjét és leszaladt az iskolai dobogóról… Igen, Koszmovszky Edina belső iránytűje megmutatta, mikor kell lelépni, és mikor kell bátran fellépni egy dobogóra, hogy onnan mindig az igazság hangozzék.</p>
+      <p>Az elmondottakból is tudható, hogy bár orvos szeretett volna lenni — mint oly sokan ebben a diktatúrában — ő sem tanulhatott tovább, édesanyja is kötésből, lekvárfőzésből, takarításból tartotta fenn családját, Edina is fiatal lányként dolgozni kezdett. Először a Mirelit gyárban, majd műszaki rajzolóként a Kőbányai Porcelángyárban talált munkahelyet. Végezte csendes alázattal a rá bízott feladatokat, nem is sejtve, hogy — ahogy a magyar nemzet számára —, úgy fiatal leányként számára is sorsfordító lesz az idén épp 70 éve felvirradt október 23-i nap.</p>
+      <p>Nem gondolhatta, hogy aznap, mikor francia nyelvleckét venni indult munkahelyéről csinos kabátjában, a szabadság hírvivője lesz.</p>
+      <p>E szívünkbe vésett napnak ma már szinte percről-percre ismerjük a történéseit, emblematikus helyszíneit, és magunk előtt látjuk az ikonikus jelenetet is, mikor a Magyar Rádió egykori Bródy Sándor utcai épülete előtt összegyűlt tömegben egy sugárzó arcú lány kezében tartva a frissen nyomtatott röplapot felolvassa az egyetemi diákság 14 pontját. Egy másik kor, hasonlóan lelkünkbe égett pillanata, mikor az imént idézett vers költője olvasta fel a 12 pontba foglalt követeléseket. És 108 évvel később ismétlődik a történelem: egy 18 éves fiatal lány tolmácsolja egy nemzet akaratát, miközben szívében Petőfi szavai lüktetnek: <em>„nyílik, nyílik, ím a börtönajtó…"</em></p>
+      <p>Két megrendítő pillanat, amelybe belesűrűsödött a magyar sors, mindaz, ami nemzetünk számára tegnap, ma és holnap is létesszencia; fegyverekkel, ideológiákkal és divathullámokkal sem kiirtható eszmény és nemzeti megmaradásunk változatlan programja: szabadság befelé és függetlenség kifelé. Ifjútól aggastyánig értette ezt mindenki.</p>
+      <p>Az ifjú Koszmovszky Edinának az Astoriánál, a villamosról leszállva adták kezébe fiatal műszaki egyetemisták a 14 pontot. A lelkes tömeg sodrásában, a Himnuszt énekelve ment ő is a „Szabadítsuk fel a Rádiót!" kiáltásra a Bródy Sándor utca felé. Ott aztán valaki megkérdezte, hogy kinél van a 14 pont, és ő jelentkezett. Így lépett fel az épület előtt álló vágókocsira, és vele a történelem és az igazság színpadára a szürke kabátos tömegből egy csinos fiatal lány, divatos piros kabátkájában.</p>
+      <p>Mikrofont adtak kezébe, és ő ragyogó szemmel olvasta fel a követeléseket. Szavai nyomán pedig nyíltak a börtönajtók. Mert akkor a lelkeken bilincs volt, egy zsarnok rendszer félelemből kovácsolt rablánca kötötte gúzsba a nemzetet. A csillogó szemű fiatal lány e láthatatlan bilincset oldotta ki a maga szép és igaz valójával.</p>
+      <p>Aztán valaki felkiáltott, hogy „delegációt a Rádióba!", s alig néhány percre rá Edina kilenc fiú mellett már indult is a pártpropaganda szigorúan őrzött épületébe. Erre később így emlékezett vissza: <em>„Felemelő volt, együtt lélegeztünk, ugyanazt akartuk, egy nemzet voltunk. Az épületben Benke Valéria rádióelnök mereven elzárkózott a pontok beolvasásától, ám egy idő után az utcán várakozó tömeg követelni kezdte, hogy jelenjenek meg a fiatalok a Rádió erkélyén. Ekkor kaptam egy mikrofont, és másodszorra is felolvastam a követeléseket."</em></p>
+      <p>Miután azonban Edina hangja helyett Gerő Ernő beszéde hangzott fel nyolc órakor a rádióban, a helyszínen elszabadultak az indulatok, a véres összecsapások a forradalom egyik sorsfordító pillanatává váltak.</p>
+      <p>Edina a Rádió épületéből kijutva sem hazafelé vette az irányt, szíve ismét megmutatta, merre kell induljon.</p>
+      <p>A forradalom napjaiban önkéntesként segítette a sebesülteket a Villányi úti kórházban, vért adott és ápolta a harcok sérültjeit. Nullás vércsoportja jelképes is: univerzális adóként tette a dolgát, segítette szívvel, lélekkel és saját vérét adva a sebesülteket. Három, hitéből kapott fegyverrel harcolt a forradalomban: tiszta <em>hangjával</em>, mellyel a nemzet üzenetét tolmácsolta; <em>két karjával</em>, amelyekkel ápolta, gyógyította a sebesülteket; és <em>vérével</em>, mellyel életet adhatott a súlyos sérülteknek.</p>
+      <p>Találkozott a halállal is: már Budapest ostromakor kicsi lányként a légópincében és 1956-ban a kórházban is: két sebesült orosz kiskatona halt meg a kezei között, akik talán azt sem tudták, hová és miért küldték őket meghalni. Edina volt, aki kicsi lányként, majd fiatal nőként utoljára fogta meg a kezüket és mondott el értük imádságot.</p>
+      <p>November 4-én már otthon ébredt a szovjet tankok dübörgésére és miután az ÁVÓ név szerint keresni kezdte, édesapja november 13-án hajnalban, mikor épp sétából tért vissza a Duna-partról, sötét tekintettel várta leányát. <em>„Edina, név szerint keresett az ÁVÓ. Fordulj meg, egy kapualjba se térj be, délután négy órakor irány nyugat!"</em> És aznap délután ismeretlen emberekkel egy autóban elindult az ismeretlenbe. Egy nagykövet feleségével és kislányával jutott át a határon, melynek osztrák oldalán — mint azon a régi iskolai ünnepségen — keserűen zokogva borult a határsorompóra, hazája felé nézve…</p>
+      <p>Bécsen keresztül az ő rajongott Franciaországába emigrált, ahol új életet kezdett, két évet a Sorbonne-on tanult, majd műszaki rajzolóként helyezkedett el. 21 évesen, 1959-ben kötött házasságot, négy fiúgyermek édesanyja lett, Párizs, aztán Marseille után 1963-tól Nizzában élt. Szerette a várost, otthon érezte magát ott.</p>
+      <p>A franciaországi magyar közösség és az egyházi élet aktív tagjaként évtizedeken át végzett közösségi és lelkigondozói szolgálatot — hivatása is megtalálta: ugyan nem testet, de lelkeket gyógyított, s mikor fiai kirepültek, 1992 és 2000 között egy 1200 ágyas nizzai pszichiátriai kórházban szolgált szeretettel, alázattal és hitből fakadó hivatástudattal. Kétszer találkozott Szent II. János Pál pápával. Katolikus hite és hivatása mellett élete középpontja a családja volt, melynek szeretetét és összetartó erejét jelenlétével és szellemi örökségével 4 fiú gyermekének, 15 unokájának és 6 dédunokájának is továbbadta, továbbadja.</p>
+      <p>1969-ben rehabilitálták, de csak 1970-ben tért vissza először Magyarországra férjével és három első fiával, a harmadik születése után néhány hónappal. A 2000-es évektől rendszeresen járt haza, hogy középiskolákban és egyetemeken beszéljen a fiataloknak az 1956-os forradalomról, személyes emlékein keresztül átadva a szabadság és a nemzeti összetartozás üzenetét. Amíg erővel bírta, végezte ezt a szolgálatot — talán kisebbik fiam osztálya volt, akik utoljára hallhatták lelkesítő előadását, közte Márai Sándor ma is mélységesen aktuális szavait:</p>
+      <div class="speech-verse">„és kérdik, egyre többen kérdik<br>
+      hebegve, mert végképp nem értik<br>
+      ők, akik örökségbe kapták:<br>
+      — ilyen nagy dolog a szabadság?"</div>
+      <p>Külön örömöt jelentett számára, hogy egyik fia, kedves barátom, Philippe 2005-ben családjával Magyarországra költözött, így a család hosszú emigráció után részben ismét hazatalált. Koszmovszky Edina kiemelkedő helytállásáért és közéleti tevékenységéért 2022-ben Magyar Érdemrend kitüntetésben részesült. 2024-ben pedig végleg hazaköltözött Magyarországra. Utolsó éveit falunkban, Sződligeten töltötte. Hálás vagyok érte, hogy olykor alkalmunk volt meglátogatni, néhány szál, nemzeti szín szalaggal átkötött virággal megköszönni életét és a hazánkért vállalt áldozatát, ami örökre példa marad minden hazaszerető magyar ember számára.</p>
+      <p><em>Drága piros kabátos lány!</em></p>
+      <p>Te a jó harcot megharcoltad, a pályádat megfutottad, és a hitedet megtartottad, így térhettél meg Teremtő Istenedhez.</p>
+      <p>Köszönet és hála a kedves, igaz életedért, és kérünk, imádkozz értünk, a Te szeretett hazádért, a Te sokat szenvedett magyar nemzetedért ma is, holnap is szüntelen!</p>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+    try { localStorage.setItem('site-lang', lang); } catch(e) {}
+  }
+  (function() {
+    let lang = 'fr';
+    try {
+      const saved = localStorage.getItem('site-lang');
+      if (saved === 'hu' || saved === 'fr') lang = saved;
+      else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+    } catch(e) {}
+    setLang(lang);
+  })();
+</script>
+
+</body>
+</html>

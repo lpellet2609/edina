@@ -73,6 +73,11 @@
     }
     .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
     .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
     .lang-switch button {
       background: transparent;
       border: 1px solid var(--rule);
@@ -458,6 +463,7 @@
     <nav class="navbar">
       <a href="index.html" class="active"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
       <a href="hommages.html"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+      <a href="textes.html"><span data-lang="fr" class="inline">Textes de la cérémonie</span><span data-lang="hu" class="inline">Szertartás szövegei</span></a>
       <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
       <a href="album.html"><span data-lang="fr" class="inline">Album du 3 juin</span><span data-lang="hu" class="inline">Album — június 3.</span></a>
     </nav>
@@ -481,32 +487,6 @@
         <span data-lang="fr" class="inline">Messages de dernière minute</span>
         <span data-lang="hu" class="inline">Utolsó pillanatos üzenetek</span>
       </div>
-
-      <!-- Dernier message (toujours visible) -->
-      <div data-lang="fr">
-        <p class="msg-latest">Pour ceux qui sont invités à la réception après les funérailles, pensez à répondre avant ce soir minuit pour confirmer ou décliner votre présence.</p>
-      </div>
-      <div data-lang="hu">
-        <p class="msg-latest">A temetés utáni fogadásra meghívottaknak: kérjük, jelezzék ma éjfélig, hogy részt vesznek-e vagy sem.</p>
-      </div>
-
-      <!-- Messages archivés — masqués par défaut, visibles après clic -->
-      <!-- Ajouter ici les anciens messages quand nécessaire -->
-      <div id="msg-archive" hidden>
-        <div data-lang="fr">
-          <ul class="msg-archive-list">
-            <!-- anciens messages FR ici, du plus récent au plus ancien -->
-          </ul>
-        </div>
-        <div data-lang="hu">
-          <ul class="msg-archive-list">
-            <!-- régi FR üzenetek itt, a legújabbtól a legrégebbiig -->
-          </ul>
-        </div>
-      </div>
-
-      <!-- Bouton déplier/replier (masqué tant qu'il n'y a pas d'archives) -->
-      <button id="msg-archive-btn" class="msg-archive-btn" hidden onclick="toggleArchive()"></button>
     </div>
 
     <!-- FAIRE-PART -->
