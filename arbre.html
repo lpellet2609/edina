@@ -195,8 +195,18 @@ const people = [
   { id:'bernard', firstName:'Bernard', lastName:'Pellet', years:'1934', gender:'m', x:1235, y:Y.e,
     rel_fr:'époux d\'Edina', rel_hu:'Edina férje' },
 
-  { id:'peter', firstName:'Péter', lastName:'Kozmovszky', gender:'m', x:1950, y:Y.e,
+  { id:'peter', firstName:'Péter', lastName:'Kozmovszky', gender:'m', x:1870, y:Y.e,
     rel_fr:'frère d\'Edina', rel_hu:'Edina fivére' },
+  { id:'lois', firstName:'Lois', lastName:'Doherty', gender:'f', x:1950, y:Y.e,
+    rel_fr:'épouse de Péter Kozmovszky', rel_hu:'Péter Kozmovszky felesége' },
+
+  // ── Péter's children ────────────────────────────────────────────────────
+  { id:'kristina',  firstName:'Kristina',  lastName:'Kozmovszky', gender:'f', x:1820, y:Y.c,
+    rel_fr:'nièce d\'Edina (fille de Péter)', rel_hu:'Edina unokahúga (Péter lánya)' },
+  { id:'elizabeth', firstName:'Elizabeth', lastName:'Stuart Perry', gender:'f', x:1910, y:Y.c,
+    rel_fr:'nièce d\'Edina (fille de Péter, d\'une autre relation)', rel_hu:'Edina unokahúga (Péter lánya, más kapcsolatból)' },
+  { id:'justin',    firstName:'Justin',    lastName:'Kozmovszky', gender:'m', x:2000, y:Y.c,
+    rel_fr:'neveu d\'Edina (fils de Péter)', rel_hu:'Edina unokaöccse (Péter fia)' },
 
   // ── Éva's children ──────────────────────────────────────────────────────
   { id:'laszlo', firstName:'László', lastName:'Telegdy', gender:'m', x:245, y:Y.c,
@@ -275,6 +285,7 @@ const couples = [
   ['philippe','ildiko'],
   ['laurent','eszter'],
   ['eric','isabelle'],
+  ['peter','lois'],
 ];
 
 // ─── Parent → child relationships ──────────────────────────────────────────
@@ -289,6 +300,8 @@ const families = [
   { parents:['philippe','ildiko'], children:['christophe','david','sebastien','these','jeanne'] },
   { parents:['laurent','eszter'], children:['marina','julie','emilie'] },
   { parents:['eric','isabelle'],  children:['thais','livie','marie'] },
+  { parents:['peter','lois'],     children:['kristina','justin'] },
+  { parents:['peter'],            children:['elizabeth'] },
 ];
 
 // ─── Index ─────────────────────────────────────────────────────────────────
@@ -398,16 +411,20 @@ const subLayer = g.append('g').attr('id', 'sublabels');
 subLabels.forEach(sl => {
   const p = byId[sl.under];
   if (!p) return;
-  const startY = p.y + R + 24;
-  subLayer.append('line')
-    .attr('x1', p.x).attr('y1', p.y + R)
-    .attr('x2', p.x).attr('y2', startY - 6)
-    .attr('stroke', '#9a6060').attr('stroke-width', 1).attr('stroke-dasharray', '3 3').attr('opacity', 0.4);
+  // Place label well below the node, inside a small rounded box
+  const boxX = p.x;
+  const boxY = p.y + R + 48;
+  const boxW = sl.names.length * 6.8 + 20;
+  const boxH = 22;
+  subLayer.append('rect')
+    .attr('x', boxX - boxW/2).attr('y', boxY - 14)
+    .attr('width', boxW).attr('height', boxH)
+    .attr('rx', 3).attr('fill', '#f5efe6').attr('stroke', '#d9cdb8').attr('stroke-width', 0.8).attr('opacity', 0.9);
   subLayer.append('text')
-    .attr('x', p.x).attr('y', startY)
+    .attr('x', boxX).attr('y', boxY + 2)
     .attr('text-anchor', 'middle')
-    .attr('font-family', 'Cormorant Garamond, serif')
-    .attr('font-size', 13).attr('fill', '#9a6060').attr('opacity', 0.85)
+    .attr('font-family', 'Cormorant Garamond, serif').attr('font-style', 'italic')
+    .attr('font-size', 12).attr('fill', '#7a5050')
     .text(sl.names);
 });
 
