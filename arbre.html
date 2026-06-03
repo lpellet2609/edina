@@ -388,6 +388,29 @@ families.forEach(fam => {
   }
 });
 
+// ─── Sub-family labels (children of László and András — text compact) ────────
+const subLabels = [
+  { under:'laszlo', names:'Kriszta · Ákos · Luca' },
+  { under:'andras', names:'Márton · Bálint · Mátyás · Júlia' },
+];
+
+const subLayer = g.append('g').attr('id', 'sublabels');
+subLabels.forEach(sl => {
+  const p = byId[sl.under];
+  if (!p) return;
+  const startY = p.y + R + 24;
+  subLayer.append('line')
+    .attr('x1', p.x).attr('y1', p.y + R)
+    .attr('x2', p.x).attr('y2', startY - 6)
+    .attr('stroke', '#9a6060').attr('stroke-width', 1).attr('stroke-dasharray', '3 3').attr('opacity', 0.4);
+  subLayer.append('text')
+    .attr('x', p.x).attr('y', startY)
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'Cormorant Garamond, serif')
+    .attr('font-size', 13).attr('fill', '#9a6060').attr('opacity', 0.85)
+    .text(sl.names);
+});
+
 // ─── Draw nodes ─────────────────────────────────────────────────────────────
 const nodeLayer = g.append('g').attr('id', 'nodes');
 const tooltip   = d3.select('#tooltip');
