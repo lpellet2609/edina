@@ -93,17 +93,21 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
+      align-items: start; /* chaque photo garde sa hauteur propre, pas d'étirement */
     }
     @media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .gallery { grid-template-columns: 1fr; } }
+    /* Affichage de la photo ENTIÈRE (pas de recadrage) :
+       hauteur automatique selon le ratio de chaque photo. */
     .gallery img {
       width: 100%;
-      height: 250px;
-      object-fit: cover;
+      height: auto;
+      display: block;
       border-radius: 2px;
       cursor: zoom-in;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.2s;
+      background: var(--cream);
     }
     .gallery img:hover { transform: scale(1.02); }
 
@@ -286,7 +290,7 @@
         if (!list.length) { return; }
         empty.style.display = 'none';
         gallery.innerHTML = list.map(r => {
-          const thumb = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_500,h_500,q_auto,f_auto/v${r.version}/${r.public_id}.${r.format}`;
+          const thumb = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_limit,w_700,q_auto,f_auto/v${r.version}/${r.public_id}.${r.format}`;
           const full  = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/v${r.version}/${r.public_id}.${r.format}`;
           return `<img src="${thumb}" alt="" loading="lazy" onclick="openLightbox('${full}')" />`;
         }).join('');
