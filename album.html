@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Fenêtre d'envoi de photos Cloudinary -->
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
   <style>
     :root {
       --bordeaux: #7a1f24;
@@ -122,6 +124,42 @@
       margin: 8px 0;
     }
 
+    .upload-zone {
+      text-align: center;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 28px 24px;
+      margin-bottom: 8px;
+    }
+    .upload-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+    .upload-btn {
+      background: var(--bordeaux);
+      color: #fff;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      padding: 14px 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .upload-btn:hover { background: var(--bordeaux-dark); }
+    .upload-thanks {
+      display: none;
+      margin: 16px 0 0;
+      color: #2e7d32;
+      font-size: 15px;
+    }
+    .upload-thanks.show { display: block; }
+
     .lightbox {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.92); z-index: 100;
@@ -179,40 +217,30 @@
 
   <div class="container">
 
-    <!-- Messe -->
-    <h2 class="section-title">
-      <span data-lang="fr" class="inline">Messe — Église Saint-László</span>
-      <span data-lang="hu" class="inline">Szentmise — Szent László-templom</span>
-    </h2>
-    <div class="gallery" id="gallery-messe"></div>
-    <div class="empty-state" id="empty-messe">
-      <div class="icon">✝︎</div>
-      <p data-lang="fr">Les photos de la messe seront ajoutées ici après le 3 juin.</p>
-      <p data-lang="hu">A szentmise fényképei június 3. után kerülnek ide.</p>
+    <!-- Bouton d'envoi de photo (ouvre la fenêtre Cloudinary) -->
+    <div class="upload-zone">
+      <p class="upload-intro" data-lang="fr">Vous étiez présent·e le 3 juin ? Partagez vos photos. Elles seront publiées ici après validation.</p>
+      <p class="upload-intro" data-lang="hu">Ön is ott volt június 3-án? Ossza meg fényképeit. Jóváhagyás után jelennek meg itt.</p>
+      <button class="upload-btn" type="button" onclick="openUpload()">
+        <span data-lang="fr" class="inline">📷 Ajouter une photo</span>
+        <span data-lang="hu" class="inline">📷 Fénykép hozzáadása</span>
+      </button>
+      <p class="upload-thanks" id="upload-thanks">
+        <span data-lang="fr" class="inline">Merci ! Votre photo a bien été envoyée. Elle apparaîtra ici une fois validée.</span>
+        <span data-lang="hu" class="inline">Köszönjük! A fényképét megkaptuk. Jóváhagyás után jelenik meg itt.</span>
+      </p>
     </div>
 
-    <!-- Inhumation -->
+    <!-- Souvenirs (galerie unique, alimentée par Cloudinary) -->
     <h2 class="section-title">
-      <span data-lang="fr" class="inline">Inhumation — Cimetière de Rákoskeresztúr</span>
-      <span data-lang="hu" class="inline">Temetés — Rákoskeresztúri temető</span>
+      <span data-lang="fr" class="inline">Souvenirs du 3 juin</span>
+      <span data-lang="hu" class="inline">A június 3-i nap emlékei</span>
     </h2>
-    <div class="gallery" id="gallery-inhumation"></div>
-    <div class="empty-state" id="empty-inhumation">
-      <div class="icon">✦</div>
-      <p data-lang="fr">Les photos de l'inhumation seront ajoutées ici après le 3 juin.</p>
-      <p data-lang="hu">A temetés fényképei június 3. után kerülnek ide.</p>
-    </div>
-
-    <!-- Reception -->
-    <h2 class="section-title">
-      <span data-lang="fr" class="inline">Réception</span>
-      <span data-lang="hu" class="inline">Fogadás</span>
-    </h2>
-    <div class="gallery" id="gallery-reception"></div>
-    <div class="empty-state" id="empty-reception">
+    <div class="gallery" id="gallery-souvenirs"></div>
+    <div class="empty-state" id="empty-souvenirs">
       <div class="icon">❦</div>
-      <p data-lang="fr">Les photos de la réception seront ajoutées ici après le 3 juin.</p>
-      <p data-lang="hu">A fogadás fényképei június 3. után kerülnek ide.</p>
+      <p data-lang="fr">Les premières photos apparaîtront ici bientôt. Vous pouvez déjà ajouter les vôtres avec le bouton ci-dessus.</p>
+      <p data-lang="hu">Az első fényképek hamarosan megjelennek itt. Az Öné a fenti gombbal már most hozzáadható.</p>
     </div>
 
   </div>
@@ -228,34 +256,69 @@
   </footer>
 
   <script>
-    // Pour ajouter des photos après le 3 juin :
-    // 1) Déposer les fichiers dans /images/album/messe/, /images/album/inhumation/, ou /images/album/reception/
-    // 2) Lister les noms de fichiers ci-dessous dans le bon tableau
-    const PHOTOS = {
-      messe: [
-        // exemple : "messe-01.jpg", "messe-02.jpg"
-      ],
-      inhumation: [
-        // exemple : "inhum-01.jpg"
-      ],
-      reception: [
-        // exemple : "recep-01.jpg"
-      ]
-    };
+    /* ============================================================
+       CONFIGURATION CLOUDINARY — À REMPLIR (2 valeurs)
+       ------------------------------------------------------------
+       1) CLOUD_NAME    = le "nom de l'espace" affiché en haut de ton
+                          tableau de bord Cloudinary (Dashboard).
+       2) UPLOAD_PRESET = le nom du "réglage d'envoi" (upload preset)
+                          que tu auras créé (sans connexion + modération).
+       PUBLIC_TAG ne change pas : c'est l'étiquette des photos validées.
+       Pour publier une photo : dans Cloudinary, lui ajouter cette
+       étiquette « album-public ». Pour la retirer du site : enlever
+       l'étiquette. (Rien n'est visible tant qu'elle n'a pas l'étiquette.)
+       ============================================================ */
+    const CLOUD_NAME    = "duiehxhw3";
+    const UPLOAD_PRESET = "souvenirs_edina";
+    const PUBLIC_TAG    = "album-public";
 
-    function renderSection(name) {
-      const list = PHOTOS[name] || [];
-      const gallery = document.getElementById('gallery-' + name);
-      const empty = document.getElementById('empty-' + name);
-      if (!list.length) {
-        gallery.style.display = 'none';
+    // Charge les photos validées (= celles qui portent l'étiquette PUBLIC_TAG)
+    async function loadGallery() {
+      const gallery = document.getElementById('gallery-souvenirs');
+      const empty = document.getElementById('empty-souvenirs');
+      if (CLOUD_NAME.startsWith('REMPLACER')) { return; } // pas encore configuré
+      try {
+        const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/${PUBLIC_TAG}.json`;
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('liste indisponible');
+        const data = await res.json();
+        const list = (data.resources || []).sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
+        if (!list.length) { return; }
+        empty.style.display = 'none';
+        gallery.innerHTML = list.map(r => {
+          const thumb = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_500,h_500,q_auto,f_auto/v${r.version}/${r.public_id}.${r.format}`;
+          const full  = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/v${r.version}/${r.public_id}.${r.format}`;
+          return `<img src="${thumb}" alt="" loading="lazy" onclick="openLightbox('${full}')" />`;
+        }).join('');
+      } catch (e) {
+        // En cas de souci réseau on garde simplement le message d'attente
+        console.warn('Album : impossible de charger les photos pour le moment.', e);
+      }
+    }
+
+    // Ouvre la fenêtre d'envoi Cloudinary
+    function openUpload() {
+      if (CLOUD_NAME.startsWith('REMPLACER')) {
+        alert("L'envoi de photos sera activé très bientôt. Merci de votre patience !");
         return;
       }
-      empty.style.display = 'none';
-      gallery.innerHTML = list.map(f => {
-        const src = `images/album/${name}/${f}`;
-        return `<img src="${src}" alt="" onclick="openLightbox('${src}')" />`;
-      }).join('');
+      const lang = document.documentElement.lang === 'hu' ? 'hu' : 'fr';
+      cloudinary.openUploadWidget({
+        cloudName: CLOUD_NAME,
+        uploadPreset: UPLOAD_PRESET,
+        sources: ['local', 'camera'],
+        multiple: true,
+        maxFiles: 20,
+        language: lang,
+        text: {
+          fr: { menu: { files: 'Mes photos', camera: 'Appareil photo' } },
+          hu: { menu: { files: 'Fényképeim', camera: 'Kamera' } }
+        }
+      }, (error, result) => {
+        if (!error && result && result.event === 'success') {
+          document.getElementById('upload-thanks').classList.add('show');
+        }
+      });
     }
 
     function openLightbox(src) {
@@ -280,7 +343,7 @@
         else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
       } catch(e) {}
       setLang(lang);
-      ['messe','inhumation','reception'].forEach(renderSection);
+      loadGallery();
     })();
   </script>
 
