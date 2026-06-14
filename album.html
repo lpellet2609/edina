@@ -189,48 +189,55 @@
     html[lang="fr"] [data-lang="fr"].inline,
     html[lang="hu"] [data-lang="hu"].inline { display: inline; }
 
-    /* Hub 3 juin — boîtes de navigation persistantes */
-    .hub-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+    /* Hub 3 juin — intro et navigation par onglets */
+    .hub-section {
       max-width: 720px;
-      margin: 24px auto;
-      padding: 0 24px;
+      margin: 0 auto;
+      padding: 28px 24px 0;
     }
-    @media (max-width: 600px) { .hub-cards { grid-template-columns: 1fr; } }
-    .hub-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .hub-intro {
+      font-size: 14px;
+      color: var(--muted);
       text-align: center;
-      gap: 6px;
-      background: var(--cream);
-      border: 1px solid var(--rule);
-      border-top: 3px solid var(--bordeaux);
-      border-radius: 2px;
-      padding: 18px 12px 14px;
+      margin: 0 0 22px;
+      line-height: 1.65;
+      font-style: italic;
+    }
+    .hub-nav {
+      display: flex;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 0;
+    }
+    .hub-nav a {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 8px 11px;
       text-decoration: none;
-      color: var(--ink);
-      transition: all 0.2s;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: color 0.15s;
     }
-    .hub-card:hover { border-color: var(--bordeaux); box-shadow: 0 2px 14px rgba(0,0,0,0.07); }
-    .hub-card.active {
-      background: var(--bordeaux);
-      border-color: var(--bordeaux);
-      pointer-events: none;
+    .hub-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background 0.15s;
     }
-    .hub-card-icon { font-size: 22px; color: var(--bordeaux); line-height: 1; }
-    .hub-card.active .hub-card-icon { color: rgba(255,255,255,0.9); }
-    .hub-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      color: var(--bordeaux);
-      font-weight: 500;
-    }
-    .hub-card.active .hub-card-title { color: white; }
-    .hub-card-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
-    .hub-card.active .hub-card-sub { color: rgba(255,255,255,0.75); }
+    .hub-nav a:hover { color: var(--bordeaux); }
+    .hub-nav a:hover::after { background: var(--bordeaux); opacity: 0.5; }
+    .hub-nav a.active { color: var(--bordeaux); pointer-events: none; }
+    .hub-nav a.active::after { background: var(--bordeaux); }
+    .hub-nav-icon { font-size: 14px; }
+
   </style>
 </head>
 <body>
@@ -247,33 +254,15 @@
     </nav>
   </div>
 
-  <div class="hub-cards">
-    <a class="hub-card" href="textes.html">
-      <span class="hub-card-icon">🎙</span>
-      <span class="hub-card-title"><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></span>
-    </a>
-    <a class="hub-card active" href="album.html">
-      <span class="hub-card-icon">📷</span>
-      <span class="hub-card-title"><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></span>
-    </a>
-    <a class="hub-card" href="hommages.html">
-      <span class="hub-card-icon">✉</span>
-      <span class="hub-card-title"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></span>
-    </a>
-  </div>
-
-  <header class="hero">
-    <h1>
-      <span data-lang="fr" class="inline">Album du 3 juin 2026</span>
-      <span data-lang="hu" class="inline">2026. június 3. — Album</span>
-    </h1>
-    <div class="sub">
-      <span data-lang="fr" class="inline">Souvenirs de la journée — messe, inhumation et réception</span>
-      <span data-lang="hu" class="inline">A nap emlékei — szentmise, temetés és fogadás</span>
-    </div>
-  </header>
-
-  <div class="ornament">✦ ✦ ✦</div>
+<div class="hub-section">
+  <p class="hub-intro" data-lang="fr">Le 3 juin 2026, Edina Koszmovszky a été inhumée au Nouveau cimetière de Rákoskeresztúr, dans la parcelle 300, réservée aux héros et martyrs de la révolution hongroise de 1956.</p>
+  <p class="hub-intro" data-lang="hu">2026. június 3-án Koszmovszky Edinát a Rákoskeresztúri Új Köztemetőben helyezték örök nyugalomra, a 300-as parcellában, ahol az 1956-os forradalom hősei és mártírjai nyugszanak.</p>
+  <nav class="hub-nav">
+    <a href="textes.html"><span class="hub-nav-icon">🎙</span><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></a>
+    <a href="album.html" class="active"><span class="hub-nav-icon">📷</span><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></a>
+    <a href="hommages.html"><span class="hub-nav-icon">✉</span><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+  </nav>
+</div>
 
   <div class="container">
 
