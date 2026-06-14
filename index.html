@@ -113,10 +113,24 @@
       text-align: center;
       padding: 48px 24px 24px;
     }
-    header.hero .cross {
-      color: var(--bordeaux);
-      font-size: 26px;
-      margin-bottom: 16px;
+    .duo-portrait {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .duo-portrait img {
+      width: 130px;
+      height: 170px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 2px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.18);
+    }
+    .portrait-young { transform: scaleX(-1); filter: grayscale(100%); }
+    @media (max-width: 480px) {
+      .duo-portrait img { width: 100px; height: 130px; }
     }
     header.hero h1 {
       font-size: 38px;
@@ -481,7 +495,10 @@
   </div>
 
   <header class="hero">
-    <div class="cross">✝︎</div>
+    <div class="duo-portrait">
+      <img class="portrait-young" src="images/edina-jeune.webp" alt="Edina Koszmovszky, jeune">
+      <img class="portrait-adult" src="images/Portrait Edina KOSZMOVSZKY.jpg" alt="Edina Koszmovszky">
+    </div>
     <h1>Koszmovszky Edina Franciska</h1>
     <div class="dates">Budapest, 23.08.1938 — Sződliget, 12.05.2026</div>
     <div class="epitaph">
