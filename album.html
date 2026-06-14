@@ -188,6 +188,49 @@
     html[lang="hu"] [data-lang="hu"] { display: block; }
     html[lang="fr"] [data-lang="fr"].inline,
     html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+
+    /* Hub 3 juin — boîtes de navigation persistantes */
+    .hub-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 720px;
+      margin: 24px auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 600px) { .hub-cards { grid-template-columns: 1fr; } }
+    .hub-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--bordeaux);
+      border-radius: 2px;
+      padding: 18px 12px 14px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .hub-card:hover { border-color: var(--bordeaux); box-shadow: 0 2px 14px rgba(0,0,0,0.07); }
+    .hub-card.active {
+      background: var(--bordeaux);
+      border-color: var(--bordeaux);
+      pointer-events: none;
+    }
+    .hub-card-icon { font-size: 22px; color: var(--bordeaux); line-height: 1; }
+    .hub-card.active .hub-card-icon { color: rgba(255,255,255,0.9); }
+    .hub-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--bordeaux);
+      font-weight: 500;
+    }
+    .hub-card.active .hub-card-title { color: white; }
+    .hub-card-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+    .hub-card.active .hub-card-sub { color: rgba(255,255,255,0.75); }
   </style>
 </head>
 <body>
@@ -202,6 +245,21 @@
       <a href="textes.html" class="active"><span data-lang="fr" class="inline">Le 3 juin 2026</span><span data-lang="hu" class="inline">2026. június 3.</span></a>
       <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
     </nav>
+  </div>
+
+  <div class="hub-cards">
+    <a class="hub-card" href="textes.html">
+      <span class="hub-card-icon">🎙</span>
+      <span class="hub-card-title"><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></span>
+    </a>
+    <a class="hub-card active" href="album.html">
+      <span class="hub-card-icon">📷</span>
+      <span class="hub-card-title"><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></span>
+    </a>
+    <a class="hub-card" href="hommages.html">
+      <span class="hub-card-icon">✉</span>
+      <span class="hub-card-title"><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></span>
+    </a>
   </div>
 
   <header class="hero">
