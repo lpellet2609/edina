@@ -189,24 +189,21 @@
     html[lang="fr"] [data-lang="fr"].inline,
     html[lang="hu"] [data-lang="hu"].inline { display: inline; }
 
-    /* Hub 3 juin — intro et navigation par onglets */
-    .hub-section {
+    /* Hub 3 juin — barre de navigation persistante + phrase contextuelle */
+    .hub-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .hub-bar-inner {
       max-width: 720px;
       margin: 0 auto;
-      padding: 28px 24px 0;
-    }
-    .hub-intro {
-      font-size: 14px;
-      color: var(--muted);
-      text-align: center;
-      margin: 0 0 22px;
-      line-height: 1.65;
-      font-style: italic;
+      padding: 0 24px;
     }
     .hub-nav {
       display: flex;
-      border-bottom: 1px solid var(--rule);
-      margin-bottom: 0;
     }
     .hub-nav a {
       flex: 1;
@@ -237,6 +234,19 @@
     .hub-nav a.active { color: var(--bordeaux); pointer-events: none; }
     .hub-nav a.active::after { background: var(--bordeaux); }
     .hub-nav-icon { font-size: 14px; }
+    .hub-intro-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 22px 24px 4px;
+    }
+    .hub-intro {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+      line-height: 1.65;
+      font-style: italic;
+    }
 
   </style>
 </head>
@@ -254,14 +264,19 @@
     </nav>
   </div>
 
-<div class="hub-section">
-  <p class="hub-intro" data-lang="fr">Le 3 juin 2026, Edina Koszmovszky a été inhumée au Nouveau cimetière de Rákoskeresztúr, dans la parcelle 300, réservée aux héros et martyrs de la révolution hongroise de 1956.</p>
-  <p class="hub-intro" data-lang="hu">2026. június 3-án Koszmovszky Edinát a Rákoskeresztúri Új Köztemetőben helyezték örök nyugalomra, a 300-as parcellában, ahol az 1956-os forradalom hősei és mártírjai nyugszanak.</p>
-  <nav class="hub-nav">
+<div class="hub-bar">
+  <div class="hub-bar-inner">
+    <nav class="hub-nav">
     <a href="textes.html"><span class="hub-nav-icon">🎙</span><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></a>
     <a href="album.html" class="active"><span class="hub-nav-icon">📷</span><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></a>
     <a href="hommages.html"><span class="hub-nav-icon">✉</span><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<div class="hub-intro-wrap">
+  <p class="hub-intro" data-lang="fr">Le 3 juin 2026, Edina Koszmovszky a été inhumée au Nouveau cimetière de Rákoskeresztúr, dans la parcelle 300, réservée aux héros et martyrs de la révolution hongroise de 1956.</p>
+  <p class="hub-intro" data-lang="hu">2026. június 3-án Koszmovszky Edinát a Rákoskeresztúri Új Köztemetőben helyezték örök nyugalomra, a 300-as parcellában, ahol az 1956-os forradalom hősei és mártírjai nyugszanak.</p>
 </div>
 
   <div class="container">
@@ -394,7 +409,18 @@
       setLang(lang);
       loadGallery();
     })();
-  </script>
+  
+  // Positionne hub-bar juste sous le topbar sticky
+  (function() {
+    function posHub() {
+      var tb = document.querySelector('.topbar');
+      var hb = document.querySelector('.hub-bar');
+      if (tb && hb) hb.style.top = tb.offsetHeight + 'px';
+    }
+    posHub();
+    window.addEventListener('resize', posHub);
+  })();
+</script>
 
 </body>
 </html>
