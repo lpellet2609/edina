@@ -36,7 +36,8 @@ Les deux domaines sont achetés chez **Porkbun** (compte lpellet@gmail.com), ren
 index.html       — accueil (faire-part, cérémonies, infos pratiques, plan)
 hommages.html    — 38 hommages bilingues + formulaire mailto pour en envoyer
 articles.html    — revue de presse (10 articles + 3 vidéos)
-communiques.html — communiqués officiels (sous-menu du « 3 juin ») : lettre Ambassade de
+communiques.html — communiqués officiels (rubrique de NIVEAU 1, menu du haut, entre
+                   « Le 3 juin » et « Revue de presse ») : lettre Ambassade de
                    Hongrie (texte + PDF dans documents/), vidéo Parlement calée 6:31:15→6:37:54
                    (params YouTube start/end + cc), transcription FR/HU dépliable des 2
                    discours (Máté Zsuzsanna KDNP + Bóka Zsolt Tisza), communiqué NÖRI. Bilingue.
@@ -151,7 +152,7 @@ Workflow : quand un nouvel article tombe, Laurent transfère le lien → je réc
 
 ✅ Site en ligne sur les deux domaines custom (HTTPS). **La cérémonie du 3 juin est passée** ; le site reste un mémorial pérenne.
 ✅ Toutes les pages en place et bilingues : accueil, hommages, revue de presse, **textes de la cérémonie**, album, repas.
-✅ **NOUVEAU (15 juin) : page « Communiqués officiels »** ajoutée au sous-menu du « 3 juin » (sur les 4 pages du hub) : lettre Ambassade de Hongrie, hommage au Parlement (vidéo calée + transcription FR/HU des 2 discours, extraite des sous-titres auto via yt-dlp), communiqué NÖRI. Demande de Philippe (séparer l'officiel des hommages famille/amis).
+✅ **NOUVEAU (15 juin) : page « Communiqués officiels »** = rubrique de NIVEAU 1 (menu du haut, entre « Le 3 juin » et « Revue de presse ») depuis la décision des frères. Contenu : lettre Ambassade de Hongrie, hommage au Parlement (vidéo calée + transcription FR/HU des 2 discours, extraite des sous-titres auto via yt-dlp), communiqué NÖRI. Page autonome (plus de hub-bar du 3 juin).
 ✅ **Album : photos déposées par les visiteurs via Cloudinary**, modérées par Laurent (étiquette `album-public`). Testé en réel, en ligne.
 ✅ Page Réception complète (infos pratiques, 2 groupes WhatsApp, alerte alcool). RSVP clôturée.
 ✅ Veille presse active. Données personnelles invités protégées (`data/invites-*` gitignored, `confirmation.html` supprimée).

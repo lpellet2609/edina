@@ -307,6 +307,52 @@
     }
     .video-link:hover { background: var(--bordeaux); color: white; }
 
+    /* Dépliants français sous les vidéos hongroises (résumé + traduction intégrale) */
+    .vid-text { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 12px; }
+    .vid-text + .vid-text { margin-top: 8px; border-top: none; padding-top: 0; }
+    .vid-text > summary {
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      font-size: 12.5px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--bordeaux);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .vid-text > summary::-webkit-details-marker { display: none; }
+    .vid-text > summary::before { content: '▸'; font-size: 10px; }
+    .vid-text[open] > summary::before { content: '▾'; }
+    .vid-text > summary:hover { color: var(--bordeaux-dark); }
+    .vid-text-body { margin-top: 12px; }
+    .vid-text-body p {
+      font-size: 15px;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.75;
+      margin: 0 0 11px;
+      color: var(--ink);
+    }
+    .vid-text-intro { font-style: italic; color: var(--muted); font-size: 13px !important; font-family: 'Lato', sans-serif !important; }
+    .vid-text-speaker {
+      font-weight: 700 !important;
+      color: var(--bordeaux);
+      font-family: 'Lato', sans-serif !important;
+      font-size: 12px !important;
+      letter-spacing: 0.03em;
+      margin-top: 16px !important;
+    }
+    .vid-text-note {
+      font-family: 'Lato', sans-serif !important;
+      font-size: 11.5px !important;
+      color: var(--muted);
+      font-style: italic;
+      border-top: 1px solid var(--rule);
+      padding-top: 10px;
+      margin-top: 14px !important;
+    }
+
     footer {
       text-align: center; color: var(--muted); font-size: 14px;
       padding: 32px 24px; border-top: 1px solid var(--rule); margin-top: 40px;
@@ -329,6 +375,7 @@
     <nav class="navbar">
       <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
       <a href="textes.html"><span data-lang="fr" class="inline">Le 3 juin 2026</span><span data-lang="hu" class="inline">2026. június 3.</span></a>
+      <a href="communiques.html"><span data-lang="fr" class="inline">Communiqués officiels</span><span data-lang="hu" class="inline">Hivatalos közlemények</span></a>
       <a href="articles.html" class="active"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
     </nav>
   </div>
