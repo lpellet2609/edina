@@ -99,6 +99,15 @@ HANDOFF.md       — bilan des tracks terminés
   - En vue HU, chaque article affiche donc : source · date · journaliste · titre HU · lien direct vers l'original. Idem pour les vidéos (vignette + titre + lien YouTube).
 - Bibliothèque vidéo en bas avec vignettes YouTube cliquables
 - Indication de langue sur chaque vidéo
+- **Dépliants de traduction FR (ajoutés le 15 juin)** sous les 2 vidéos en hongrois
+  (Párbeszéd Háza `Cw_bzOQYnHE` et Duett/BUDA TV `L-zseCfvtR0`) : un dépliant
+  « Résumé en français » + un « Traduction intégrale », **vue Français uniquement**
+  (`<div data-lang="fr">`, classe CSS `.vid-text`). Le doc « Hazaérés » (`Lrcmui3khlM`)
+  n'a PAS de dépliant (choix de Laurent).
+  ⚙️ **Méthode (ces vidéos n'ont AUCUN sous-titre YouTube)** : audio récupéré via
+  `yt-dlp -f bestaudio`, converti en WAV 16 kHz mono (ffmpeg), transcrit en hongrois
+  avec `whisper-cli -l hu -m ggml-large-v3-turbo.bin` (Homebrew `whisper-cpp`), puis
+  nettoyé et traduit. Refaire ainsi si un nouvel hommage vidéo HU doit être traduit.
 
 ### Page Album (`album.html`) — photos envoyées par les visiteurs (Cloudinary)
 **Depuis le 2026-06-06**, l'album n'est plus alimenté à la main : les visiteurs déposent eux-mêmes leurs photos.
