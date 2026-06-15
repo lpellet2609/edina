@@ -36,6 +36,10 @@ Les deux domaines sont achetés chez **Porkbun** (compte lpellet@gmail.com), ren
 index.html       — accueil (faire-part, cérémonies, infos pratiques, plan)
 hommages.html    — 38 hommages bilingues + formulaire mailto pour en envoyer
 articles.html    — revue de presse (10 articles + 3 vidéos)
+communiques.html — communiqués officiels (sous-menu du « 3 juin ») : lettre Ambassade de
+                   Hongrie (texte + PDF dans documents/), vidéo Parlement calée 6:31:15→6:37:54
+                   (params YouTube start/end + cc), transcription FR/HU dépliable des 2
+                   discours (Máté Zsuzsanna KDNP + Bóka Zsolt Tisza), communiqué NÖRI. Bilingue.
 album.html       — album souvenirs : photos déposées par les visiteurs via Cloudinary,
                    modérées par étiquette "album-public" (galerie unique "Souvenirs")
 repas.html       — page protégée par code "Budapest" pour les invités au déjeuner
@@ -56,6 +60,8 @@ images/
   album/                     — sous-dossiers messe/, inhumation/, reception/ (vides)
   repas/                     — 6 photos du Bistro/parking/trajet (extérieur, intérieur,
                                 parking-vue, parking-automate, trajet-esplanade, trajet-allee)
+documents/
+  lettre-ambassade-hongrie-2026.pdf — scan officiel de la lettre de l'Ambassade (tracké)
 CNAME            — domaine GitHub Pages (ne pas supprimer)
 CLAUDE.md        — ce fichier
 HANDOFF.md       — bilan des tracks terminés
@@ -141,10 +147,11 @@ Workflow : quand un nouvel article tombe, Laurent transfère le lien → je réc
 - Jamais le `"` ASCII droit comme fermant → casse le JavaScript
 - Vérifier la syntaxe avant push si du texte HU contient des guillemets : `node -e "new Function(fs.readFileSync('hommages.html','utf8'))"` ou équivalent
 
-## Statut actuel (2026-06-06)
+## Statut actuel (2026-06-15)
 
 ✅ Site en ligne sur les deux domaines custom (HTTPS). **La cérémonie du 3 juin est passée** ; le site reste un mémorial pérenne.
 ✅ Toutes les pages en place et bilingues : accueil, hommages, revue de presse, **textes de la cérémonie**, album, repas.
+✅ **NOUVEAU (15 juin) : page « Communiqués officiels »** ajoutée au sous-menu du « 3 juin » (sur les 4 pages du hub) : lettre Ambassade de Hongrie, hommage au Parlement (vidéo calée + transcription FR/HU des 2 discours, extraite des sous-titres auto via yt-dlp), communiqué NÖRI. Demande de Philippe (séparer l'officiel des hommages famille/amis).
 ✅ **Album : photos déposées par les visiteurs via Cloudinary**, modérées par Laurent (étiquette `album-public`). Testé en réel, en ligne.
 ✅ Page Réception complète (infos pratiques, 2 groupes WhatsApp, alerte alcool). RSVP clôturée.
 ✅ Veille presse active. Données personnelles invités protégées (`data/invites-*` gitignored, `confirmation.html` supprimée).

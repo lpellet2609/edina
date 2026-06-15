@@ -234,6 +234,12 @@
     .hub-nav a.active { color: var(--bordeaux); pointer-events: none; }
     .hub-nav a.active::after { background: var(--bordeaux); }
     .hub-nav-icon { font-size: 14px; }
+    /* Sous-menu à 4 entrées : défilement horizontal sur mobile pour éviter l'écrasement */
+    @media (max-width: 600px) {
+      .hub-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .hub-nav::-webkit-scrollbar { display: none; }
+      .hub-nav a { flex: 0 0 auto; white-space: nowrap; font-size: 12px; padding: 10px 13px 11px; }
+    }
     .hub-intro-wrap {
       max-width: 720px;
       margin: 0 auto;
@@ -268,6 +274,7 @@
   <div class="hub-bar-inner">
     <nav class="hub-nav">
     <a href="textes.html"><span class="hub-nav-icon">🎙</span><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></a>
+    <a href="communiques.html"><span class="hub-nav-icon">🏛</span><span data-lang="fr" class="inline">Communiqués officiels</span><span data-lang="hu" class="inline">Hivatalos közlemények</span></a>
     <a href="album.html" class="active"><span class="hub-nav-icon">📷</span><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></a>
     <a href="hommages.html"><span class="hub-nav-icon">✉</span><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
     </nav>

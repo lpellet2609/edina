@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Communiqués officiels — Koszmovszky Edina Franciska</title>
+  <meta name="description" content="Communiqués officiels rendant hommage à Koszmovszky Edina Franciska : Ambassade de Hongrie à Paris, Parlement hongrois, Institut du Patrimoine National (NÖRI)." />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png?v=3">
+  <link rel="shortcut icon" href="favicon.ico?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bordeaux: #7a1f24;
+      --bordeaux-dark: #5a161a;
+      --cream: #f5efe6;
+      --paper: #fbf8f3;
+      --ink: #2b2b2b;
+      --muted: #6b6b6b;
+      --rule: #d9cdb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', 'Garamond', Georgia, serif;
+      font-weight: 500;
+      color: var(--bordeaux);
+      letter-spacing: 0.01em;
+    }
+    a { color: var(--bordeaux); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--bordeaux-dark); }
+
+    /* Top bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .lang-switch {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px 6px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .lang-switch button.active {
+      background: var(--bordeaux); color: white; border-color: var(--bordeaux);
+    }
+    .lang-switch button:hover:not(.active) {
+      border-color: var(--bordeaux); color: var(--bordeaux);
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 16px 10px;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar a.active { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+    .navbar a:hover { color: var(--bordeaux); }
+    @media (max-width: 600px) {
+      .navbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; mask-image: linear-gradient(to right, black 75%, transparent 100%); -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%); }
+      .navbar::-webkit-scrollbar { display: none; }
+      .navbar a { font-size: 11px; white-space: nowrap; padding: 4px 6px; }
+    }
+
+    [data-lang] { display: none; }
+    html[lang="fr"] [data-lang="fr"] { display: block; }
+    html[lang="hu"] [data-lang="hu"] { display: block; }
+    html[lang="fr"] [data-lang="fr"].inline,
+    html[lang="hu"] [data-lang="hu"].inline { display: inline; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* Section header */
+    .ceremony-section {
+      margin: 48px 0 28px;
+      text-align: center;
+    }
+    .ceremony-section h2 {
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .ceremony-section .section-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--bordeaux);
+      margin: 0 auto;
+      opacity: 0.4;
+    }
+
+    /* Hub 3 juin — barre de navigation persistante + phrase contextuelle */
+    .hub-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .hub-bar-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .hub-nav {
+      display: flex;
+    }
+    .hub-nav a {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 8px 11px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: color 0.15s;
+    }
+    .hub-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background 0.15s;
+    }
+    .hub-nav a:hover { color: var(--bordeaux); }
+    .hub-nav a:hover::after { background: var(--bordeaux); opacity: 0.5; }
+    .hub-nav a.active { color: var(--bordeaux); pointer-events: none; }
+    .hub-nav a.active::after { background: var(--bordeaux); }
+    .hub-nav-icon { font-size: 14px; }
+    /* Sous-menu à 4 entrées : défilement horizontal sur mobile pour éviter l'écrasement */
+    @media (max-width: 600px) {
+      .hub-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .hub-nav::-webkit-scrollbar { display: none; }
+      .hub-nav a { flex: 0 0 auto; white-space: nowrap; font-size: 12px; padding: 10px 13px 11px; }
+    }
+    .hub-intro-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 22px 24px 4px;
+    }
+    .hub-intro {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin: 0;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* Cartes communiqués officiels */
+    .comm-card {
+      background: var(--cream);
+      border-left: 3px solid var(--bordeaux);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .comm-source {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .comm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      color: var(--bordeaux);
+      font-weight: 500;
+      line-height: 1.25;
+      margin: 0 0 4px;
+    }
+    .comm-meta {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      margin: 0 0 18px;
+    }
+    .comm-card p {
+      font-size: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.8;
+      margin: 0 0 14px;
+    }
+    .comm-card p:last-child { margin-bottom: 0; }
+    .comm-card em { font-style: italic; }
+    .comm-signature {
+      margin-top: 18px;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .comm-actions { margin-top: 18px; }
+    .comm-link {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--bordeaux);
+      border: 1px solid var(--bordeaux);
+      border-radius: 2px;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .comm-link:hover { background: var(--bordeaux); color: #fff; }
+    .comm-verse {
+      padding: 10px 0 10px 20px;
+      border-left: 2px solid var(--rule);
+      margin: 12px 0;
+      font-style: italic;
+      line-height: 1.9;
+    }
+
+    /* Lecteur vidéo responsive 16:9 */
+    .video-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin: 4px 0 6px;
+      background: #000;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .video-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .video-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-style: italic;
+      font-family: 'Lato', sans-serif;
+      margin: 0 0 14px;
+    }
+
+    /* Texte des discours (transcription dépliable) */
+    .speech-text {
+      margin: 4px 0 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 14px;
+    }
+    .speech-text > summary {
+      cursor: pointer;
+      font-family: 'Lato', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--bordeaux);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .speech-text > summary::-webkit-details-marker { display: none; }
+    .speech-text > summary::before { content: '▸'; font-size: 11px; }
+    .speech-text[open] > summary::before { content: '▾'; }
+    .speech-text > summary:hover { color: var(--bordeaux-dark); }
+    .speech-text-body { margin-top: 16px; }
+    .speech-text-body p {
+      font-size: 15.5px;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.8;
+      margin: 0 0 12px;
+    }
+    .speech-text-intro {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 13.5px !important;
+      font-family: 'Lato', sans-serif !important;
+    }
+    .speech-text-speaker {
+      font-weight: 700 !important;
+      color: var(--bordeaux);
+      margin-top: 22px !important;
+      font-family: 'Lato', sans-serif !important;
+      font-size: 13px !important;
+      letter-spacing: 0.03em;
+      line-height: 1.4 !important;
+    }
+    .speech-text-note {
+      font-family: 'Lato', sans-serif !important;
+      font-size: 12px !important;
+      color: var(--muted);
+      font-style: italic;
+      border-top: 1px solid var(--rule);
+      padding-top: 12px;
+      margin-top: 18px !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lang-switch" role="navigation" aria-label="Langue">
+    <button id="btn-fr" class="active" onclick="setLang('fr')">Français</button>
+    <button id="btn-hu" onclick="setLang('hu')">Magyar</button>
+  </div>
+  <nav class="navbar">
+    <a href="index.html"><span data-lang="fr" class="inline">Accueil</span><span data-lang="hu" class="inline">Kezdőlap</span></a>
+    <a href="textes.html" class="active"><span data-lang="fr" class="inline">Le 3 juin 2026</span><span data-lang="hu" class="inline">2026. június 3.</span></a>
+    <a href="articles.html"><span data-lang="fr" class="inline">Revue de presse</span><span data-lang="hu" class="inline">Sajtószemle</span></a>
+  </nav>
+</div>
+
+<div class="hub-bar">
+  <div class="hub-bar-inner">
+    <nav class="hub-nav">
+    <a href="textes.html"><span class="hub-nav-icon">🎙</span><span data-lang="fr" class="inline">Discours prononcés</span><span data-lang="hu" class="inline">Búcsúbeszédek</span></a>
+    <a href="communiques.html" class="active"><span class="hub-nav-icon">🏛</span><span data-lang="fr" class="inline">Communiqués officiels</span><span data-lang="hu" class="inline">Hivatalos közlemények</span></a>
+    <a href="album.html"><span class="hub-nav-icon">📷</span><span data-lang="fr" class="inline">Album souvenir</span><span data-lang="hu" class="inline">Emlékalbum</span></a>
+    <a href="hommages.html"><span class="hub-nav-icon">✉</span><span data-lang="fr" class="inline">Hommages</span><span data-lang="hu" class="inline">Megemlékezések</span></a>
+    </nav>
+  </div>
+</div>
+
+<div class="hub-intro-wrap">
+  <p class="hub-intro" data-lang="fr">À la suite du décès d'Edina Koszmovszky, plusieurs institutions hongroises ont rendu hommage à son engagement et à sa mémoire par des communiqués officiels.</p>
+  <p class="hub-intro" data-lang="hu">Koszmovszky Edina halálát követően több magyar intézmény is hivatalos közleményben adózott helytállása és emléke előtt.</p>
+</div>
+
+<div class="container">
+
+  <!-- === COMMUNIQUÉS OFFICIELS === -->
+  <div class="ceremony-section">
+    <h2 data-lang="fr">Communiqués officiels</h2>
+    <h2 data-lang="hu">Hivatalos közlemények</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- 1. Ambassade de Hongrie à Paris -->
+  <div class="comm-card">
+    <div class="comm-source" data-lang="fr">Ambassade de Hongrie à Paris</div>
+    <div class="comm-source" data-lang="hu">Magyarország Párizsi Nagykövetsége</div>
+    <p class="comm-title" data-lang="fr">Lettre de condoléances de l'Ambassade de Hongrie</p>
+    <p class="comm-title" data-lang="hu">A Magyar Nagykövetség részvétnyilvánító levele</p>
+    <p class="comm-meta" data-lang="fr">Réf. 61/2026/HUEMB/FR — Paris, le 15 juin 2026</p>
+    <p class="comm-meta" data-lang="hu">Hivatkozás: 61/2026/HUEMB/FR — Párizs, 2026. június 15.</p>
+
+    <div data-lang="fr">
+      <p>C'est avec une profonde tristesse que nous avons appris le décès de Madame Edina Koszmovszky, connue comme « la dame au manteau rouge » de la Révolution hongroise de 1956.</p>
+      <p>Par son courage et son engagement, elle est devenue l'un des symboles de la lutte du peuple hongrois pour la liberté et l'indépendance. Tout au long de sa vie, elle a contribué à préserver et à transmettre la mémoire de cet événement fondateur de l'histoire de la Hongrie.</p>
+      <p>En reconnaissance de ses mérites exceptionnels, l'État hongrois lui a décerné, le 13 octobre 2022, la Croix de Chevalier de l'Ordre du Mérite de Hongrie, témoignant de la gratitude de la Nation pour son action exemplaire au service de la mémoire et des valeurs de 1956.</p>
+      <p>L'Ambassade de Hongrie rend hommage à une femme dont le souvenir demeurera vivant dans la mémoire collective hongroise et adresse ses sincères condoléances à sa famille et à ses proches.</p>
+      <p class="comm-signature">Au nom de l'Ambassade de Hongrie,<br>
+      Dr György Galicza<br>
+      Chargé d'affaires ad interim</p>
+    </div>
+    <div data-lang="hu">
+      <p>Mély szomorúsággal értesültünk Koszmovszky Edina asszony elhunytáról, akit az 1956-os magyar forradalom „piros kabátos lányaként” ismertek.</p>
+      <p>Bátorságával és elkötelezettségével a magyar nép szabadságért és függetlenségért folytatott küzdelmének egyik jelképévé vált. Egész életében azon munkálkodott, hogy megőrizze és továbbadja a magyar történelem e sorsfordító eseményének emlékét.</p>
+      <p>Kivételes érdemei elismeréseként a magyar állam 2022. október 13-án a Magyar Érdemrend lovagkeresztjével tüntette ki, tanúsítva a Nemzet háláját az 1956 emlékének és értékeinek szolgálatában végzett példamutató tevékenységéért.</p>
+      <p>Magyarország Nagykövetsége tisztelettel adózik egy olyan asszony emléke előtt, akinek emlékezete elevenen él tovább a magyar nemzet kollektív emlékezetében, és őszinte részvétét fejezi ki családjának és szeretteinek.</p>
+      <p class="comm-signature">Magyarország Nagykövetsége nevében,<br>
+      Dr. Galicza György<br>
+      ideiglenes ügyvivő</p>
+    </div>
+
+    <div class="comm-actions">
+      <a class="comm-link" href="documents/lettre-ambassade-hongrie-2026.pdf" target="_blank" rel="noopener">
+        <span data-lang="fr" class="inline">Voir la lettre originale (PDF)</span>
+        <span data-lang="hu" class="inline">Az eredeti levél megtekintése (PDF)</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2. Parlement hongrois (Országgyűlés) -->
+  <div class="comm-card">
+    <div class="comm-source" data-lang="fr">Parlement hongrois — Országgyűlés</div>
+    <div class="comm-source" data-lang="hu">Magyar Országgyűlés</div>
+    <p class="comm-title" data-lang="fr">Hommage lors de la séance du Parlement</p>
+    <p class="comm-title" data-lang="hu">Megemlékezés az Országgyűlés ülésén</p>
+    <p class="comm-meta" data-lang="fr">Séance du 8 juin 2026 — extrait de l'intervention</p>
+    <p class="comm-meta" data-lang="hu">2026. június 8-i ülés — a felszólalás részlete</p>
+
+    <div data-lang="fr">
+      <p>Lors de la séance de l'Assemblée nationale hongroise (Országgyűlés) du 8 juin 2026, la mémoire d'Edina Koszmovszky, « la fille au manteau rouge » de la révolution de 1956, a été honorée. L'extrait ci-dessous reprend le passage qui lui est consacré.</p>
+    </div>
+    <div data-lang="hu">
+      <p>A Magyar Országgyűlés 2026. június 8-i ülésén megemlékeztek Koszmovszky Edináról, az 1956-os forradalom „piros kabátos lányáról”. Az alábbi részlet a róla szóló felszólalást tartalmazza.</p>
+    </div>
+
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/U1qWD05vr2s?start=23475&end=23874&cc_load_policy=1&cc_lang_pref=fr&hl=fr"
+              title="Hommage à Edina Koszmovszky — Parlement hongrois, 8 juin 2026"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <p class="video-note" data-lang="fr">La vidéo ne lit que le passage consacré à Edina (de 6 h 31 min 15 s à 6 h 37 min 54 s de la séance complète). Les sous-titres sont activés ; pour le français, cliquez sur ⚙️ dans le lecteur → Sous-titres → Traduire automatiquement → Français. Le texte intégral des discours est disponible juste en dessous.</p>
+    <p class="video-note" data-lang="hu">A videó csak az Edinának szentelt részletet játssza le (a teljes ülés 6:31:15 és 6:37:54 közötti szakasza). A feliratok be vannak kapcsolva. A felszólalások teljes szövege közvetlenül alább olvasható.</p>
+
+    <!-- Texte des discours — FR -->
+    <details class="speech-text" data-lang="fr">
+      <summary>Lire le texte des discours</summary>
+      <div class="speech-text-body">
+        <p class="speech-text-intro">Lors de cette séance, deux députés ont rendu hommage à Edina Koszmovszky. Transcription et traduction du passage.</p>
+
+        <p class="speech-text-speaker">Présidence — annonce</p>
+        <p>« Pour une intervention après l'ordre du jour, la parole a été demandée par M<sup>me</sup> Zsuzsanna Máté (KDNP), sous le titre <em>« Hommage devant la mémoire de la fille au manteau rouge »</em>. Je lui donne la parole, pour cinq minutes. »</p>
+
+        <p class="speech-text-speaker">Zsuzsanna Máté (KDNP)</p>
+        <p>« Merci beaucoup, Monsieur le Président. Mes chers collègues, c'est pour me souvenir et rendre grâce que j'ai demandé aujourd'hui la parole ici, dans la Maison de la Nation. Je voudrais évoquer la mémoire d'une personnalité exceptionnelle, Edina Franciska Koszmovszky, la bien-aimée « fille au manteau rouge » des Hongrois, une héroïne de notre nation — à l'enterrement de laquelle j'ai pu être présente mercredi dernier, et que j'ai pu accompagner parmi les héros de 1956, dans la parcelle 300.</p>
+        <p>Edina Koszmovszky, dans l'un des moments les plus sacrés de notre histoire, à 18 ans, sans connaître la peur et le cœur empli d'un sens limpide de la justice, a proclamé devant le monde entier son amour de la patrie. Elle est née en 1938 dans une famille noble persécutée par le pouvoir communiste. Dès l'enfance, l'Histoire l'a confrontée aux pires injustices : pendant les années de la Shoah, elle a vu sur les bords du Danube les chaussures abandonnées des Juifs fusillés et jetés dans le fleuve — parmi eux de petits enfants. Ses parents eurent du mal à l'empêcher de coudre elle-même une étoile jaune sur son manteau, car elle ne pouvait accepter l'inacceptable : que l'on envoie des êtres à la mort à cause de leurs origines. Elle était en septième année lorsque son père, après sa détention à la prison Csillag de Szeged, fut déporté à Recsk.</p>
+        <p>C'est le 23 octobre — gravé dans nos cœurs, il y a 70 ans cette année — qu'elle est entrée sur la scène de l'histoire hongroise. Près de l'Astoria, des étudiants lui mirent en main les 14 points. Le flot de la foule l'entraîna devant le bâtiment de la Radio hongroise, alors rue Bródy Sándor. Quand on demanda qui détenait les revendications, c'est elle qui se présenta — et ainsi se détacha de la foule aux manteaux gris une jolie jeune fille de 18 ans, dans son petit manteau rouge devenu iconique, qui lut, les yeux brillants, la volonté de toute une nation. Les âmes, alors, étaient enchaînées : les fers forgés dans la peur par un régime tyrannique et bafouant le droit ligotaient le pays. Cette jeune fille aux yeux étincelants a desserré ces chaînes, par sa seule présence, belle et pure. Ce fut l'un de ces instants où se condense le destin hongrois ; cet idéal que ni les armes ni les idéologies ne peuvent extirper : la liberté au-dedans, l'indépendance au-dehors.</p>
+        <p>Quand les armes se mirent à crépiter, Edina ne rentra pas chez elle : bénévole, elle secourut les blessés, donna son sang — de groupe O, donneuse universelle — et soigna les victimes des combats. Elle combattit dans la révolution avec trois armes reçues de sa foi : sa voix pure, par laquelle elle porta le message de la nation ; ses deux bras, par lesquels elle soigna et guérit les blessés ; et son sang, par lequel elle put sauver des vies.</p>
+        <p>Honorable Assemblée ! Lorsque nous inclinons aujourd'hui la tête devant la mémoire de la fille au manteau rouge, ce n'est pas seulement le passé que nous évoquons. Son héritage demeure, aujourd'hui encore, un avertissement vivant pour nous tous : la liberté et la souveraineté nationale ne sont pas un état qui va de soi, acquis d'avance. Ce sont des valeurs qu'il faut défendre à chaque époque, encore et encore — face à la pression extérieure comme face aux forces intérieures. Edina Koszmovszky dut quitter sa patrie à 18 ans, vécut la plus grande partie de sa vie en France, et fit une mission de revenir au pays pour témoigner, devant le plus de jeunes possible, de son amour de la patrie et de sa foi. C'est en Hongrie qu'elle retourna vers son Créateur, et je suis reconnaissante d'avoir pu la rencontrer personnellement. Sa vie nous enseigne que, même dans les temps difficiles, nous ne pouvons perdre notre tenue, ni transiger avec nos principes, ni jamais regarder l'injustice en silence.</p>
+        <p>Chère Fille au Manteau Rouge, ici, au Parlement, je te remercie de ton courageux engagement et, exprimant la gratitude de notre nation, je te le promets : nous resterons fidèles à tes idéaux. Merci. »</p>
+
+        <p class="speech-text-speaker">Présidence — annonce</p>
+        <p>« Au nom du Gouvernement, quelqu'un souhaite-t-il intervenir, pour cinq minutes ? Non. Pour une intervention après l'ordre du jour, la parole a été demandée par M. Zsolt Bóka (Tisza), sous le titre <em>« Plus de choses nous unissent que ne nous séparent — À la mémoire d'Edina Koszmovszky »</em>. Je lui donne la parole, pour cinq minutes. »</p>
+
+        <p class="speech-text-speaker">Zsolt Bóka (Tisza)</p>
+        <p>« Monsieur le Président, honorable Assemblée. Après le digne hommage de ma collègue Zsuzsa Máté, il est difficile de prendre la parole. La fille au manteau rouge fut en effet l'une des figures emblématiques de notre révolution de 1956 ; nous l'avons perdue en ce jour, mais son courage et sa fermeté demeurent le symbole éternel, le messager de la soif de liberté hongroise. Le Seigneur a fait passer Edina Koszmovszky d'une de ses paumes à l'autre. J'ai revu ce week-end le documentaire qui lui est consacré, et la conviction s'est renforcée en moi que nous devons honorer sa mémoire non seulement par des paroles, mais aussi par des actes.</p>
+        <p>C'est pourquoi je propose que sa sépulture devienne partie intégrante du cimetière national. Je demande à ma collègue, M<sup>me</sup> Zsuzsa Máté, de se joindre à cette initiative, afin que nous soumettions ensemble cette proposition au Comité national des Lieux de Mémoire et du Recueillement. Que ce pas commun soit le symbole de ce que, lorsqu'il s'agit de rendre hommage aux grands de la nation, il y a vraiment plus de choses qui nous unissent que de choses qui nous séparent. La mémoire des héros de 1956 est notre héritage commun, qui nous relie tous, indépendamment de notre appartenance partisane ou confessionnelle — car nous le savons tous : <em>« C'est ici qu'il te faut vivre et mourir. »</em> Merci de votre attention. »</p>
+
+        <p class="speech-text-note">Transcription établie à partir des sous-titres automatiques de YouTube, légèrement corrigée et ponctuée pour la lecture. La vidéo reste la référence.</p>
+      </div>
+    </details>
+
+    <!-- Texte des discours — HU -->
+    <details class="speech-text" data-lang="hu">
+      <summary>A felszólalások szövegének elolvasása</summary>
+      <div class="speech-text-body">
+        <p class="speech-text-intro">Az ülésen két képviselő is megemlékezett Koszmovszky Edináról. A részlet átirata.</p>
+
+        <p class="speech-text-speaker">Elnöklő — bejelentés</p>
+        <p>„Napirend utáni felszólalásra jelentkezett Dr. Máté Zsuzsanna, a KDNP, <em>»Főhajtás a piros kabátos lány emléke előtt«</em> címmel. Megadom a szót, öt perces időkeretben.”</p>
+
+        <p class="speech-text-speaker">Máté Zsuzsanna (KDNP)</p>
+        <p>„Köszönöm szépen, elnök úr. Tisztelt képviselőtársaim! Emlékezni és hálát adni kértem ma szót itt, a Nemzet házában. Egy kivételes személyiségre, Koszmovszky Edina Franciskára, a magyarság szeretett piros kabátos lányára, nemzetünk hősére szeretnék emlékezni, akinek a temetésén a múlt héten, szerdán ott lehettem, és búcsúztathattam őt az '56-os hősök között, a 300-as parcellában.</p>
+        <p>Koszmovszky Edina legszentebb történelmi pillanataink egyikében, 18 éves fiatal lányként, félelmet nem ismerve és kristálytiszta igazságérzettel a szívében vallotta meg ország-világ előtt a haza szeretetét. 1938-ban született, egy kommunista hatalom által üldözött nemesi családban. A történelem már gyermekként a legsúlyosabb igazságtalanságokkal szembesítette: a vészkorszakban látta a Duna-parton ott hagyott cipőket, a folyóba lőtt zsidó emberek — köztük kicsi gyerekek — lábbelijeit. Szülei alig tudták visszatartani attól, hogy maga is sárga csillagot varrjon a kabátjára, mert nem tudta elfogadni az elfogadhatatlant: hogy vannak, akiket származásuk miatt halálba küldenek. Hetedikes volt, amikor édesapját — a szegedi Csillagbörtönben való raboskodása után — Recskre hurcolták.</p>
+        <p>A szívünkbe vésett, idén 70 évvel ezelőtti október 23-ai napon lépett fel a magyar történelem színpadára. Az Astoriánál egyetemisták nyomták a kezébe a 14 pontot. A tömeg sodrása a Magyar Rádió akkori, Bródy Sándor utcai épülete elé vitte. Amikor megkérdezték, kinél vannak a követelések, ő jelentkezett — és így vált ki a szürke kabátos tömegből egy csinos, 18 éves lány, a maga ikonikussá vált piros kabátkájában, és olvasta fel ragyogó szemmel egy nemzet akaratát. Akkor a lelkeken bilincs volt: egy zsarnok, jogtipró rendszer félelemből kovácsolt rablánca kötötte gúzsba az országot. Ez a csillogó szemű fiatal lány ezt a bilincset oldotta meg a maga szép és tiszta valójával. Olyan pillanat volt ez, amelybe belesűrűsödött a magyar sors; az az eszmény, amit se fegyverekkel, se ideológiákkal nem lehet kiirtani: szabadság befelé, függetlenség kifelé.</p>
+        <p>Amikor a fegyverek ropogni kezdtek, Edina nem hazament: önkéntesként segítette a sebesülteket, nullás vércsoportjával, univerzális adóként vért adott, ápolta a harcok sérültjeit. Három, hitéből kapott fegyverrel harcolt a forradalomban: tiszta hangjával, mellyel a nemzet üzenetét tolmácsolta; két karjával, melyekkel ápolta, gyógyította a sebesülteket; és vérével, amellyel életet menthetett.</p>
+        <p>Tisztelt Ház! Amikor ma fejet hajtunk a piros kabátos lány emléke előtt, nem csak a múltat idézzük. Az ő öröksége ma is élő figyelmeztetés mindannyiunk számára: a szabadság és a nemzeti szuverenitás nem magától értetődő, készen kapott állapot. Olyan értékek ezek, amelyeket minden korszakban újra és újra meg kell védeni — a külső nyomással és a belső erőkkel szemben ugyanúgy. Koszmovszky Edinának 18 évesen el kellett hagynia a hazáját, élete nagy részét Franciaországban élte le, és missziónak tekintette, hogy hazajárva minél több fiatal előtt tanúságot tegyen a haza szeretetéről, hitéről. Már Magyarországon tért meg Teremtőjéhez, és hálás vagyok, hogy személyesen is találkozhattam vele. Élete arra tanít bennünket, hogy nehéz időkben sem veszíthetjük el a tartásunkat, nem alkudhatunk meg az elveinkkel, és soha nem nézhetjük némán az igazságtalanságot.</p>
+        <p>Kedves Piros Kabátos Lány! Itt, az Országházában köszönöm meg bátor kiállásodat, és nemzetünk háláját kifejezve ígérem: hűek maradunk eszményeidhez. Köszönöm szépen.”</p>
+
+        <p class="speech-text-speaker">Elnöklő — bejelentés</p>
+        <p>„A Kormány nevében kíván-e valaki felszólalni öt perces időkeretben? Nem. Napirend utáni felszólalásra jelentkezett Dr. Bóka Zsolt, a Tisza, <em>»Több köt össze bennünket, mint ami elválaszt — Koszmovszky Edina emlékére«</em> címmel. Megadom a szót, öt percben.”</p>
+
+        <p class="speech-text-speaker">Bóka Zsolt (Tisza)</p>
+        <p>„Tisztelt elnök úr, tisztelt Ház! Máté Zsuzsa képviselőtársam méltó megemlékezése után nehéz megszólalni. Valóban, '56-os forradalmunk egyik emblematikus alakja volt a piros kabátos lány, akit e napon elvesztettünk, de akinek a bátorsága és a helytállása a magyar szabadságvágy örök jelképe, hírvivője maradt. Koszmovszky Edinát az Úr áttette az egyik tenyeréből a másikba. A róla készült dokumentumfilmet újra megnéztem a hétvégén, és megerősödött bennem, hogy az emléke előtt ne csupán szavakkal tisztelegjünk, hanem tettekkel is.</p>
+        <p>Ezért kezdeményezem, hogy a nyughelye a nemzeti sírkert részévé váljon. Arra kérem képviselőtársamat, tisztelt Máté Zsuzsát, hogy csatlakozzon ehhez a kezdeményezéshez, és közösen terjesszük elő a Nemzeti Emlékhely és Kegyeleti Bizottsághoz ezt a javaslatot. Legyen ez a közös lépés annak a szimbóluma, hogy a nemzet nagyjai előtti tiszteletadás ügyében valóban több köt össze bennünket, mint amennyi elválaszt. Az 1956-os hősök emléke közös örökségünk, amely pártállástól és felekezeti hovatartozástól függetlenül valamennyiünket összeköt — mert mindannyian tudjuk: <em>„itt élned, halnod kell”</em>. Köszönöm a szót.”</p>
+
+        <p class="speech-text-note">Az átirat a YouTube automatikus feliratából készült, a könnyebb olvashatóság érdekében kismértékben javítva és központozva. A hiteles forrás maga a videó.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- 3. Institut du Patrimoine National (NÖRI) -->
+  <div class="comm-card">
+    <div class="comm-source" data-lang="fr">Institut du Patrimoine National — NÖRI</div>
+    <div class="comm-source" data-lang="hu">Nemzeti Örökség Intézete — NÖRI</div>
+    <p class="comm-title" data-lang="fr">« La légendaire fille au manteau rouge de la révolution de 1956 nous a quittés »</p>
+    <p class="comm-title" data-lang="hu">„Elhunyt Koszmovszky Edina, az 1956-os forradalom legendás piros kabátos lánya”</p>
+    <p class="comm-meta" data-lang="fr">Communiqué de l'Institut du Patrimoine National (NÖRI), 18 mai 2026</p>
+    <p class="comm-meta" data-lang="hu">A Nemzeti Örökség Intézete (NÖRI) közleménye, 2026. május 18.</p>
+
+    <div data-lang="fr">
+      <p>Koszmovszky Edina, l'une des courageuses témoins et actrices de la révolution de 1956, s'est éteinte le 12 mai 2026, à l'âge de 87 ans. Son parcours illustre à la fois les tournants tragiques de l'histoire hongroise du XX<sup>e</sup> siècle et la force du courage personnel et de l'amour de la patrie.</p>
+      <p>Née à Budapest le 23 août 1938 dans une famille noble persécutée par la dictature communiste, elle ne put, en raison de ses origines, poursuivre d'études supérieures et travailla très jeune : à l'usine Mirelit, puis comme dessinatrice technique aux usines Widenta et à la Manufacture de porcelaine de Kőbánya.</p>
+      <p>La révolution de 1956 marqua sa vie à jamais. Le 23 octobre, devant le bâtiment de la Radio hongroise, elle fut la première à lire publiquement les 14 points des étudiants. Seule femme d'une délégation de dix personnes, elle prit personnellement part aux négociations. Pendant les journées de la révolution, elle soigna bénévolement les blessés à l'hôpital de la rue Villányi.</p>
+      <p>Fuyant la persécution de la police politique (ÁVH), elle émigra en France où elle commença une nouvelle vie. Elle se maria en 1959, devint mère de quatre enfants et vécut à Nice à partir de 1963. Membre active de la communauté hongroise de France, elle rencontra deux fois le pape Jean-Paul II et exerça, de 1992 à 2000, un ministère d'accompagnement spirituel à l'hôpital psychiatrique de Nice.</p>
+      <p>À partir des années 2000, elle revint en Hongrie pour témoigner de la révolution de 1956 dans les lycées et les universités. En reconnaissance de son action exceptionnelle, elle reçut en 2022 l'Ordre du Mérite hongrois.</p>
+      <p>En 2024, elle rentra définitivement au pays et passa ses dernières années à Sződliget. Ses obsèques ont eu lieu le 3 juin 2026 à 11 heures, dans la parcelle 300 du Nouveau cimetière municipal de Rákoskeresztúr, précédées à 9 heures d'une messe de funérailles en l'église Saint-Ladislas de Kőbánya.</p>
+    </div>
+    <div data-lang="hu">
+      <p>Koszmovszky Edina, az 1956-os forradalom egyik bátor tanúja és résztvevője 2026. május 12-én, 87 éves korában elhunyt. Életútja nemcsak a XX. századi magyar történelem tragikus fordulatait, hanem a személyes helytállás és a hazaszeretet erejét is példázza.</p>
+      <p>Budapesten született 1938. augusztus 23-án, egy kommunista diktatúra által üldözött nemesi családban. Származása miatt nem tanulhatott tovább felsőfokon, fiatalon munkába állt: a Mirelit gyárban, majd műszaki rajzolóként a Widenta gyárban és a Kőbányai Porcelángyárban dolgozott.</p>
+      <p>Az 1956-os forradalom örökre meghatározta életét. Október 23-án a Magyar Rádió épületénél elsőként olvasta fel nyilvánosan a diákság 14 pontját. A tízfős küldöttség egyetlen női tagjaként személyesen vett részt a tárgyalásokon. A forradalom napjaiban önkéntesként segítette a sebesülteket a Villányi úti kórházban.</p>
+      <p>Az ÁVH üldözése elől Franciaországba emigrált, ahol új életet kezdett. 1959-ben házasodott meg, négy gyermek édesanyja lett, 1963-tól Nizzában élt. A franciaországi magyar közösség aktív tagjaként szolgálatot végzett, kétszer találkozott II. János Pál pápával, 1992 és 2000 között lelkipásztorként dolgozott a nizzai pszichiátriai kórházban.</p>
+      <p>A 2000-es évektől visszatért Magyarországra, középiskolákban és egyetemeken beszélt az 1956-os forradalomról. Kiemelkedő tevékenységéért 2022-ben Magyar Érdemrend kitüntetésben részesült.</p>
+      <p>2024-ben végleg hazaköltözött, Sződligeten töltötte utolsó éveit. Temetése 2026. június 3-án, 11 órakor volt a Rákoskeresztúri Új köztemető 300-as parcellájában, előtte 9 órától gyászmisét tartottak a kőbányai Szent László-templomban.</p>
+    </div>
+
+    <div class="comm-actions">
+      <a class="comm-link" href="https://intezet.nori.gov.hu/hirek/elhunyt-koszmovszky-edina-az-1956-os-forradalom-legendas-piros-kabatos-lanya" target="_blank" rel="noopener">
+        <span data-lang="fr" class="inline">Lire le communiqué original (NÖRI)</span>
+        <span data-lang="hu" class="inline">Az eredeti közlemény elolvasása (NÖRI)</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /.container -->
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+    try { localStorage.setItem('site-lang', lang); } catch(e) {}
+  }
+  (function() {
+    let lang = 'fr';
+    try {
+      const saved = localStorage.getItem('site-lang');
+      if (saved === 'hu' || saved === 'fr') lang = saved;
+      else if ((navigator.language || '').toLowerCase().startsWith('hu')) lang = 'hu';
+    } catch(e) {}
+    setLang(lang);
+  })();
+
+  // Positionne hub-bar juste sous le topbar sticky
+  (function() {
+    function posHub() {
+      var tb = document.querySelector('.topbar');
+      var hb = document.querySelector('.hub-bar');
+      if (tb && hb) hb.style.top = tb.offsetHeight + 'px';
+    }
+    posHub();
+    window.addEventListener('resize', posHub);
+  })();
+</script>
+
+</body>
+</html>
